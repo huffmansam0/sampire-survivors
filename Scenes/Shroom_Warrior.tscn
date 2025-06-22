@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcc1dov0guwsp"]
+
+[ext_resource type="Script" uid="uid://dy3vdp6wm8wle" path="res://Scripts/shroom_warrior.gd" id="1_r7byj"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7k104"]
+load_path = "res://.godot/imported/mushroom_1.png-b7215244ccfdc56e818190778c67d212.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4gyqm"]
+load_path = "res://.godot/imported/mushroom_2.png-7994d036f2310887711a4bb15647d77d.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_epg4t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_7k104")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_4gyqm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
+size = Vector2(43.5, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(120, 120)
+
+[node name="Shroom_Warrior_RigidBody2D" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_r7byj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(2.55319, 2.85714)
+sprite_frames = SubResource("SpriteFrames_epg4t")
+autoplay = "default"
+frame_progress = 0.817619
+
+[node name="Collision_Area2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7k104")
+
+[node name="Hitbox_Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Hitbox_Collision2D" type="CollisionShape2D" parent="Hitbox_Area2D"]
+shape = SubResource("RectangleShape2D_4gyqm")
+
+[node name="Hurtbox_Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
+shape = SubResource("RectangleShape2D_4gyqm")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -72.0
+offset_top = 67.0
+offset_right = 73.0
+offset_bottom = 96.0
+fill_mode = 1
