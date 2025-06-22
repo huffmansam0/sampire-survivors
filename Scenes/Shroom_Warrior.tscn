@@ -28,8 +28,8 @@ size = Vector2(43.5, 44)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
 size = Vector2(120, 120)
 
-[node name="Shroom_Warrior_RigidBody2D" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_r7byj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

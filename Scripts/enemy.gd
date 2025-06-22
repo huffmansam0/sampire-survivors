@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends CharacterBody2D
 
 @export var speed: float
 @export var max_hp: int
@@ -18,11 +18,11 @@ func _ready():
 
 func _physics_process(delta):
 	handle_movement()
+	move_and_slide()
 
 func handle_movement():
 	var direction = global_position.direction_to(player.global_position)
-	var force = direction * speed * mass
-	apply_central_force(force)
+	velocity = direction * speed
 
 func set_player(player_node):
 	player = player_node
