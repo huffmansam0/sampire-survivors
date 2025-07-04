@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed: float
 @export var max_hp: int
 
+@onready var health_bar = $HealthBar
+
 #TODO: define dims of hitbox/hurtbox here?
 
 var current_hp: int
@@ -10,11 +12,12 @@ var current_hp: int
 var damage_timer: float = 0.0
 var damage_interval: float = 0.25
 
-var player: Node2D = null
+var player: CharacterBody2D = null
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	current_hp = max_hp
+	health_bar.value = current_hp
 
 func _physics_process(delta):
 	handle_movement()

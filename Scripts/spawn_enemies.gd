@@ -2,7 +2,7 @@ extends Node2D
 
 @export var shroom_warrior_scene = preload("res://Scenes/Shroom_Warrior.tscn")
 @export var spawn_rate: float = 1
-@onready var player = $CharacterBody2D
+@onready var player = $Player
 
 var spawn_timer: float = 0.0
 

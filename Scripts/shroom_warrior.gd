@@ -1,6 +1,6 @@
 extends "res://Scripts/enemy.gd"
 
-@onready var hp_bar = $ProgressBar
+@onready var hp_bar = $HealthBar
 
 func _ready():
 	speed = 300.0

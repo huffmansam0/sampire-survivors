@@ -2,25 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dy3vdp6wm8wle" path="res://Scripts/shroom_warrior.gd" id="1_r7byj"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7k104"]
-load_path = "res://.godot/imported/mushroom_1.png-b7215244ccfdc56e818190778c67d212.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4gyqm"]
-load_path = "res://.godot/imported/mushroom_2.png-7994d036f2310887711a4bb15647d77d.ctex"
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_epg4t"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_7k104")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_4gyqm")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.5
-}]
+[sub_resource type="SpriteFrames" id="SpriteFrames_r7byj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
 size = Vector2(43.5, 44)
@@ -28,16 +10,20 @@ size = Vector2(43.5, 44)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
 size = Vector2(120, 120)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7byj"]
+bg_color = Color(0.420963, 0, 0.0543423, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
+bg_color = Color(0.922122, 0.0404463, 7.70092e-07, 1)
+
+[node name="ShroomWarrior" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_r7byj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.8147e-06, 0)
 scale = Vector2(2.55319, 2.85714)
-sprite_frames = SubResource("SpriteFrames_epg4t")
-autoplay = "default"
-frame_progress = 0.817619
+sprite_frames = SubResource("SpriteFrames_r7byj")
 
 [node name="Collision_Area2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7k104")
@@ -55,9 +41,11 @@ collision_mask = 0
 [node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
 shape = SubResource("RectangleShape2D_4gyqm")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -72.0
 offset_top = 67.0
 offset_right = 73.0
 offset_bottom = 96.0
-fill_mode = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
+show_percentage = false
