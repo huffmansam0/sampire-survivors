@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crretod7ajk03"
-path="res://.godot/imported/SlimeCrawler.png-d63d0fb5c3eede7dccbcdd04a7ca55f8.ctex"
+uid="uid://cu7dujjrykx1f"
+path="res://.godot/imported/Sprite_Sheet.png-722c139dcb0a883f006ea1c06d0e92f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/SlimeCrawler.png"
-dest_files=["res://.godot/imported/SlimeCrawler.png-d63d0fb5c3eede7dccbcdd04a7ca55f8.ctex"]
+source_file="res://Images/Sprite_Sheet.png"
+dest_files=["res://.godot/imported/Sprite_Sheet.png-722c139dcb0a883f006ea1c06d0e92f4.ctex"]
 
 [params]
 

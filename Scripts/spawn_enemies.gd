@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var shroom_warrior_scene = preload("res://Scenes/Shroom_Warrior.tscn")
+@export var mycellium_mage_scene = preload("res://Scenes/Mycellium_Mage.tscn")
+@export var sporecap_sprinter_scene = preload("res://Scenes/Sporecap_Sprinter.tscn")
 @export var spawn_rate: float = 1
 @onready var player = $Player
 
@@ -13,7 +15,9 @@ func _process(delta):
 		spawn_timer = 0.0
 
 func spawn_enemy():
-	var enemy = shroom_warrior_scene.instantiate()
+	randomize()
+	var enemies = [shroom_warrior_scene, mycellium_mage_scene, sporecap_sprinter_scene]
+	var enemy = enemies[randi() % enemies.size()].instantiate()
 	enemy.global_position = get_spawn_position()
 	enemy.set_player(player)
 	add_child(enemy)

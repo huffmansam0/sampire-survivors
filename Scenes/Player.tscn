@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2xod8pb6h4qd"]
+[gd_scene load_steps=13 format=3 uid="uid://d2xod8pb6h4qd"]
 
 [ext_resource type="Script" uid="uid://cncjalb71asae" path="res://Scripts/player.gd" id="1_nn08x"]
-[ext_resource type="Texture2D" uid="uid://bkf4pj0w1gmj6" path="res://Images/icon.svg" id="2_52ee3"]
 [ext_resource type="AudioStream" uid="uid://bb15qdc0armo2" path="res://Audio/snail_damaged_take_1.wav" id="3_bhhdu"]
 [ext_resource type="AudioStream" uid="uid://b4j70ts1rn3n1" path="res://Audio/snail_damaged_take_2.wav" id="4_megsn"]
 [ext_resource type="AudioStream" uid="uid://cewdpvvf3kj4y" path="res://Audio/snail_damaged_take_3.wav" id="5_yoq75"]
 [ext_resource type="AudioStream" uid="uid://cfsvpywav6n64" path="res://Audio/shitty_sad_trombone_1.mp3" id="6_ksbbd"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="6_nn08x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8gbba"]
 font_size = 256
@@ -15,6 +15,35 @@ outline_color = Color(0.705018, 0, 0.0496522, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
 size = Vector2(118, 117)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52ee3"]
+atlas = ExtResource("6_nn08x")
+region = Rect2(0, 1600, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhhdu"]
+atlas = ExtResource("6_nn08x")
+region = Rect2(200, 1600, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_megsn"]
+atlas = ExtResource("6_nn08x")
+region = Rect2(400, 1600, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yoq75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52ee3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhhdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_megsn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 2
@@ -29,9 +58,6 @@ offset_bottom = 530.0
 label_settings = SubResource("LabelSettings_8gbba")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_52ee3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
@@ -57,3 +83,7 @@ stream = ExtResource("6_ksbbd")
 
 [node name="Slime_Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yoq75")
+autoplay = "default"

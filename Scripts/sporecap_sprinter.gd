@@ -3,7 +3,7 @@ extends "res://Scripts/enemy.gd"
 @onready var hp_bar = $HealthBar
 
 func _ready():
-	speed = 200.0
+	speed = 300.0
 	max_hp = 1000
 	hp_bar.max_value = max_hp
 	hp_bar.min_value = 0

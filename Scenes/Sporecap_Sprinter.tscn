@@ -1,31 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcc1dov0guwsp"]
+[gd_scene load_steps=10 format=3 uid="uid://c2jjfco32l7a2"]
 
-[ext_resource type="Script" uid="uid://dy3vdp6wm8wle" path="res://Scripts/shroom_warrior.gd" id="1_r7byj"]
-[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_bgd1r"]
+[ext_resource type="Script" uid="uid://c6yf5eafjmehy" path="res://Scripts/sporecap_sprinter.gd" id="1_mg7ix"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_rhw1c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e5y0t"]
-atlas = ExtResource("2_bgd1r")
-region = Rect2(0, 0, 200, 200)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg7ix"]
+atlas = ExtResource("2_rhw1c")
+region = Rect2(0, 400, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_igg1x"]
-atlas = ExtResource("2_bgd1r")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2jcfd"]
-atlas = ExtResource("2_bgd1r")
-region = Rect2(400, 0, 200, 200)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhw1c"]
+atlas = ExtResource("2_rhw1c")
+region = Rect2(200, 400, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4pjup"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e5y0t")
+"texture": SubResource("AtlasTexture_mg7ix")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_igg1x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2jcfd")
+"texture": SubResource("AtlasTexture_rhw1c")
 }],
 "loop": true,
 "name": &"default",
@@ -44,12 +37,12 @@ bg_color = Color(0.420963, 0, 0.0543423, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
 bg_color = Color(0.922122, 0.0404463, 7.70092e-07, 1)
 
-[node name="ShroomWarrior" type="CharacterBody2D"]
+[node name="SporecapSprinter" type="CharacterBody2D"]
 z_index = 1
-script = ExtResource("1_r7byj")
+script = ExtResource("1_mg7ix")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.86102e-06, 1.43051e-06)
+position = Vector2(2.02656e-06, -1.54972e-06)
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_4pjup")
 autoplay = "default"
