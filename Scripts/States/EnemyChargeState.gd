@@ -11,12 +11,15 @@ var distance_to_destination : float
 
 func Enter():
 	target = get_tree().get_first_node_in_group("Player")
-	destination = target.global_position
+	var target_position = target.global_position
+	destination = target_position + (enemy.global_position.direction_to(target_position) * 500.0)
 
 func Physics_Update(delta: float):
 	move_direction = enemy.global_position.direction_to(destination)
 	distance_to_destination = enemy.global_position.distance_to(destination)
 	enemy.velocity = move_direction * move_speed
 	
-	if distance_to_destination < 100.0:
-		Transitioned.emit(self, "EnemyApproachState")
+	enemy.move_and_slide()
+	
+	if distance_to_destination < 20.0:
+		Transitioned.emit(self, "EnemyTiredState")

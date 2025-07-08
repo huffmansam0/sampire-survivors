@@ -18,9 +18,6 @@ func _ready():
 	current_hp = max_hp
 	health_bar.value = current_hp
 
-func _physics_process(delta):
-	move_and_slide()
-
 func set_player(player_node):
 	player = player_node
 

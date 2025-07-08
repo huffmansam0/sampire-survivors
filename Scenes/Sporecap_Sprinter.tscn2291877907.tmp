@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bbd4cay2ygh8r" path="res://Scenes/state_machine.gd" id="3_huefm"]
 [ext_resource type="Script" uid="uid://cignvu8qp4sk2" path="res://Scripts/States/EnemyApproachState.gd" id="4_ib7ku"]
 [ext_resource type="Script" uid="uid://cyvuqur0mcqf" path="res://Scripts/States/EnemyChargeState.gd" id="5_ib7ku"]
-[ext_resource type="Script" uid="uid://c5gc2afegv4lp" path="res://Scripts/States/EnemyTiredState.gd" id="6_t2pfq"]
+[ext_resource type="Script" uid="uid://c5gc2afegv4lp" path="res://Scripts/States/Tired.gd" id="6_t2pfq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mg7ix"]
 atlas = ExtResource("2_rhw1c")
@@ -86,14 +86,14 @@ script = ExtResource("4_ib7ku")
 enemy = NodePath("../..")
 striking_distance_state = NodePath("../EnemyChargeState")
 move_speed = 400.0
-striking_distance = 700.0
+striking_distance = 1000.0
 
 [node name="EnemyChargeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_ib7ku")
 enemy = NodePath("../..")
-move_speed = 1600.0
+move_speed = 800.0
 
-[node name="EnemyTiredState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+[node name="Tired" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_t2pfq")
 enemy = NodePath("../..")
-rest_time = 3.0
+rest_time = 5.0

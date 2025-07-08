@@ -21,3 +21,5 @@ func Physics_Update(delta: float):
 	if distance_to_target <= striking_distance:
 		if striking_distance_state:
 			Transitioned.emit(self, striking_distance_state.name)
+	
+	enemy.move_and_slide()

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=4 uid="uid://cp80bo6t3q3hl"]
+
+[ext_resource type="Script" uid="uid://b2ebmabjr40g2" path="res://Scripts/spawn_enemies.gd" id="1_kln2b"]
+[ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="3_kln2b"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_rgh2o"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pbw6q"]
+resource_name = "tilez"
+texture = ExtResource("4_rgh2o")
+margins = Vector2i(200, 0)
+texture_region_size = Vector2i(400, 400)
+2:0/0 = 0
+4:0/0 = 0
+3:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_v1gob"]
+sources/1 = SubResource("TileSetAtlasSource_pbw6q")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_kln2b")
+
+[node name="Player" parent="." instance=ExtResource("3_kln2b")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(2.5, 2.5)
+tile_map_data = PackedByteArray("AAD//wAAAQACAAAAAAAYAAAAAQAEAAAAAAD//+f/AQAEAAEAAADm/wAAAQADAAEAAAD//xkAAQACAAEAAAAYABkAAQADAAAAAAAYAOf/AQADAAEAAADm/+f/AQADAAAAAADm/xkAAQAEAAAAAADN/+f/AQACAAAAAADN/87/AQAEAAAAAADN/wAAAQACAAEAAADN/xkAAQACAAAAAAAxABkAAQACAAAAAAAxAM7/AQACAAAAAADm/87/AQAEAAEAAAD//87/AQACAAEAAAAYAM7/AQAEAAEAAAAxAOf/AQAEAAEAAAAxAAAAAQADAAAAAABKAM7/AQAEAAAAAABKAOf/AQAEAAEAAABKAAAAAQACAAAAAABKABkAAQADAAEAAADN/zIAAQADAAEAAAC0/zIAAQADAAAAAABKADIAAQAEAAAAAAAxADIAAQAEAAEAAAAYADIAAQACAAAAAAD//zIAAQACAAAAAADm/zIAAQAEAAEAAAC0/xkAAQACAAAAAAC0/wAAAQADAAAAAAC0/+f/AQAEAAAAAAC0/87/AQADAAEAAAA=")
+tile_set = SubResource("TileSet_v1gob")

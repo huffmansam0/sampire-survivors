@@ -48,12 +48,12 @@ func take_damage(amount: int):
 	print("HP: %s" % current_hp)
 	
 	#TODO: how are audio sources usually handled? this probably needs to be cleaned up
-	var temp_audio = AudioStreamPlayer.new()
-	temp_audio.stream = hurt_audios[randi() % hurt_audios.size()].stream
-	add_child(temp_audio)
-	temp_audio.play()
-	
-	temp_audio.finished.connect(func(): temp_audio.queue_free())
+	#var temp_audio = AudioStreamPlayer.new()
+	#temp_audio.stream = hurt_audios[randi() % hurt_audios.size()].stream
+	#add_child(temp_audio)
+	#temp_audio.play()
+	#
+	#temp_audio.finished.connect(func(): temp_audio.queue_free())
 	
 	if (current_hp <= 0):
 		die()

@@ -17,7 +17,7 @@ func _process(delta):
 func spawn_enemy():
 	randomize()
 	var enemies = [shroom_warrior_scene, mycellium_mage_scene, sporecap_sprinter_scene]
-	#var enemies = [sporecap_sprinter_scene]
+#	var enemies = [sporecap_sprinter_scene]
 	var enemy = enemies[randi() % enemies.size()].instantiate()
 	enemy.global_position = get_spawn_position()
 	enemy.set_player(player)
@@ -38,9 +38,9 @@ func get_spawn_position() -> Vector2:
 	var spawn_pos = Vector2()
 	
 	match edge:
-		0: spawn_pos = Vector2(randf_range(top_left.x, bottom_right.x), bottom_right.y + 50)
-		1: spawn_pos = Vector2(bottom_right.x + 50, randf_range(top_left.y, bottom_right.y))
-		2: spawn_pos = Vector2(randf_range(top_left.x, bottom_right.x), top_left.y - 50)
-		3: spawn_pos = Vector2(top_left.x - 50, randf_range(top_left.y, bottom_right.y))
+		0: spawn_pos = Vector2(randf_range(top_left.x, bottom_right.x), bottom_right.y + 100)
+		1: spawn_pos = Vector2(bottom_right.x + 100, randf_range(top_left.y, bottom_right.y))
+		2: spawn_pos = Vector2(randf_range(top_left.x, bottom_right.x), top_left.y - 100)
+		3: spawn_pos = Vector2(top_left.x - 100, randf_range(top_left.y, bottom_right.y))
 	
 	return spawn_pos
