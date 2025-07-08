@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2jjfco32l7a2"]
+[gd_scene load_steps=13 format=3 uid="uid://c2jjfco32l7a2"]
 
 [ext_resource type="Script" uid="uid://c6yf5eafjmehy" path="res://Scripts/sporecap_sprinter.gd" id="1_mg7ix"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_rhw1c"]
+[ext_resource type="Script" uid="uid://bbd4cay2ygh8r" path="res://Scenes/state_machine.gd" id="3_huefm"]
+[ext_resource type="Script" uid="uid://cignvu8qp4sk2" path="res://Scripts/States/EnemyApproachState.gd" id="4_ib7ku"]
+[ext_resource type="Script" uid="uid://cyvuqur0mcqf" path="res://Scripts/States/EnemyChargeState.gd" id="5_ib7ku"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mg7ix"]
 atlas = ExtResource("2_rhw1c")
@@ -22,7 +25,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 6.5
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
@@ -39,6 +42,7 @@ bg_color = Color(0.922122, 0.0404463, 7.70092e-07, 1)
 
 [node name="SporecapSprinter" type="CharacterBody2D"]
 z_index = 1
+motion_mode = 1
 script = ExtResource("1_mg7ix")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -71,3 +75,19 @@ offset_bottom = 96.0
 theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
 show_percentage = false
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_huefm")
+initial_state = NodePath("EnemyApproachState")
+
+[node name="EnemyApproachState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "striking_distance_state")]
+script = ExtResource("4_ib7ku")
+enemy = NodePath("../..")
+striking_distance_state = NodePath("../EnemyChargeState")
+move_speed = 400.0
+striking_distance = 1000.0
+
+[node name="EnemyChargeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_ib7ku")
+enemy = NodePath("../..")
+move_speed = 800.0

@@ -7,15 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://cfsvpywav6n64" path="res://Audio/shitty_sad_trombone_1.mp3" id="6_ksbbd"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="6_nn08x"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_8gbba"]
-font_size = 256
-font_color = Color(0, 0, 0, 1)
-outline_size = 24
-outline_color = Color(0.705018, 0, 0.0496522, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
-size = Vector2(118, 117)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_52ee3"]
 atlas = ExtResource("6_nn08x")
 region = Rect2(0, 1600, 200, 200)
@@ -45,9 +36,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_8gbba"]
+font_size = 256
+font_color = Color(0, 0, 0, 1)
+outline_size = 24
+outline_color = Color(0.705018, 0, 0.0496522, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
+size = Vector2(118, 117)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
 z_index = 2
+motion_mode = 1
 script = ExtResource("1_nn08x")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.23517e-06, 0.499995)
+scale = Vector2(0.59, 0.585)
+sprite_frames = SubResource("SpriteFrames_yoq75")
+autoplay = "default"
 
 [node name="Label" type="Label" parent="."]
 z_index = 1
@@ -83,7 +90,3 @@ stream = ExtResource("6_ksbbd")
 
 [node name="Slime_Timer" type="Timer" parent="."]
 autostart = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_yoq75")
-autoplay = "default"

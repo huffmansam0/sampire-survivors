@@ -17,6 +17,7 @@ func _process(delta):
 func spawn_enemy():
 	randomize()
 	var enemies = [shroom_warrior_scene, mycellium_mage_scene, sporecap_sprinter_scene]
+	#var enemies = [sporecap_sprinter_scene]
 	var enemy = enemies[randi() % enemies.size()].instantiate()
 	enemy.global_position = get_spawn_position()
 	enemy.set_player(player)

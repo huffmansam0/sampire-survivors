@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@export var speed: float
 @export var max_hp: int
 
 @onready var health_bar = $HealthBar
@@ -20,12 +19,7 @@ func _ready():
 	health_bar.value = current_hp
 
 func _physics_process(delta):
-	handle_movement()
 	move_and_slide()
-
-func handle_movement():
-	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * speed
 
 func set_player(player_node):
 	player = player_node
