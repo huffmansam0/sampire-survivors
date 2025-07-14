@@ -2,19 +2,23 @@ extends CharacterBody2D
 
 @export var slime_scene = preload("res://Scenes/Slime.tscn")
 @export var speed: float = 600.0
-@export var max_hp: int = 100
+@export var max_hp: int = 6
 @export var slime_spawn_time = 0.25
 
 @onready var label = $Label
 @onready var hurt_audios = [$SnailDamagedTake1, $SnailDamagedTake2, $SnailDamagedTake3, $"ShittySadTrombone1"]
 @onready var slime_timer = $Slime_Timer
 @onready var player_sprite = $PlayerSprite
+@onready var slime_manager = get_node("../SlimeManager")
+
+signal health_changed(new_health)
 
 var current_hp: int
 
-var damage_timer: float = 0.0
-var damage_interval: float = 0.25
-var damage_amount: int = 5
+var damage_timer: Timer
+var damage_cooldown: float = 1
+var damage_amount: int = 1
+var damage_boosting: bool = false
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -24,14 +28,8 @@ func _ready():
 	slime_timer.start()
 
 func _physics_process(delta):
-	if ($Hurtbox_Area2D.has_overlapping_areas()):
-		damage_timer += delta
-	else:
-		damage_timer = 0.0
-	
-	if (damage_timer > damage_interval):
+	if ($Hurtbox_Area2D.has_overlapping_areas() && !damage_boosting):
 		take_damage(damage_amount)
-		damage_timer = 0.0
 
 	handle_movement()
 	move_and_collide(velocity * delta)
@@ -45,7 +43,11 @@ func handle_movement():
 	
 func take_damage(amount: int):
 	current_hp -= amount
+	damage_boosting = true
+	get_tree().create_timer(damage_cooldown).timeout.connect(func(): damage_boosting = false)
 	print("HP: %s" % current_hp)
+	
+	health_changed.emit(current_hp)
 	
 	#TODO: how are audio sources usually handled? this probably needs to be cleaned up
 	#var temp_audio = AudioStreamPlayer.new()
@@ -72,6 +74,4 @@ func die():
 	get_tree().paused = true
 	
 func spawn_slime():
-	var slime = slime_scene.instantiate()
-	slime.global_position = global_position
-	get_parent().add_child(slime)
+	slime_manager.spawn_puddle(global_position)

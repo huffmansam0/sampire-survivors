@@ -10,7 +10,7 @@ var destination : Vector2
 var distance_to_destination : float
 
 func Enter():
-	target = get_tree().get_first_node_in_group("Player")
+	target = GameCache.get_player()
 	var target_position = target.global_position
 	destination = target_position + (enemy.global_position.direction_to(target_position) * 500.0)
 

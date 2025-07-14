@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://cp80bo6t3q3hl"]
+[gd_scene load_steps=7 format=4 uid="uid://cp80bo6t3q3hl"]
 
 [ext_resource type="Script" uid="uid://b2ebmabjr40g2" path="res://Scripts/spawn_enemies.gd" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="3_kln2b"]
-[ext_resource type="Script" uid="uid://b7pphq8epdkb2" path="res://Scripts/slime_manager.gd" id="3_rgh2o"]
+[ext_resource type="Script" uid="uid://b7pphq8epdkb2" path="res://Scenes/slime_manager.gd" id="3_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_rgh2o"]
-[ext_resource type="Script" uid="uid://cryep8dp6jk8" path="res://Scripts/health_ui.gd" id="5_pbw6q"]
-[ext_resource type="Script" uid="uid://0xosey5cq2iw" path="res://Scripts/game_cache.gd" id="6_v1gob"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pbw6q"]
 resource_name = "tilez"
@@ -22,14 +20,6 @@ texture_region_size = Vector2i(400, 400)
 [sub_resource type="TileSet" id="TileSet_v1gob"]
 sources/1 = SubResource("TileSetAtlasSource_pbw6q")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pbw6q"]
-atlas = ExtResource("4_rgh2o")
-region = Rect2(200, 1400, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v1gob"]
-atlas = ExtResource("4_rgh2o")
-region = Rect2(0, 1400, 200, 200)
-
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("3_kln2b")]
@@ -44,17 +34,3 @@ script = ExtResource("3_rgh2o")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("1_kln2b")
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="HealthUI" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_pbw6q")
-heart_texture = SubResource("AtlasTexture_pbw6q")
-empty_heart_texture = SubResource("AtlasTexture_v1gob")
-
-[node name="GameCache" type="Node" parent="."]
-script = ExtResource("6_v1gob")

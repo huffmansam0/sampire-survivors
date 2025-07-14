@@ -15,9 +15,14 @@ run/main_scene="uid://cp80bo6t3q3hl"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Images/icon.svg"
 
+[autoload]
+
+GameCache="*res://Scripts/game_cache.gd"
+
 [global_group]
 
 Player=""
+Enemies=""
 
 [input]
 

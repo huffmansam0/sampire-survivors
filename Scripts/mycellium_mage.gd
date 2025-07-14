@@ -1,13 +1,38 @@
-extends "res://Scripts/enemy.gd"
+extends Enemy
+
+@export var move_speed := 200.0
+@export var shoot_target_proximity := 800.0
+@export var shoot_interval := 100.0
+
+var target = GameCache.get_player()
+var move_direction: Vector2
+var distance_to_target: float
 
 @onready var hp_bar = $HealthBar
+@onready var state_machine = $StateMachine
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	max_hp = 300
+	max_hp = 150
 	hp_bar.max_value = max_hp
 	hp_bar.min_value = 0
 	hp_bar.value = current_hp
 	super._ready()
+	
+func approach():
+	move_direction = global_position.direction_to(target.global_position)
+	distance_to_target = global_position.distance_to(target.global_position)
+	velocity = move_direction * move_speed
+	move_and_slide()
+	
+func shoot():
+	distance_to_target = global_position.distance_to(target.global_position)
+	
+func should_approach():
+	return distance_to_target > shoot_target_proximity
+
+func should_shoot():
+	return distance_to_target <= shoot_target_proximity
 
 func take_damage(amount: int):
 	super.take_damage(amount)

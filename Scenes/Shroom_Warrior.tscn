@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcc1dov0guwsp"]
+[gd_scene load_steps=12 format=3 uid="uid://bcc1dov0guwsp"]
 
 [ext_resource type="Script" uid="uid://dy3vdp6wm8wle" path="res://Scripts/shroom_warrior.gd" id="1_r7byj"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_bgd1r"]
-[ext_resource type="Script" uid="uid://bbd4cay2ygh8r" path="res://Scenes/state_machine.gd" id="3_igg1x"]
-[ext_resource type="Script" uid="uid://cignvu8qp4sk2" path="res://Scripts/States/EnemyApproachState.gd" id="4_2jcfd"]
+[ext_resource type="Script" uid="uid://byj0q387wdifi" path="res://Scripts/shroom_warrior_fsm.gd" id="3_e5y0t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5y0t"]
 atlas = ExtResource("2_bgd1r")
@@ -38,7 +37,7 @@ animations = [{
 size = Vector2(43.5, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(120, 120)
+size = Vector2(153, 186)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7byj"]
 bg_color = Color(0.420963, 0, 0.0543423, 1)
@@ -46,14 +45,13 @@ bg_color = Color(0.420963, 0, 0.0543423, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
 bg_color = Color(0.922122, 0.0404463, 7.70092e-07, 1)
 
-[node name="ShroomWarrior" type="CharacterBody2D"]
+[node name="ShroomWarrior" type="CharacterBody2D" groups=["Enemies"]]
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_r7byj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.86102e-06, 1.43051e-06)
-scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_4pjup")
 autoplay = "default"
 
@@ -64,6 +62,7 @@ shape = SubResource("RectangleShape2D_7k104")
 collision_layer = 2
 
 [node name="Hitbox_Collision2D" type="CollisionShape2D" parent="Hitbox_Area2D"]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
@@ -71,23 +70,19 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
+position = Vector2(-0.5, 7)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -72.0
-offset_top = 67.0
+offset_top = 107.0
 offset_right = 73.0
-offset_bottom = 96.0
+offset_bottom = 136.0
 theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
 show_percentage = false
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_igg1x")
-initial_state = NodePath("EnemyApproachState")
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_e5y0t")
 
-[node name="EnemyApproachState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("4_2jcfd")
-enemy = NodePath("../..")
-move_speed = 200.0
-striking_distance = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpfcdil8xqpe7"]
+[gd_scene load_steps=11 format=3 uid="uid://cpfcdil8xqpe7"]
 
 [ext_resource type="Script" uid="uid://vpv4olcn11rv" path="res://Scripts/mycellium_mage.gd" id="1_n3fy3"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_ku07x"]
-[ext_resource type="Script" uid="uid://bbd4cay2ygh8r" path="res://Scenes/state_machine.gd" id="3_d2l4i"]
-[ext_resource type="Script" uid="uid://cignvu8qp4sk2" path="res://Scripts/States/EnemyApproachState.gd" id="4_6vvjw"]
+[ext_resource type="Script" uid="uid://d1r4q80uy640e" path="res://Scripts/mycellium_mage_fsm.gd" id="3_d2l4i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3fy3"]
 atlas = ExtResource("2_ku07x")
@@ -39,7 +38,7 @@ bg_color = Color(0.420963, 0, 0.0543423, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
 bg_color = Color(0.922122, 0.0404463, 7.70092e-07, 1)
 
-[node name="MycelliumMage" type="CharacterBody2D"]
+[node name="MycelliumMage" type="CharacterBody2D" groups=["Enemies"]]
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_n3fy3")
@@ -75,11 +74,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
 show_percentage = false
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_d2l4i")
-initial_state = NodePath("EnemyApproachState")
 
-[node name="EnemyApproachState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("4_6vvjw")
-enemy = NodePath("../..")
-move_speed = 200.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

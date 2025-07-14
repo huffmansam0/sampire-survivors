@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://c2jjfco32l7a2"]
+
+[ext_resource type="Script" uid="uid://c6yf5eafjmehy" path="res://Scripts/sporecap_sprinter.gd" id="1_mg7ix"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_rhw1c"]
+[ext_resource type="Script" uid="uid://bbd4cay2ygh8r" path="res://Scripts/state_machine.gd" id="3_huefm"]
+[ext_resource type="Script" uid="uid://cignvu8qp4sk2" path="res://Scripts/States/EnemyApproachState.gd" id="4_ib7ku"]
+[ext_resource type="Script" uid="uid://cyvuqur0mcqf" path="res://Scripts/States/EnemyChargeState.gd" id="5_ib7ku"]
+[ext_resource type="Script" uid="uid://c5gc2afegv4lp" path="res://Scripts/States/EnemyTiredState.gd" id="6_t2pfq"]
+[ext_resource type="Script" uid="uid://kocemqmwmbw5" path="res://Scripts/enemy_explode_state.gd" id="7_6r63f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg7ix"]
+atlas = ExtResource("2_rhw1c")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhw1c"]
+atlas = ExtResource("2_rhw1c")
+region = Rect2(200, 400, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4pjup"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg7ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhw1c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
+size = Vector2(34.75, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2pfq"]
+size = Vector2(77, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6r63f"]
+size = Vector2(77, 78)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7byj"]
+bg_color = Color(0.420963, 0, 0.0543423, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
+bg_color = Color(0.922122, 0.0404463, 7.70092e-07, 1)
+
+[node name="SporecapSprinter" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 1
+motion_mode = 1
+script = ExtResource("1_mg7ix")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-9.53674e-07, 9.53674e-07)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_4pjup")
+autoplay = "default"
+
+[node name="Collision_Area2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7k104")
+
+[node name="Hitbox_Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Hitbox_Collision2D" type="CollisionShape2D" parent="Hitbox_Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_t2pfq")
+
+[node name="Hurtbox_Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_6r63f")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -73.0
+offset_top = 51.0
+offset_right = 72.0
+offset_bottom = 80.0
+theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
+show_percentage = false
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_huefm")
+initial_state = NodePath("EnemyApproachState")
+
+[node name="EnemyApproachState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "striking_distance_state")]
+script = ExtResource("4_ib7ku")
+enemy = NodePath("../..")
+striking_distance_state = NodePath("../EnemyChargeState")
+move_speed = 400.0
+striking_distance = 500.0
+
+[node name="EnemyChargeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_ib7ku")
+enemy = NodePath("../..")
+move_speed = 1600.0
+
+[node name="EnemyTiredState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_t2pfq")
+enemy = NodePath("../..")
+rest_time = 3.0
+
+[node name="EnemyExplodeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_6r63f")
+enemy = NodePath("../..")
