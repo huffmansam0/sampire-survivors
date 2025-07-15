@@ -2,21 +2,29 @@ extends Enemy
 
 @export var move_speed := 200.0
 @export var shoot_target_proximity := 800.0
-@export var shoot_interval := 100.0
+@export var shoot_interval := 3.0
 
 var target = GameCache.get_player()
 var move_direction: Vector2
 var distance_to_target: float
+var shot_ready := true
+var ranged_attack: PackedScene = preload("res://Scenes/Mycellium_Mage_Ranged_Attack.tscn")
 
 @onready var hp_bar = $HealthBar
 @onready var state_machine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var shot_timer: Timer = $ShotTimer
 
 func _ready():
 	max_hp = 150
 	hp_bar.max_value = max_hp
 	hp_bar.min_value = 0
 	hp_bar.value = current_hp
+	
+	shot_timer.one_shot = false
+	shot_timer.timeout.connect(func(): shot_ready = true)
+	shot_timer.start(shoot_interval)
+	
 	super._ready()
 	
 func approach():
@@ -27,6 +35,12 @@ func approach():
 	
 func shoot():
 	distance_to_target = global_position.distance_to(target.global_position)
+	
+	if shot_ready:
+		shot_ready = false
+		var instance = ranged_attack.instantiate()
+		instance.global_position = global_position
+		get_tree().current_scene.add_child(instance)
 	
 func should_approach():
 	return distance_to_target > shoot_target_proximity

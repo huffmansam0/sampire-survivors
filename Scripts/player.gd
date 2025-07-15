@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var slime_scene = preload("res://Scenes/Slime.tscn")
 @export var speed: float = 600.0
@@ -42,10 +43,11 @@ func handle_movement():
 		player_sprite.flip_h = input_direction.x >= 0
 	
 func take_damage(amount: int):
+	if damage_boosting:
+		return
 	current_hp -= amount
 	damage_boosting = true
 	get_tree().create_timer(damage_cooldown).timeout.connect(func(): damage_boosting = false)
-	print("HP: %s" % current_hp)
 	
 	health_changed.emit(current_hp)
 	
