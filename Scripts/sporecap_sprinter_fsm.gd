@@ -42,6 +42,7 @@ func _enter_state(new_state, old_state):
 			parent.animation_player.play("Walk")
 			pass
 		states.charge:
+			get_node("../Collision_Area2D").disabled = true
 			var target_position = parent.target.global_position
 			parent.charge_destination = target_position + (parent.global_position.direction_to(target_position) * 500.0)
 			pass
@@ -50,6 +51,10 @@ func _enter_state(new_state, old_state):
 			#start fixin' to bust animation
 			pass
 		states.explode:
-			parent.animation_player.animation_finished.connect(func(new_name): parent.queue_free())
+			get_node("../Hitbox_Area2D").scale.x = 3.5
+			get_node("../Hitbox_Area2D").scale.y = 3.5
+			parent.animation_player.animation_finished.connect(func(new_name): 
+				parent.die()
+			)
 			get_node("../HealthBar").visible = false
 			parent.animation_player.play("Explode")

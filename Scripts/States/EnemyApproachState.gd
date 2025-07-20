@@ -11,7 +11,7 @@ var move_direction : Vector2
 var distance_to_target : float
 
 func Enter():
-	target = GameCache.get_player()
+	target = GameManager.player
 
 func Physics_Update(delta: float):
 	move_direction = enemy.global_position.direction_to(target.global_position)

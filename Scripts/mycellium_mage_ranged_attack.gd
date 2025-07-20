@@ -6,7 +6,7 @@ class_name MycelliumMageRangedAttack
 
 var life_time := 5.0
 
-var target: Player = GameCache.get_player()
+var target: Player = GameManager.player
 var move_direction: Vector2
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -22,7 +22,6 @@ func _ready():
 	move_direction = global_position.direction_to(target.global_position)
 	velocity = move_direction * move_speed
 	sprite_sheet.rotation = velocity.angle() + PI
-	print(sprite_sheet.rotation)
 	
 func _physics_process(delta: float) -> void:
 	move_and_slide()

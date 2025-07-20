@@ -17,12 +17,14 @@ config/icon="res://Images/icon.svg"
 
 [autoload]
 
-GameCache="*res://Scripts/game_cache.gd"
+GameManager="*res://Scripts/game_manager.gd"
 
 [global_group]
 
 Player=""
 Enemies=""
+GameTimer=""
+Experience=""
 
 [input]
 

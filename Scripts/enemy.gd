@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
+signal died(enemy: Enemy)
+
 @export var max_hp: int
 
 @onready var health_bar = $HealthBar
@@ -24,4 +26,5 @@ func take_damage(amount: int):
 		die()
 
 func die():
+	died.emit(self)
 	queue_free()

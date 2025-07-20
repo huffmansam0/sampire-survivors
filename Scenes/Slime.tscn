@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://01yqed4jli7y"]
+[gd_scene load_steps=8 format=3 uid="uid://01yqed4jli7y"]
 
-[ext_resource type="Texture2D" uid="uid://bkf4pj0w1gmj6" path="res://Images/icon.svg" id="1_f0k3c"]
 [ext_resource type="Script" uid="uid://4pw0uqkr1gw2" path="res://Scripts/slime.gd" id="1_p1xxi"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_7yyg5"]
 
@@ -43,9 +42,6 @@ script = ExtResource("1_p1xxi")
 
 [node name="Hitbox_CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8h0vd")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_f0k3c")
 
 [node name="Despawn_Timer" type="Timer" parent="."]
 

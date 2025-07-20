@@ -9,6 +9,7 @@ height = 70.0
 
 [sub_resource type="Animation" id="Animation_x0q4v"]
 resource_name = "Fly"
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -17,7 +18,7 @@ tracks/0/path = NodePath("SpriteSheet:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Rect2(400, 800, 200, 200), Rect2(600, 800, 200, 200)]
@@ -45,6 +46,7 @@ _data = {
 }
 
 [node name="MycelliumMageRangedAttack" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_8mpjv")
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -59,6 +61,7 @@ shape = SubResource("CapsuleShape2D_dgtad")
 libraries = {
 &"": SubResource("AnimationLibrary_nbua6")
 }
+autoplay = "Fly"
 
 [node name="SpriteSheet" type="Sprite2D" parent="."]
 texture = ExtResource("2_r1k1k")

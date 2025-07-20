@@ -4,7 +4,7 @@ extends Enemy
 @export var shoot_target_proximity := 800.0
 @export var shoot_interval := 3.0
 
-var target = GameCache.get_player()
+var target = GameManager.player
 var move_direction: Vector2
 var distance_to_target: float
 var shot_ready := true
@@ -38,6 +38,7 @@ func shoot():
 	
 	if shot_ready:
 		shot_ready = false
+		shot_timer.start(shoot_interval)
 		var instance = ranged_attack.instantiate()
 		instance.global_position = global_position
 		get_tree().current_scene.add_child(instance)

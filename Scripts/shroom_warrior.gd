@@ -2,7 +2,7 @@ extends Enemy
 
 @export var move_speed := 200.0
 
-var target = GameCache.get_player()
+var target = GameManager.player
 var move_direction: Vector2
 var distance_to_target: float
 

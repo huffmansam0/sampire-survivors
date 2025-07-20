@@ -1,16 +1,17 @@
 extends Control
 
-@export var heart_texture: Texture2D  # Drag your full heart sprite here
-@export var empty_heart_texture: Texture2D  # Drag your empty heart sprite here
-@export var heart_spacing: int = 5  # Space between hearts
-@export var hearts_per_row: int = 10  # Max hearts per row before wrapping
+@export var full_heart_texture: Texture2D
+@export var half_heart_texture: Texture2D
+@export var empty_heart_texture: Texture2D
+@export var heart_spacing: int = 5
+@export var hearts_per_row: int = 10
 
 var max_health: int = 0
 var current_health: int = 0
 var heart_containers: Array[TextureRect] = []
 
 func _ready():
-	var player = GameCache.get_player()
+	var player = GameManager.player
 	if player:
 		player.health_changed.connect(_on_health_changed)
 		max_health = player.max_hp
@@ -38,7 +39,7 @@ func clear_hearts():
 	heart_containers.clear()
 
 func create_heart_containers():
-	for i in range(max_health):
+	for i in range(max_health / 2):
 		var heart = TextureRect.new()
 		heart.texture = empty_heart_texture
 		heart.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -62,10 +63,12 @@ func create_heart_containers():
 func update_heart_visuals():
 	for i in range(heart_containers.size()):
 		var heart = heart_containers[i]
-		if i < current_health:
-			heart.texture = heart_texture  # Full heart
+		if current_health == (i + 1) * 2 - 1:
+			heart.texture = half_heart_texture
+		elif current_health >= (i + 1) * 2:
+			heart.texture = full_heart_texture
 		else:
-			heart.texture = empty_heart_texture  # Empty heart
+			heart.texture = empty_heart_texture
 
 func set_health(health: int, max_hp: int):
 	max_health = max_hp

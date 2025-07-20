@@ -14,10 +14,10 @@ size = Vector2(77, 78)
 size = Vector2(77, 78)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7byj"]
-bg_color = Color(0.420963, 0, 0.0543423, 1)
+bg_color = Color(0.243137, 0.152941, 0.192157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
-bg_color = Color(0.922122, 0.0404463, 7.70092e-07, 1)
+bg_color = Color(1, 0, 0.266667, 1)
 
 [sub_resource type="Animation" id="Animation_huefm"]
 resource_name = "Explode"

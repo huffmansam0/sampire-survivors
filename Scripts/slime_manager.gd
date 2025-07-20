@@ -2,29 +2,42 @@ extends Node
 class_name SlimeManager
 
 @export var slime_scene = preload("res://Scenes/Slime.tscn")
-@export var damage_per_tick: float = 15.0
+@export var damage_per_tick: float = 1.0
 @export var damage_interval: float = 0.01
 
 var active_puddles: Array[Node2D] = []
-var enemies_in_slime: Dictionary = {}  # enemy -> reference_count
-var damage_timers: Dictionary = {}     # enemy -> Timer
+var enemies_in_slime: Dictionary = {}
+var damage_timers: Dictionary = {}
 
 func spawn_puddle(position: Vector2):
 	var slime = slime_scene.instantiate()
 	slime.global_position = position
 	slime.setup(self)
 	get_parent().add_child(slime)
-	# Create puddle, add to scene, manage max count
 	
-func enemy_entered_puddle(enemy):
+func enemy_entered_puddle(enemy: Enemy):
 	var enemyId = enemy.get_instance_id()
-	if (!enemies_in_slime.has(enemyId)):
-		enemies_in_slime[enemyId] = enemy
-		var damage_timer = get_tree().create_timer(damage_interval).timeout.connect(func(): enemy.take_damage(damage_per_tick))
+	var enemyEntry = enemies_in_slime.get_or_add(enemyId, 0)
+	enemies_in_slime[enemyId] += 1
+	if enemies_in_slime[enemyId] == 1:
+		var damage_timer = Timer.new()
+		damage_timer.wait_time = damage_interval
+		damage_timer.timeout.connect(_damage_enemy.bind(enemy))
+		damage_timer.autostart = true
+		add_child(damage_timer)
 		damage_timers[enemyId] = damage_timer
-	
-func enemy_exited_puddle(enemy):
+
+func enemy_exited_puddle(enemy: Enemy):
 	var enemyId = enemy.get_instance_id()
-	if (enemies_in_slime.has(enemyId)):
-		enemies_in_slime.erase(enemyId)
-		damage_timers.erase(enemyId)
+	enemies_in_slime[enemyId] -= 1
+	if enemies_in_slime[enemyId] <= 0:
+		_remove_enemy(enemyId)
+		
+func _damage_enemy(enemy: Enemy):
+	if is_instance_valid(enemy):
+		enemy.take_damage(damage_per_tick)
+	
+func _remove_enemy(enemyId):
+	enemies_in_slime.erase(enemyId)
+	damage_timers[enemyId].queue_free()
+	damage_timers.erase(enemyId)

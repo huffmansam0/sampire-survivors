@@ -4,13 +4,14 @@ class_name Player
 @export var slime_scene = preload("res://Scenes/Slime.tscn")
 @export var speed: float = 600.0
 @export var max_hp: int = 6
-@export var slime_spawn_time = 0.25
+@export var slime_spawn_time = 0.1
 
 @onready var label = $Label
 @onready var hurt_audios = [$SnailDamagedTake1, $SnailDamagedTake2, $SnailDamagedTake3, $"ShittySadTrombone1"]
 @onready var slime_timer = $Slime_Timer
 @onready var player_sprite = $PlayerSprite
 @onready var slime_manager = get_node("../SlimeManager")
+@onready var kyle_sad_trumpet = preload("res://Audio/sad_trumpy_kyle.wav")
 
 signal health_changed(new_health)
 
@@ -63,17 +64,18 @@ func take_damage(amount: int):
 		die()
 		
 func die():
-	label.text = "You Died.\nYou Suck.\nFuck You."
-	
-#	Can't play music here, probably because we're pausing right after we start the clip.
-	#var temp_audio = AudioStreamPlayer.new()
-	#temp_audio.stream = $"Vm1k2Prpti-sad-trombone-sfx-1".stream  # Copy the audio clip
-	#add_child(temp_audio)
-	#temp_audio.play()
-	#
-	#temp_audio.finished.connect(func(): temp_audio.queue_free())
-	
-	get_tree().paused = true
+	if speed > 0:
+		label.text = "You Died.\nYou Suck.\nFuck You."
+		
+	#	Can't play music here, probably because we're pausing right after we start the clip.
+		var temp_audio = AudioStreamPlayer.new()
+		temp_audio.stream = kyle_sad_trumpet  # Copy the audio clip
+		add_child(temp_audio)
+		temp_audio.play()
+		
+		temp_audio.finished.connect(func(): temp_audio.queue_free())
+		
+		speed = 0
 	
 func spawn_slime():
 	slime_manager.spawn_puddle(global_position)
