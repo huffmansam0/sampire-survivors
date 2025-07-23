@@ -110,7 +110,8 @@ _data = {
 }
 
 [node name="SporecapSprinter" type="CharacterBody2D" groups=["Enemies"]]
-z_index = 1
+z_index = 5
+z_as_relative = false
 motion_mode = 1
 script = ExtResource("1_mg7ix")
 

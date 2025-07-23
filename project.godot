@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Sampire Survivors"
+config/name="Snail Game"
 run/main_scene="uid://cp80bo6t3q3hl"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Images/icon.svg"
@@ -18,6 +18,12 @@ config/icon="res://Images/icon.svg"
 [autoload]
 
 GameManager="*res://Scripts/game_manager.gd"
+
+[display]
+
+window/size/mode=3
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 
 [global_group]
 

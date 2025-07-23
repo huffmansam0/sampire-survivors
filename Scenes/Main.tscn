@@ -25,6 +25,17 @@ texture_region_size = Vector2i(400, 400)
 [sub_resource type="TileSet" id="TileSet_v1gob"]
 sources/1 = SubResource("TileSetAtlasSource_pbw6q")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy5pj"]
+bg_color = Color(0.14902, 0.168627, 0.266667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
+bg_color = Color(0, 0.6, 0.858824, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vy5pj"]
+font_size = 20
+outline_size = 2
+outline_color = Color(0.0941176, 0.0784314, 0.145098, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_50glp"]
 atlas = ExtResource("4_rgh2o")
 region = Rect2(200, 1400, 200, 200)
@@ -42,17 +53,6 @@ font_size = 32
 outline_size = 8
 outline_color = Color(0.352941, 0.411765, 0.533333, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy5pj"]
-bg_color = Color(0.14902, 0.168627, 0.266667, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
-bg_color = Color(0, 0.6, 0.858824, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_vy5pj"]
-font_size = 20
-outline_size = 2
-outline_color = Color(0.0941176, 0.0784314, 0.145098, 1)
-
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("3_kln2b")]
@@ -64,60 +64,66 @@ tile_set = SubResource("TileSet_v1gob")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HealthUI" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="TopUI" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ExperienceUI" type="MarginContainer" parent="UI/MarginContainer/TopUI"]
+layout_mode = 2
+script = ExtResource("5_vy5pj")
+
+[node name="ExperienceProgressBar" type="ProgressBar" parent="UI/MarginContainer/TopUI/ExperienceUI"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_vy5pj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bmxlf")
+show_percentage = false
+
+[node name="ExperienceLabel" type="Label" parent="UI/MarginContainer/TopUI/ExperienceUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Level 1"
+label_settings = SubResource("LabelSettings_vy5pj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/TopUI"]
+layout_mode = 2
+
+[node name="HealthUI" type="Control" parent="UI/MarginContainer/TopUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
 script = ExtResource("5_pbw6q")
 full_heart_texture = SubResource("AtlasTexture_50glp")
 half_heart_texture = SubResource("AtlasTexture_jw32o")
 empty_heart_texture = SubResource("AtlasTexture_v1gob")
 
-[node name="GameTimerUI" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -82.0
-offset_right = -82.0
-grow_horizontal = 0
+[node name="GameTimerUI" type="MarginContainer" parent="UI/MarginContainer/TopUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 15
 script = ExtResource("6_jw32o")
 
-[node name="GameTimerUILabel" type="Label" parent="UI/GameTimerUI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="GameTimerUILabel" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/GameTimerUI"]
+layout_mode = 2
+text = "9:59"
 label_settings = SubResource("LabelSettings_jw32o")
+horizontal_alignment = 2
 
-[node name="ExperienceUI" type="Control" parent="UI"]
+[node name="UpgradeUI" type="Control" parent="UI"]
 layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 1152.0
-offset_top = 80.0
-offset_right = 1152.0
-offset_bottom = 80.0
-grow_vertical = 0
-script = ExtResource("5_vy5pj")
-
-[node name="ExperienceProgressBar" type="ProgressBar" parent="UI/ExperienceUI"]
-layout_mode = 0
-offset_left = -1152.0
-offset_top = -100.0
-offset_bottom = -80.0
-theme_override_styles/background = SubResource("StyleBoxFlat_vy5pj")
-theme_override_styles/fill = SubResource("StyleBoxFlat_bmxlf")
-show_percentage = false
-
-[node name="ExperienceLabel" type="Label" parent="UI/ExperienceUI"]
-layout_mode = 0
-offset_left = -583.0
-offset_top = -105.0
-offset_right = -542.0
-offset_bottom = -71.0
-label_settings = SubResource("LabelSettings_vy5pj")
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="GameTimer" type="Timer" parent="." groups=["GameTimer"]]
 wait_time = 600.0

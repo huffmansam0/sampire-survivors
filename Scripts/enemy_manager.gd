@@ -69,6 +69,10 @@ func _on_enemy_died(enemy: Enemy):
 
 func _on_game_time_elapsed(seconds: int):
 	match seconds:
+		#useful testing stuff
+		#1:
+			#sporecap_sprinter_weight = 1
+			#mycellium_mage_weight = 1
 		5:
 			spawn_rate *= 1.1
 		10:

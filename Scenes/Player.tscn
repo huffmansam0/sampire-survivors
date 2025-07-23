@@ -70,10 +70,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.4, 0.4)
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="Hurtbox_CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]

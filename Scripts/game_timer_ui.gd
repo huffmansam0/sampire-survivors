@@ -1,4 +1,4 @@
-extends Control
+extends MarginContainer
 
 @onready var time_label: Label = $GameTimerUILabel
 @onready var game_timer: Timer = GameManager.get_game_timer()
