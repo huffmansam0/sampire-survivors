@@ -36,6 +36,8 @@ animations = [{
 }]
 
 [node name="Hitbox_Area2D" type="Area2D"]
+process_mode = 1
+z_as_relative = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_p1xxi")

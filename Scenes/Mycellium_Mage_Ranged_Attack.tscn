@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cvtx0xc2a5ol0"]
 
-[ext_resource type="Script" uid="uid://ceu4woafe8sg8" path="res://Scripts/mycellium_mage_ranged_attack.gd" id="1_8mpjv"]
+[ext_resource type="Script" uid="uid://ceu4woafe8sg8" path="res://Scripts/Enemies/mycellium_mage_ranged_attack.gd" id="1_8mpjv"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_r1k1k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgtad"]
@@ -46,7 +46,7 @@ _data = {
 }
 
 [node name="MycelliumMageRangedAttack" type="CharacterBody2D"]
-z_index = 5
+z_index = 3
 z_as_relative = false
 script = ExtResource("1_8mpjv")
 

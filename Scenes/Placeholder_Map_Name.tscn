@@ -1,18 +1,16 @@
-[gd_scene load_steps=19 format=4 uid="uid://cp80bo6t3q3hl"]
+[gd_scene load_steps=17 format=4 uid="uid://0qnw1ctsgve5"]
 
-[ext_resource type="Script" uid="uid://b2ebmabjr40g2" path="res://Scripts/enemy_manager.gd" id="1_kln2b"]
-[ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="3_kln2b"]
-[ext_resource type="Script" uid="uid://b7pphq8epdkb2" path="res://Scripts/slime_manager.gd" id="3_rgh2o"]
-[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_rgh2o"]
-[ext_resource type="Script" uid="uid://cryep8dp6jk8" path="res://Scripts/health_ui.gd" id="5_pbw6q"]
-[ext_resource type="Script" uid="uid://brl0fqjxdwaa0" path="res://Scripts/experience_ui.gd" id="5_vy5pj"]
-[ext_resource type="Script" uid="uid://cqokfpdqudjuk" path="res://Scripts/experience_manager.gd" id="6_50glp"]
-[ext_resource type="Script" uid="uid://dtbm6eohcjvxq" path="res://Scripts/game_timer_ui.gd" id="6_jw32o"]
-[ext_resource type="Script" uid="uid://0xosey5cq2iw" path="res://Scripts/game_manager.gd" id="6_v1gob"]
+[ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/placeholder_map_name.gd" id="1_epho6"]
+[ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_otn62"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_3rfmu"]
+[ext_resource type="Script" uid="uid://b2ebmabjr40g2" path="res://Scripts/enemy_spawner.gd" id="4_0wjqh"]
+[ext_resource type="Script" uid="uid://brl0fqjxdwaa0" path="res://Scripts/UI/experience_ui.gd" id="5_u4vt4"]
+[ext_resource type="Script" uid="uid://cryep8dp6jk8" path="res://Scripts/UI/health_ui.gd" id="6_yeids"]
+[ext_resource type="Script" uid="uid://dtbm6eohcjvxq" path="res://Scripts/UI/game_timer_ui.gd" id="7_ewhqx"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pbw6q"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iokn6"]
 resource_name = "tilez"
-texture = ExtResource("4_rgh2o")
+texture = ExtResource("3_3rfmu")
 margins = Vector2i(200, 0)
 texture_region_size = Vector2i(400, 400)
 2:0/0 = 0
@@ -22,47 +20,61 @@ texture_region_size = Vector2i(400, 400)
 3:1/0 = 0
 4:1/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_v1gob"]
-sources/1 = SubResource("TileSetAtlasSource_pbw6q")
+[sub_resource type="TileSet" id="TileSet_61w0f"]
+sources/1 = SubResource("TileSetAtlasSource_iokn6")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy5pj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1qtq"]
 bg_color = Color(0.14902, 0.168627, 0.266667, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpk4g"]
 bg_color = Color(0, 0.6, 0.858824, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_vy5pj"]
-font_size = 20
+[sub_resource type="LabelSettings" id="LabelSettings_cw43m"]
+font_size = 30
 outline_size = 2
 outline_color = Color(0.0941176, 0.0784314, 0.145098, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_50glp"]
-atlas = ExtResource("4_rgh2o")
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnn4a"]
+atlas = ExtResource("3_3rfmu")
 region = Rect2(200, 1400, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jw32o"]
-atlas = ExtResource("4_rgh2o")
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k2rf"]
+atlas = ExtResource("3_3rfmu")
 region = Rect2(400, 1400, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v1gob"]
-atlas = ExtResource("4_rgh2o")
+[sub_resource type="AtlasTexture" id="AtlasTexture_caca8"]
+atlas = ExtResource("3_3rfmu")
 region = Rect2(0, 1400, 200, 200)
 
-[sub_resource type="LabelSettings" id="LabelSettings_jw32o"]
+[sub_resource type="LabelSettings" id="LabelSettings_0mwrw"]
 font_size = 32
 outline_size = 8
 outline_color = Color(0.352941, 0.411765, 0.533333, 1)
 
-[node name="Main" type="Node2D"]
+[node name="PlaceholderMapName" type="Node"]
+script = ExtResource("1_epho6")
 
-[node name="Player" parent="." instance=ExtResource("3_kln2b")]
+[node name="Player" parent="." instance=ExtResource("2_otn62")]
+process_mode = 1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+z_as_relative = false
 scale = Vector2(2.5, 2.5)
 tile_map_data = PackedByteArray("AAD//wAAAQACAAAAAAAYAAAAAQAEAAAAAAD//+f/AQAEAAEAAADm/wAAAQADAAEAAAD//xkAAQACAAEAAAAYABkAAQADAAAAAAAYAOf/AQADAAEAAADm/+f/AQADAAAAAADm/xkAAQAEAAAAAADN/+f/AQACAAAAAADN/87/AQAEAAAAAADN/wAAAQACAAEAAADN/xkAAQACAAAAAAAxABkAAQACAAAAAAAxAM7/AQACAAAAAADm/87/AQAEAAEAAAD//87/AQACAAEAAAAYAM7/AQAEAAEAAAAxAOf/AQAEAAEAAAAxAAAAAQADAAAAAABKAM7/AQAEAAAAAABKAOf/AQAEAAEAAABKAAAAAQACAAAAAABKABkAAQADAAEAAADN/zIAAQADAAEAAAC0/zIAAQADAAAAAABKADIAAQAEAAAAAAAxADIAAQAEAAEAAAAYADIAAQACAAAAAAD//zIAAQACAAAAAADm/zIAAQAEAAEAAAC0/xkAAQACAAAAAAC0/wAAAQADAAAAAAC0/+f/AQAEAAAAAAC0/87/AQADAAEAAAA=")
-tile_set = SubResource("TileSet_v1gob")
+tile_set = SubResource("TileSet_61w0f")
+
+[node name="GameTimer" type="Timer" parent="." groups=["GameTimer"]]
+process_mode = 1
+wait_time = 600.0
+one_shot = true
+
+[node name="EnemySpawner" type="Node" parent="."]
+process_mode = 1
+script = ExtResource("4_0wjqh")
 
 [node name="UI" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 10
@@ -80,20 +92,21 @@ theme_override_constants/separation = 10
 
 [node name="ExperienceUI" type="MarginContainer" parent="UI/MarginContainer/TopUI"]
 layout_mode = 2
-script = ExtResource("5_vy5pj")
+script = ExtResource("5_u4vt4")
 
 [node name="ExperienceProgressBar" type="ProgressBar" parent="UI/MarginContainer/TopUI/ExperienceUI"]
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_vy5pj")
-theme_override_styles/fill = SubResource("StyleBoxFlat_bmxlf")
+theme_override_styles/background = SubResource("StyleBoxFlat_o1qtq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lpk4g")
 show_percentage = false
 
 [node name="ExperienceLabel" type="Label" parent="UI/MarginContainer/TopUI/ExperienceUI"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Level 1"
-label_settings = SubResource("LabelSettings_vy5pj")
+label_settings = SubResource("LabelSettings_cw43m")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/TopUI"]
 layout_mode = 2
@@ -101,22 +114,22 @@ layout_mode = 2
 [node name="HealthUI" type="Control" parent="UI/MarginContainer/TopUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-script = ExtResource("5_pbw6q")
-full_heart_texture = SubResource("AtlasTexture_50glp")
-half_heart_texture = SubResource("AtlasTexture_jw32o")
-empty_heart_texture = SubResource("AtlasTexture_v1gob")
+script = ExtResource("6_yeids")
+full_heart_texture = SubResource("AtlasTexture_gnn4a")
+half_heart_texture = SubResource("AtlasTexture_7k2rf")
+empty_heart_texture = SubResource("AtlasTexture_caca8")
 
 [node name="GameTimerUI" type="MarginContainer" parent="UI/MarginContainer/TopUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 15
-script = ExtResource("6_jw32o")
+script = ExtResource("7_ewhqx")
 
 [node name="GameTimerUILabel" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/GameTimerUI"]
 layout_mode = 2
 text = "9:59"
-label_settings = SubResource("LabelSettings_jw32o")
+label_settings = SubResource("LabelSettings_0mwrw")
 horizontal_alignment = 2
 
 [node name="UpgradeUI" type="Control" parent="UI"]
@@ -124,19 +137,3 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="GameTimer" type="Timer" parent="." groups=["GameTimer"]]
-wait_time = 600.0
-one_shot = true
-
-[node name="EnemyManager" type="Node" parent="."]
-script = ExtResource("1_kln2b")
-
-[node name="ExperienceManager" type="Node" parent="."]
-script = ExtResource("6_50glp")
-
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource("6_v1gob")
-
-[node name="SlimeManager" type="Node" parent="."]
-script = ExtResource("3_rgh2o")

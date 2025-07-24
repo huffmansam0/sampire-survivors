@@ -10,7 +10,7 @@ class_name Player
 @onready var hurt_audios = [$SnailDamagedTake1, $SnailDamagedTake2, $SnailDamagedTake3, $"ShittySadTrombone1"]
 @onready var slime_timer = $Slime_Timer
 @onready var player_sprite = $PlayerSprite
-@onready var slime_manager = get_node("../SlimeManager")
+@onready var slime_manager = get_node("SlimeSpawner")
 @onready var kyle_sad_trumpet = preload("res://Audio/sad_trumpy_kyle.wav")
 
 signal health_changed(new_health)
@@ -23,7 +23,6 @@ var damage_amount: int = 1
 var damage_boosting: bool = false
 
 func _ready():
-	process_mode = Node.PROCESS_MODE_PAUSABLE
 	current_hp = max_hp
 	slime_timer.wait_time = slime_spawn_time
 	slime_timer.timeout.connect(spawn_slime)

@@ -1,5 +1,5 @@
 extends Node
-class_name SlimeManager
+class_name SlimeSpawner
 
 @export var slime_scene = preload("res://Scenes/Slime.tscn")
 @export var damage_per_tick: float = 1.0
@@ -13,7 +13,7 @@ func spawn_puddle(position: Vector2):
 	var slime = slime_scene.instantiate()
 	slime.global_position = position
 	slime.setup(self)
-	get_parent().add_child(slime)
+	get_tree().current_scene.add_child(slime)
 	
 func enemy_entered_puddle(enemy: Enemy):
 	var enemyId = enemy.get_instance_id()

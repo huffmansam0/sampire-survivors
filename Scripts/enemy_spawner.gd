@@ -1,5 +1,5 @@
 extends Node
-class_name EnemyManager
+class_name EnemySpawner
 
 signal enemy_died(enemy: Enemy)
 
@@ -24,6 +24,8 @@ var spawn_timer: float = 0.0
 func _ready():
 	GameManager.game_time_elapsed.connect(_on_game_time_elapsed)
 	GameManager.game_time_expired.connect(_on_game_time_expired)
+	
+	ExperienceManager.register_enemy_spawner(self)
 
 func _process(delta):
 	spawn_timer += delta

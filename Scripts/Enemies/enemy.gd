@@ -15,7 +15,6 @@ var damage_timer: float = 0.0
 var damage_interval: float = 0.25
 
 func _ready():
-	process_mode = Node.PROCESS_MODE_PAUSABLE
 	current_hp = max_hp
 	health_bar.value = current_hp
 

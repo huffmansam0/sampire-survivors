@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2xod8pb6h4qd"]
+[gd_scene load_steps=15 format=3 uid="uid://d2xod8pb6h4qd"]
 
 [ext_resource type="Script" uid="uid://cncjalb71asae" path="res://Scripts/player.gd" id="1_nn08x"]
+[ext_resource type="Script" uid="uid://b7pphq8epdkb2" path="res://Scripts/slime_manager.gd" id="3_52ee3"]
 [ext_resource type="AudioStream" uid="uid://bb15qdc0armo2" path="res://Audio/snail_damaged_take_1.wav" id="3_bhhdu"]
 [ext_resource type="AudioStream" uid="uid://b4j70ts1rn3n1" path="res://Audio/snail_damaged_take_2.wav" id="4_megsn"]
 [ext_resource type="AudioStream" uid="uid://cewdpvvf3kj4y" path="res://Audio/snail_damaged_take_3.wav" id="5_yoq75"]
@@ -49,7 +50,8 @@ size = Vector2(137, 139)
 radius = 81.7435
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-z_index = 2
+z_index = 5
+z_as_relative = false
 motion_mode = 1
 script = ExtResource("1_nn08x")
 
@@ -71,6 +73,9 @@ vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.4, 0.4)
+
+[node name="SlimeSpawner" type="Node" parent="."]
+script = ExtResource("3_52ee3")
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
 collision_mask = 2

@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://c2jjfco32l7a2"]
 
-[ext_resource type="Script" uid="uid://c6yf5eafjmehy" path="res://Scripts/sporecap_sprinter.gd" id="1_mg7ix"]
+[ext_resource type="Script" uid="uid://c6yf5eafjmehy" path="res://Scripts/Enemies/sporecap_sprinter.gd" id="1_mg7ix"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_rhw1c"]
-[ext_resource type="Script" uid="uid://bekv7eiyxxnfc" path="res://Scripts/sporecap_sprinter_fsm.gd" id="3_rhw1c"]
+[ext_resource type="Script" uid="uid://bekv7eiyxxnfc" path="res://Scripts/Enemies/sporecap_sprinter_fsm.gd" id="3_rhw1c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
 size = Vector2(34.75, 34)
@@ -110,7 +110,7 @@ _data = {
 }
 
 [node name="SporecapSprinter" type="CharacterBody2D" groups=["Enemies"]]
-z_index = 5
+z_index = 2
 z_as_relative = false
 motion_mode = 1
 script = ExtResource("1_mg7ix")

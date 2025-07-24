@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://bcc1dov0guwsp"]
 
-[ext_resource type="Script" uid="uid://dy3vdp6wm8wle" path="res://Scripts/shroom_warrior.gd" id="1_r7byj"]
+[ext_resource type="Script" uid="uid://dy3vdp6wm8wle" path="res://Scripts/Enemies/shroom_warrior.gd" id="1_r7byj"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_bgd1r"]
-[ext_resource type="Script" uid="uid://byj0q387wdifi" path="res://Scripts/shroom_warrior_fsm.gd" id="3_e5y0t"]
+[ext_resource type="Script" uid="uid://byj0q387wdifi" path="res://Scripts/Enemies/shroom_warrior_fsm.gd" id="3_e5y0t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5y0t"]
 atlas = ExtResource("2_bgd1r")
@@ -47,6 +47,7 @@ bg_color = Color(1, 0, 0.266667, 1)
 
 [node name="ShroomWarrior" type="CharacterBody2D" groups=["Enemies"]]
 z_index = 1
+z_as_relative = false
 motion_mode = 1
 script = ExtResource("1_r7byj")
 
