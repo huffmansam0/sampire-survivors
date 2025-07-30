@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://d2xod8pb6h4qd"]
 
 [ext_resource type="Script" uid="uid://cncjalb71asae" path="res://Scripts/player.gd" id="1_nn08x"]
-[ext_resource type="Script" uid="uid://b7pphq8epdkb2" path="res://Scripts/slime_manager.gd" id="3_52ee3"]
+[ext_resource type="Script" uid="uid://b7pphq8epdkb2" path="res://Scripts/Globals/attack_manager.gd" id="3_52ee3"]
 [ext_resource type="AudioStream" uid="uid://bb15qdc0armo2" path="res://Audio/snail_damaged_take_1.wav" id="3_bhhdu"]
 [ext_resource type="AudioStream" uid="uid://b4j70ts1rn3n1" path="res://Audio/snail_damaged_take_2.wav" id="4_megsn"]
 [ext_resource type="AudioStream" uid="uid://cewdpvvf3kj4y" path="res://Audio/snail_damaged_take_3.wav" id="5_yoq75"]
@@ -52,6 +52,8 @@ radius = 81.7435
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
 z_as_relative = false
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_nn08x")
 
@@ -78,7 +80,7 @@ zoom = Vector2(0.4, 0.4)
 script = ExtResource("3_52ee3")
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
-collision_mask = 2
+collision_layer = 4
 
 [node name="Hurtbox_CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
 position = Vector2(5.5, 1.5)
@@ -95,9 +97,6 @@ stream = ExtResource("5_yoq75")
 
 [node name="ShittySadTrombone1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ksbbd")
-
-[node name="Slime_Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="ExperienceBox" type="Area2D" parent="."]
 collision_layer = 8

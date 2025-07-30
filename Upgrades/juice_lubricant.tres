@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PlayerUpgradeResource" load_steps=4 format=3 uid="uid://bf28sihwoe1qs"]
+
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="1_2ur7e"]
+[ext_resource type="Script" uid="uid://byv6fv5rpq2di" path="res://Scripts/Resource Scripts/player_upgrade_resource.gd" id="1_v2k62"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn4t0"]
+atlas = ExtResource("1_2ur7e")
+region = Rect2(400, 1000, 200, 200)
+
+[resource]
+script = ExtResource("1_v2k62")
+speed = 0.0
+speed_mult = 1.0
+max_hp = 0
+experience_box_mult = 0
+name = "Juice Lubricant"
+description = "Increases movement speed by 100%."
+type = "player"
+icon = SubResource("AtlasTexture_fn4t0")
+metadata/_custom_type_script = "uid://byv6fv5rpq2di"

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=5 format=3 uid="uid://jcstkxtnkl1h"]
+
+[ext_resource type="Script" uid="uid://dd6xgl42i3dsh" path="res://Scripts/Resource Scripts/effect_resource.gd" id="1_os6jo"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_idsbw"]
+[ext_resource type="Script" uid="uid://bcoxc0pgv5tkb" path="res://Scripts/Resource Scripts/snail_juice_attack_upgrade_resource.gd" id="2_scdiw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufti0"]
+atlas = ExtResource("2_idsbw")
+region = Rect2(0, 1800, 200, 200)
+
+[resource]
+script = ExtResource("2_scdiw")
+size = null
+size_mult = null
+interval = null
+interval_mult = null
+duration = null
+duration_mult = 1.0
+tick_rate = null
+tick_rate_mult = null
+position_offset_x = null
+position_offset_y = null
+effects = Dictionary[String, ExtResource("1_os6jo")]({})
+name = "Slime Preservatives"
+description = "Increases Snail Juice duration by 100%."
+type = "snail_juice"
+icon = SubResource("AtlasTexture_ufti0")
+metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"

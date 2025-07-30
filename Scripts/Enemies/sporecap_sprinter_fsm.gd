@@ -43,7 +43,7 @@ func _enter_state(new_state, old_state):
 			pass
 		states.charge:
 			get_node("../Collision_Area2D").disabled = true
-			var target_position = parent.target.global_position
+			var target_position = parent.player.global_position
 			parent.charge_destination = target_position + (parent.global_position.direction_to(target_position) * 500.0)
 			pass
 		states.fixin_to_bust:

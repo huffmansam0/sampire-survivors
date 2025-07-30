@@ -1,32 +1,46 @@
 extends CharacterBody2D
 class_name Player
 
-@export var slime_scene = preload("res://Scenes/Slime.tscn")
-@export var speed: float = 600.0
-@export var max_hp: int = 6
-@export var slime_spawn_time = 0.1
+#upgrade-able stats
+var speed: float = 600.0
+var speed_mult: float = 0
+var max_hp: int = 6
+@onready var experience_box = $ExperienceBox
+var experience_box_mult: int = 0
 
 @onready var label = $Label
 @onready var hurt_audios = [$SnailDamagedTake1, $SnailDamagedTake2, $SnailDamagedTake3, $"ShittySadTrombone1"]
-@onready var slime_timer = $Slime_Timer
 @onready var player_sprite = $PlayerSprite
-@onready var slime_manager = get_node("SlimeSpawner")
 @onready var kyle_sad_trumpet = preload("res://Audio/sad_trumpy_kyle.wav")
 
 signal health_changed(new_health)
 
 var current_hp: int
 
-var damage_timer: Timer
 var damage_cooldown: float = 1
 var damage_amount: int = 1
 var damage_boosting: bool = false
 
 func _ready():
 	current_hp = max_hp
-	slime_timer.wait_time = slime_spawn_time
-	slime_timer.timeout.connect(spawn_slime)
-	slime_timer.start()
+	
+	# Debug: Print all child nodes
+	print("Player children:")
+	for child in get_children():
+		print("  - ", child.name, " (", child.get_class(), ")")
+	
+	# Debug: Check if experience_box exists
+	if experience_box:
+		print("ExperienceBox found: ", experience_box.name)
+	else:
+		print("ExperienceBox is NULL!")
+		# Try to find it manually
+		var found_box = find_child("ExperienceBox", true, false)
+		if found_box:
+			print("Found ExperienceBox manually at path: ", get_path_to(found_box))
+			experience_box = found_box
+		else:
+			print("ExperienceBox not found anywhere in the tree")
 
 func _physics_process(delta):
 	if ($Hurtbox_Area2D.has_overlapping_areas() && !damage_boosting):
@@ -75,6 +89,3 @@ func die():
 		temp_audio.finished.connect(func(): temp_audio.queue_free())
 		
 		speed = 0
-	
-func spawn_slime():
-	slime_manager.spawn_puddle(global_position)

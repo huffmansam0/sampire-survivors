@@ -11,6 +11,8 @@ region = Rect2(0, 2000, 200, 200)
 radius = 111.041
 
 [node name="Experience" type="Node2D"]
+z_index = 1
+z_as_relative = false
 script = ExtResource("1_n8qja")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

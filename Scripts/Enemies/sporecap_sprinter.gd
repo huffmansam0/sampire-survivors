@@ -1,14 +1,11 @@
 #Sporecap Sprinter
 extends Enemy
+class_name SporecapSprinter
 
-@export var move_speed := 300.0
 @export var charge_speed := 900.0
 @export var charge_target_proximity := 500.0
 @export var charge_destination_proximity := 20.0
 
-var target = GameManager.player
-var move_direction: Vector2
-var distance_to_target: float
 var charge_destination: Vector2
 var distance_to_charge_destination: float
 
@@ -18,6 +15,7 @@ var distance_to_charge_destination: float
 @onready var hitbox: Area2D = $Hitbox_Area2D
 
 func _ready():
+	move_speed = 350.0
 	max_hp = 100
 	hp_bar.max_value = max_hp
 	hp_bar.min_value = 0
@@ -26,9 +24,6 @@ func _ready():
 	super._ready()
 	
 func approach():
-	move_direction = global_position.direction_to(target.global_position)
-	distance_to_target = global_position.distance_to(target.global_position)
-	velocity = move_direction * move_speed
 	move_and_slide()
 	
 func charge():

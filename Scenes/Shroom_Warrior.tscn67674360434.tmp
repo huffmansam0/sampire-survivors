@@ -1,36 +1,43 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpfcdil8xqpe7"]
+[gd_scene load_steps=12 format=3 uid="uid://bcc1dov0guwsp"]
 
-[ext_resource type="Script" uid="uid://vpv4olcn11rv" path="res://Scripts/Enemies/mycellium_mage.gd" id="1_n3fy3"]
-[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_ku07x"]
-[ext_resource type="Script" uid="uid://d1r4q80uy640e" path="res://Scripts/Enemies/mycellium_mage_fsm.gd" id="3_d2l4i"]
+[ext_resource type="Script" uid="uid://dy3vdp6wm8wle" path="res://Scripts/Enemies/shroom_warrior.gd" id="1_r7byj"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_bgd1r"]
+[ext_resource type="Script" uid="uid://byj0q387wdifi" path="res://Scripts/Enemies/shroom_warrior_fsm.gd" id="3_e5y0t"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n3fy3"]
-atlas = ExtResource("2_ku07x")
-region = Rect2(0, 800, 200, 200)
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5y0t"]
+atlas = ExtResource("2_bgd1r")
+region = Rect2(0, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2l4i"]
-atlas = ExtResource("2_ku07x")
-region = Rect2(200, 800, 200, 200)
+[sub_resource type="AtlasTexture" id="AtlasTexture_igg1x"]
+atlas = ExtResource("2_bgd1r")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jcfd"]
+atlas = ExtResource("2_bgd1r")
+region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4pjup"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n3fy3")
+"texture": SubResource("AtlasTexture_e5y0t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d2l4i")
+"texture": SubResource("AtlasTexture_igg1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jcfd")
 }],
 "loop": true,
 "name": &"default",
-"speed": 1.5
+"speed": 2.25
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
-size = Vector2(43.5, 44)
+size = Vector2(92, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(120, 120)
+size = Vector2(153, 114)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7byj"]
 bg_color = Color(0.243137, 0.152941, 0.192157, 1)
@@ -38,48 +45,49 @@ bg_color = Color(0.243137, 0.152941, 0.192157, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
 bg_color = Color(1, 0, 0.266667, 1)
 
-[node name="MycelliumMage" type="CharacterBody2D" groups=["Enemies"]]
-z_index = 2
+[node name="ShroomWarrior" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 1
 z_as_relative = false
-collision_layer = 16
-collision_mask = 16
 motion_mode = 1
-script = ExtResource("1_n3fy3")
+script = ExtResource("1_r7byj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0.499997, 0.499997)
-scale = Vector2(0.605, 0.605)
+position = Vector2(2.86102e-06, 1.43051e-06)
 sprite_frames = SubResource("SpriteFrames_4pjup")
 autoplay = "default"
+frame = 2
 
 [node name="Collision_Area2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 48)
 shape = SubResource("RectangleShape2D_7k104")
 
 [node name="Hitbox_Area2D" type="Area2D" parent="."]
-collision_mask = 0
+visible = false
+collision_layer = 2
 
 [node name="Hitbox_Collision2D" type="CollisionShape2D" parent="Hitbox_Area2D"]
+position = Vector2(0, 43)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
-collision_layer = 2
+visible = false
+collision_layer = 4
 collision_mask = 0
 
 [node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
+position = Vector2(-1, 42)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -72.0
-offset_top = 67.0
+offset_top = 107.0
 offset_right = 73.0
-offset_bottom = 96.0
+offset_bottom = 136.0
 theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
 show_percentage = false
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_d2l4i")
+script = ExtResource("3_e5y0t")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="ShotTimer" type="Timer" parent="."]

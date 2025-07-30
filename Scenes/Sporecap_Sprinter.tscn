@@ -112,6 +112,8 @@ _data = {
 [node name="SporecapSprinter" type="CharacterBody2D" groups=["Enemies"]]
 z_index = 2
 z_as_relative = false
+collision_layer = 16
+collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_mg7ix")
 
@@ -119,14 +121,14 @@ script = ExtResource("1_mg7ix")
 shape = SubResource("RectangleShape2D_7k104")
 
 [node name="Hitbox_Area2D" type="Area2D" parent="."]
-collision_layer = 2
+collision_mask = 0
 
 [node name="Hitbox_Collision2D" type="CollisionShape2D" parent="Hitbox_Area2D"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_t2pfq")
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 2
 collision_mask = 0
 
 [node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]

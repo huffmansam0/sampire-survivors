@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=6 format=3 uid="uid://l6jporgmeft6"]
+
+[ext_resource type="Script" uid="uid://dd6xgl42i3dsh" path="res://Scripts/Resource Scripts/effect_resource.gd" id="1_qg1yl"]
+[ext_resource type="Script" uid="uid://bcoxc0pgv5tkb" path="res://Scripts/Resource Scripts/snail_juice_attack_upgrade_resource.gd" id="2_fit2p"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_vsdp3"]
+
+[sub_resource type="Resource" id="Resource_qg1yl"]
+script = ExtResource("1_qg1yl")
+type = "damage"
+amount = 0.0
+amount_mult = 1.0
+duration = 0.0
+duration_mult = 0.0
+metadata/_custom_type_script = "uid://dd6xgl42i3dsh"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idrih"]
+atlas = ExtResource("2_vsdp3")
+region = Rect2(600, 400, 200, 200)
+
+[resource]
+script = ExtResource("2_fit2p")
+size = 0.0
+size_mult = 0.0
+interval = 0.0
+interval_mult = 0.0
+duration = 0.0
+duration_mult = 0.0
+tick_rate = 0.0
+tick_rate_mult = 0.0
+position_offset_x = 0.0
+position_offset_y = 0.0
+effects = Dictionary[String, ExtResource("1_qg1yl")]({
+"damage": SubResource("Resource_qg1yl")
+})
+name = "Acidic Slime"
+description = "Increases Snail Juice damage by 100%."
+type = "snail_juice"
+icon = SubResource("AtlasTexture_idrih")
+metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"

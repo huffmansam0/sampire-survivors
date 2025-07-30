@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp80bo6t3q3hl"]
+[gd_scene load_steps=6 format=3 uid="uid://cp80bo6t3q3hl"]
 
 [ext_resource type="Script" uid="uid://0xosey5cq2iw" path="res://Scripts/Globals/game_manager.gd" id="1_f1ypk"]
 [ext_resource type="Script" uid="uid://cqokfpdqudjuk" path="res://Scripts/Globals/experience_manager.gd" id="2_i30fr"]
 [ext_resource type="Script" uid="uid://b4bdf3ucek0uc" path="res://Scripts/Globals/pause_manager.gd" id="3_d3awt"]
 [ext_resource type="Script" uid="uid://d4g6dnmpsmnoa" path="res://Scripts/Globals/audio_manager.gd" id="4_4c043"]
+[ext_resource type="Script" uid="uid://xvmy05lcn1j7" path="res://Scripts/Globals/upgrade_manager.gd" id="5_i30fr"]
 
 [node name="Globals" type="Node"]
 
@@ -18,3 +19,7 @@ script = ExtResource("3_d3awt")
 
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("4_4c043")
+
+[node name="UpgradeManager" type="Node" parent="."]
+script = ExtResource("5_i30fr")
+upgrades_array = [null]

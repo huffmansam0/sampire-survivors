@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=21 format=4 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/placeholder_map_name.gd" id="1_epho6"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_otn62"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" uid="uid://brl0fqjxdwaa0" path="res://Scripts/UI/experience_ui.gd" id="5_u4vt4"]
 [ext_resource type="Script" uid="uid://cryep8dp6jk8" path="res://Scripts/UI/health_ui.gd" id="6_yeids"]
 [ext_resource type="Script" uid="uid://dtbm6eohcjvxq" path="res://Scripts/UI/game_timer_ui.gd" id="7_ewhqx"]
+[ext_resource type="PackedScene" uid="uid://dpf138ogcjcgu" path="res://Scenes/UI/Upgrade_Button.tscn" id="8_0wjqh"]
+[ext_resource type="PackedScene" uid="uid://ci2ybwitvo86x" path="res://Scenes/UI/Upgrade_Panel.tscn" id="8_otn62"]
+[ext_resource type="Script" uid="uid://cjtl2srqi33m4" path="res://Scripts/UI/upgrade_ui.gd" id="8_u4vt4"]
+[ext_resource type="PackedScene" uid="uid://bulaad0w6s08k" path="res://Scenes/UI/Confirm_Button.tscn" id="9_3rfmu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iokn6"]
 resource_name = "tilez"
@@ -132,8 +136,46 @@ text = "9:59"
 label_settings = SubResource("LabelSettings_0mwrw")
 horizontal_alignment = 2
 
-[node name="UpgradeUI" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UpgradeUI" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_u4vt4")
+
+[node name="Spacer" type="Control" parent="UI/UpgradeUI"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+
+[node name="UpgradeHBoxContainer" type="HBoxContainer" parent="UI/UpgradeUI"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="UpgradeButton" parent="UI/UpgradeUI/UpgradeHBoxContainer" instance=ExtResource("8_0wjqh")]
+layout_mode = 2
+
+[node name="UpgradeButton2" parent="UI/UpgradeUI/UpgradeHBoxContainer" instance=ExtResource("8_0wjqh")]
+layout_mode = 2
+
+[node name="UpgradeButton3" parent="UI/UpgradeUI/UpgradeHBoxContainer" instance=ExtResource("8_0wjqh")]
+layout_mode = 2
+
+[node name="Spacer3" type="Control" parent="UI/UpgradeUI"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="UpgradePanel" parent="UI/UpgradeUI" instance=ExtResource("8_otn62")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Spacer2" type="Control" parent="UI/UpgradeUI"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ConfirmButton" parent="UI/UpgradeUI" instance=ExtResource("9_3rfmu")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0

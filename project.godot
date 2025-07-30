@@ -13,7 +13,6 @@ config_version=5
 config/name="Snail Game"
 run/main_scene="uid://0qnw1ctsgve5"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://Images/icon.svg"
 
 [autoload]
 
@@ -21,6 +20,8 @@ GameManager="*res://Scripts/Globals/game_manager.gd"
 PauseManager="*res://Scripts/Globals/pause_manager.gd"
 AudioManager="*res://Scripts/Globals/audio_manager.gd"
 ExperienceManager="*res://Scripts/Globals/experience_manager.gd"
+UpgradeManager="*res://Scripts/Globals/upgrade_manager.gd"
+AttackManager="*res://Scripts/Globals/attack_manager.gd"
 
 [display]
 

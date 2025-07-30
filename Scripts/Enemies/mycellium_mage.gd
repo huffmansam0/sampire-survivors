@@ -1,12 +1,9 @@
 extends Enemy
+class_name MycelliumMage
 
-@export var move_speed := 200.0
 @export var shoot_target_proximity := 800.0
 @export var shoot_interval := 3.0
 
-var target = GameManager.player
-var move_direction: Vector2
-var distance_to_target: float
 var shot_ready := true
 var ranged_attack: PackedScene = preload("res://Scenes/Mycellium_Mage_Ranged_Attack.tscn")
 
@@ -17,6 +14,7 @@ var ranged_attack: PackedScene = preload("res://Scenes/Mycellium_Mage_Ranged_Att
 
 func _ready():
 	max_hp = 150
+	move_speed = 200.0
 	hp_bar.max_value = max_hp
 	hp_bar.min_value = 0
 	hp_bar.value = current_hp
@@ -28,13 +26,11 @@ func _ready():
 	super._ready()
 	
 func approach():
-	move_direction = global_position.direction_to(target.global_position)
-	distance_to_target = global_position.distance_to(target.global_position)
-	velocity = move_direction * move_speed
 	move_and_slide()
 	
+#TODO: make this more efficient if we get more lag
 func shoot():
-	distance_to_target = global_position.distance_to(target.global_position)
+	distance_to_target = global_position.distance_to(player.global_position)
 	
 	if shot_ready:
 		shot_ready = false
