@@ -14,8 +14,8 @@ signal enemy_died(enemy: Enemy)
 var rng = RandomNumberGenerator.new()
 
 #== STARTING SPAWN WEIGHTS ===#
-var shroom_warrior_weight := 0
-var mycellium_mage_weight := 5
+var shroom_warrior_weight := 5
+var mycellium_mage_weight := 0
 var sporecap_sprinter_weight := 0
 
 var spawn_timer: float = 0.0
