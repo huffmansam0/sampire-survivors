@@ -6,12 +6,12 @@ func _ready():
 	add_state("approach")
 	call_deferred("set_state", states.approach)
 	
-func _state_logic(delta):
+func _state_logic(delta: float):
 	match state:
 		states.approach:
-			parent.approach()
+			parent.approach(delta)
 			
-func _get_transition(delta):
+func _get_transition(delta: float):
 	match state:
 		states.approach:
 			pass

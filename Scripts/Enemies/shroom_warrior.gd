@@ -13,7 +13,7 @@ func _ready():
 	hp_bar.value = current_hp
 	super._ready()
 	
-func approach():
+func approach(delta: float):
 	move_and_slide()
 
 func take_damage(amount: int):

@@ -23,7 +23,7 @@ func _ready():
 	
 	super._ready()
 	
-func approach():
+func approach(delta: float):
 	move_and_slide()
 	
 func charge():

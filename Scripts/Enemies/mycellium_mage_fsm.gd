@@ -7,14 +7,14 @@ func _ready():
 	add_state("shoot")
 	call_deferred("set_state", states.approach)
 	
-func _state_logic(delta):
+func _state_logic(delta: float):
 	match state:
 		states.approach:
-			parent.approach()
+			parent.approach(delta)
 		states.shoot:
 			parent.shoot()
 			
-func _get_transition(delta):
+func _get_transition(delta: float):
 	match state:
 		states.approach:
 			if parent.should_shoot():

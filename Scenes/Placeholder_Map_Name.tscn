@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=4 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=23 format=3 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/placeholder_map_name.gd" id="1_epho6"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_otn62"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_3rfmu"]
+[ext_resource type="Script" uid="uid://d0p2wp24ryhda" path="res://Scenes/background_generator.gd" id="3_yeids"]
 [ext_resource type="Script" uid="uid://b2ebmabjr40g2" path="res://Scripts/enemy_spawner.gd" id="4_0wjqh"]
 [ext_resource type="Script" uid="uid://brl0fqjxdwaa0" path="res://Scripts/UI/experience_ui.gd" id="5_u4vt4"]
 [ext_resource type="Script" uid="uid://cryep8dp6jk8" path="res://Scripts/UI/health_ui.gd" id="6_yeids"]
@@ -11,21 +12,21 @@
 [ext_resource type="PackedScene" uid="uid://ci2ybwitvo86x" path="res://Scenes/UI/Upgrade_Panel.tscn" id="8_otn62"]
 [ext_resource type="Script" uid="uid://cjtl2srqi33m4" path="res://Scripts/UI/upgrade_ui.gd" id="8_u4vt4"]
 [ext_resource type="PackedScene" uid="uid://bulaad0w6s08k" path="res://Scenes/UI/Confirm_Button.tscn" id="9_3rfmu"]
+[ext_resource type="Script" uid="uid://c0b33ltpf1yb" path="res://Scripts/UI/fps_meter.gd" id="9_ewhqx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iokn6"]
 resource_name = "tilez"
 texture = ExtResource("3_3rfmu")
-margins = Vector2i(200, 0)
-texture_region_size = Vector2i(400, 400)
-2:0/0 = 0
-4:0/0 = 0
-3:0/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
+texture_region_size = Vector2i(200, 200)
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_61w0f"]
-sources/1 = SubResource("TileSetAtlasSource_iokn6")
+tile_size = Vector2i(200, 200)
+sources/0 = SubResource("TileSetAtlasSource_iokn6")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1qtq"]
 bg_color = Color(0.14902, 0.168627, 0.266667, 1)
@@ -61,11 +62,13 @@ script = ExtResource("1_epho6")
 [node name="Player" parent="." instance=ExtResource("2_otn62")]
 process_mode = 1
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="BackgroundGenerator" type="Node" parent="."]
+script = ExtResource("3_yeids")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="BackgroundGenerator"]
 z_index = -1
 z_as_relative = false
-scale = Vector2(2.5, 2.5)
-tile_map_data = PackedByteArray("AAD//wAAAQACAAAAAAAYAAAAAQAEAAAAAAD//+f/AQAEAAEAAADm/wAAAQADAAEAAAD//xkAAQACAAEAAAAYABkAAQADAAAAAAAYAOf/AQADAAEAAADm/+f/AQADAAAAAADm/xkAAQAEAAAAAADN/+f/AQACAAAAAADN/87/AQAEAAAAAADN/wAAAQACAAEAAADN/xkAAQACAAAAAAAxABkAAQACAAAAAAAxAM7/AQACAAAAAADm/87/AQAEAAEAAAD//87/AQACAAEAAAAYAM7/AQAEAAEAAAAxAOf/AQAEAAEAAAAxAAAAAQADAAAAAABKAM7/AQAEAAAAAABKAOf/AQAEAAEAAABKAAAAAQACAAAAAABKABkAAQADAAEAAADN/zIAAQADAAEAAAC0/zIAAQADAAAAAABKADIAAQAEAAAAAAAxADIAAQAEAAEAAAAYADIAAQACAAAAAAD//zIAAQACAAAAAADm/zIAAQAEAAEAAAC0/xkAAQACAAAAAAC0/wAAAQADAAAAAAC0/+f/AQAEAAAAAAC0/87/AQADAAEAAAA=")
+scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_61w0f")
 
 [node name="GameTimer" type="Timer" parent="." groups=["GameTimer"]]
@@ -123,18 +126,26 @@ full_heart_texture = SubResource("AtlasTexture_gnn4a")
 half_heart_texture = SubResource("AtlasTexture_7k2rf")
 empty_heart_texture = SubResource("AtlasTexture_caca8")
 
-[node name="GameTimerUI" type="MarginContainer" parent="UI/MarginContainer/TopUI/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/TopUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="GameTimerUI" type="MarginContainer" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 15
 script = ExtResource("7_ewhqx")
 
-[node name="GameTimerUILabel" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/GameTimerUI"]
+[node name="GameTimerUILabel" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer/GameTimerUI"]
 layout_mode = 2
 text = "9:59"
 label_settings = SubResource("LabelSettings_0mwrw")
 horizontal_alignment = 2
+
+[node name="FPSMeter" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("9_ewhqx")
 
 [node name="UpgradeUI" type="VBoxContainer" parent="UI"]
 anchors_preset = 15

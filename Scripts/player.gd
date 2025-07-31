@@ -1,13 +1,15 @@
 extends CharacterBody2D
 class_name Player
 
-#upgrade-able stats
-var speed: float = 600.0
+signal player_position_changed(new_position: Vector2)
+
+#upgradable stats
+var speed: float = 1200.0
 var speed_mult: float = 0
 var max_hp: int = 6
-@onready var experience_box = $ExperienceBox
 var experience_box_mult: int = 0
 
+@onready var experience_box = $ExperienceBox
 @onready var label = $Label
 @onready var hurt_audios = [$SnailDamagedTake1, $SnailDamagedTake2, $SnailDamagedTake3, $"ShittySadTrombone1"]
 @onready var player_sprite = $PlayerSprite
@@ -23,33 +25,17 @@ var damage_boosting: bool = false
 
 func _ready():
 	current_hp = max_hp
-	
-	# Debug: Print all child nodes
-	print("Player children:")
-	for child in get_children():
-		print("  - ", child.name, " (", child.get_class(), ")")
-	
-	# Debug: Check if experience_box exists
-	if experience_box:
-		print("ExperienceBox found: ", experience_box.name)
-	else:
-		print("ExperienceBox is NULL!")
-		# Try to find it manually
-		var found_box = find_child("ExperienceBox", true, false)
-		if found_box:
-			print("Found ExperienceBox manually at path: ", get_path_to(found_box))
-			experience_box = found_box
-		else:
-			print("ExperienceBox not found anywhere in the tree")
+	player_position_changed.connect(func(new_position: Vector2): print(new_position))
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if ($Hurtbox_Area2D.has_overlapping_areas() && !damage_boosting):
 		take_damage(damage_amount)
 
-	handle_movement()
-	move_and_collide(velocity * delta)
+	handle_movement(delta)
+	move_and_slide()
+	player_position_changed.emit(global_position)
 
-func handle_movement():
+func handle_movement(delta: float):
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction * speed
 	

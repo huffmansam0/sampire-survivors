@@ -9,10 +9,10 @@ func _ready():
 	add_state("explode")
 	call_deferred("set_state", states.approach)
 	
-func _state_logic(delta):
+func _state_logic(delta: float):
 	match state:
 		states.approach:
-			parent.approach()
+			parent.approach(delta)
 		states.charge:
 			parent.charge()
 		states.fixin_to_bust:

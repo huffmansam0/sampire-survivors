@@ -6,7 +6,6 @@ signal enemy_died(enemy: Enemy)
 @export var shroom_warrior_scene = preload("res://Scenes/Shroom_Warrior.tscn")
 @export var mycellium_mage_scene = preload("res://Scenes/Mycellium_Mage.tscn")
 @export var sporecap_sprinter_scene = preload("res://Scenes/Sporecap_Sprinter.tscn")
-@export var spawn_rate: float = 3
 
 @onready var player = GameManager.get_player()
 @onready var game_timer = GameManager.get_game_timer()
@@ -20,9 +19,10 @@ var sporecap_sprinter_weight := 0
 
 var spawn_timer: float = 0.0
 
-var active_enemy_cap: int = 100
+var spawn_rate: float = 1000
+var active_enemy_cap: int = 300
 var active_enemy_count: int = 0
-var despawn_distance: float = 2500
+var despawn_distance: float = 8000
 
 func _ready():
 	GameManager.game_time_elapsed.connect(_on_game_time_elapsed)
@@ -72,7 +72,7 @@ func get_spawn_position() -> Vector2:
 	return spawn_pos
 
 func _check_enemy_distance(enemy: Enemy, distance: float):
-	if active_enemy_count > active_enemy_count && distance > despawn_distance:
+	if active_enemy_count == active_enemy_cap && distance > despawn_distance:
 		enemy.queue_free()
 		active_enemy_count -= 1
 

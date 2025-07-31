@@ -7,17 +7,17 @@ var states = {}
 
 @onready var parent = get_parent()
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if state:
 		_state_logic(delta)
 		var transition = _get_transition(delta)
 		if transition:
 			set_state(transition)
 
-func _state_logic(delta):
+func _state_logic(delta: float):
 	pass
 	
-func _get_transition(delta):
+func _get_transition(delta: float):
 	return null
 	
 func _enter_state(new_state, old_state):
