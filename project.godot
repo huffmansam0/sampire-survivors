@@ -38,6 +38,7 @@ Player=""
 Enemies=""
 GameTimer=""
 Experience=""
+TilePosition=""
 
 [input]
 

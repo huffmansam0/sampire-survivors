@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=24 format=3 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/placeholder_map_name.gd" id="1_epho6"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_otn62"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cjtl2srqi33m4" path="res://Scripts/UI/upgrade_ui.gd" id="8_u4vt4"]
 [ext_resource type="PackedScene" uid="uid://bulaad0w6s08k" path="res://Scenes/UI/Confirm_Button.tscn" id="9_3rfmu"]
 [ext_resource type="Script" uid="uid://c0b33ltpf1yb" path="res://Scripts/UI/fps_meter.gd" id="9_ewhqx"]
+[ext_resource type="Script" uid="uid://426roaty0inm" path="res://Scripts/UI/tile_position.gd" id="10_cui7q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iokn6"]
 resource_name = "tilez"
@@ -146,6 +147,10 @@ horizontal_alignment = 2
 [node name="FPSMeter" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("9_ewhqx")
+
+[node name="TilePosition" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer" groups=["TilePosition"]]
+layout_mode = 2
+script = ExtResource("10_cui7q")
 
 [node name="UpgradeUI" type="VBoxContainer" parent="UI"]
 anchors_preset = 15

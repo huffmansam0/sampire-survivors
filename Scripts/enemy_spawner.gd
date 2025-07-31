@@ -19,10 +19,10 @@ var sporecap_sprinter_weight := 0
 
 var spawn_timer: float = 0.0
 
-var spawn_rate: float = 1000
-var active_enemy_cap: int = 300
+var spawn_rate: float = 3
+var active_enemy_cap: int = 500
 var active_enemy_count: int = 0
-var despawn_distance: float = 8000
+var despawn_distance: float = 6000
 
 func _ready():
 	GameManager.game_time_elapsed.connect(_on_game_time_elapsed)
@@ -94,9 +94,9 @@ func _on_game_time_elapsed(seconds: int):
 			spawn_rate *= 1.1
 		15:
 			spawn_rate *= 1.1
-		30:
-			sporecap_sprinter_weight = 1
 		60:
+			sporecap_sprinter_weight = 1
+		120:
 			mycellium_mage_weight = 1
 		90:
 			spawn_rate *= 2

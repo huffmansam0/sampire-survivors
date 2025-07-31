@@ -18,12 +18,12 @@ func _ready():
 		current_health = player.current_hp
 		update_hearts()
 
-func _on_health_changed(health: int):
-	if health < current_health:
+func _on_health_changed(old_hp: int, new_hp: int):
+	if new_hp < current_health:
 		animate_damage()
-	if health > current_health:
+	if new_hp > current_health:
 		animate_heal()
-	current_health = health
+	current_health = new_hp
 	update_hearts()
 
 func update_hearts():
@@ -72,7 +72,7 @@ func update_heart_visuals():
 
 func set_health(health: int, max_hp: int):
 	max_health = max_hp
-	_on_health_changed(health)
+	_on_health_changed(-1, health)
 
 func animate_damage():
 	var tween = create_tween()

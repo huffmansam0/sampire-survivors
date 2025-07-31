@@ -24,13 +24,15 @@ func _ready():
 	super._ready()
 	
 func approach(delta: float):
-	move_and_slide()
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		velocity = velocity.bounce(collision.get_normal()) * 1
 	
-func charge():
+func charge(delta: float):
 	move_direction = global_position.direction_to(charge_destination)
 	distance_to_charge_destination = global_position.distance_to(charge_destination)
 	velocity = move_direction * charge_speed
-	move_and_slide()
+	move_and_collide(velocity * delta)
 	
 func fix_to_bust():
 	pass

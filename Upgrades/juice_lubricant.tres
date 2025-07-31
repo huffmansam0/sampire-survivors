@@ -10,11 +10,11 @@ region = Rect2(400, 1000, 200, 200)
 [resource]
 script = ExtResource("1_v2k62")
 speed = 0.0
-speed_mult = 1.0
+speed_mult = 0.1
 max_hp = 0
 experience_box_mult = 0
 name = "Juice Lubricant"
-description = "Increases movement speed by 100%."
+description = "Increases movement speed by 10%."
 type = "player"
 icon = SubResource("AtlasTexture_fn4t0")
 metadata/_custom_type_script = "uid://byv6fv5rpq2di"

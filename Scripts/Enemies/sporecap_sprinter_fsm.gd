@@ -14,7 +14,7 @@ func _state_logic(delta: float):
 		states.approach:
 			parent.approach(delta)
 		states.charge:
-			parent.charge()
+			parent.charge(delta)
 		states.fixin_to_bust:
 			parent.fix_to_bust()
 		states.explode:

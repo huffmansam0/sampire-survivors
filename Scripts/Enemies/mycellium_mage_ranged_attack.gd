@@ -24,7 +24,7 @@ func _ready():
 	sprite_sheet.rotation = velocity.angle() + PI
 	
 func _physics_process(delta: float) -> void:
-	move_and_slide()
+	move_and_collide(velocity * delta)
 	
 func hit_player():
 	target.take_damage(base_damage)

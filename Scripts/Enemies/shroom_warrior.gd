@@ -14,7 +14,9 @@ func _ready():
 	super._ready()
 	
 func approach(delta: float):
-	move_and_slide()
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		velocity = velocity.bounce(collision.get_normal()) * 1
 
 func take_damage(amount: int):
 	super.take_damage(amount)
