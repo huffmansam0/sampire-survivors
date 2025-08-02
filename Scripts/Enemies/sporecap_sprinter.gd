@@ -24,6 +24,7 @@ func _ready():
 	super._ready()
 	
 func approach(delta: float):
+	velocity.limit_length(move_speed)
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		velocity = velocity.bounce(collision.get_normal()) * 1

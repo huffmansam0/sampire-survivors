@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://01yqed4jli7y"]
+[gd_scene load_steps=11 format=3 uid="uid://01yqed4jli7y"]
 
 [ext_resource type="Script" uid="uid://4pw0uqkr1gw2" path="res://Scripts/snail_juice_attack_instance.gd" id="1_ua3dl"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_kywpr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8h0vd"]
-radius = 86.1452
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ua3dl"]
+radius = 80.0
+height = 242.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsyo3"]
 atlas = ExtResource("2_kywpr")
@@ -35,6 +36,15 @@ animations = [{
 "speed": 1.2
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ua3dl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua3dl"]
+atlas = ExtResource("2_kywpr")
+region = Rect2(0, 2400, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kywpr"]
+atlas = SubResource("AtlasTexture_ua3dl")
+
 [node name="Hitbox_Area2D" type="Area2D"]
 process_mode = 1
 z_as_relative = false
@@ -43,8 +53,18 @@ collision_mask = 2
 script = ExtResource("1_ua3dl")
 
 [node name="Hitbox_CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8h0vd")
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ua3dl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_3mnvw")
 autoplay = "default"
+
+[node name="SlimePuddle" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ua3dl")
+position = Vector2(0, -26)
+scale = Vector2(1e-05, 1e-05)
+texture = SubResource("AtlasTexture_kywpr")

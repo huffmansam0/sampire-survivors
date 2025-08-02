@@ -13,8 +13,13 @@ var upgrade_paths: Dictionary[String, String] = {
 @export var upgrades_array = []
 
 func _ready():
+	set_process(false)
+	SignalBus.game_started.connect(_start_game)
+
+func _start_game():
 	_load_upgrades()
-	
+	set_process(true)
+
 func _load_upgrades():
 	for upgrade_name in upgrade_paths:
 		var path = upgrade_paths[upgrade_name]

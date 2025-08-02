@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr1dvjdqqbc3c"]
+
+[ext_resource type="Script" uid="uid://ckfl4ogbwy0sa" path="res://Scripts/title_screen.gd" id="1_8l4an"]
+[ext_resource type="Script" uid="uid://dsy2fyu61cdw2" path="res://Scripts/title_background_generator.gd" id="1_vmg2h"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_8l4an"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n15yj"]
+resource_name = "tilez"
+texture = ExtResource("2_8l4an")
+texture_region_size = Vector2i(200, 200)
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_emot1"]
+tile_size = Vector2i(200, 200)
+sources/0 = SubResource("TileSetAtlasSource_n15yj")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmg2h"]
+atlas = ExtResource("2_8l4an")
+region = Rect2(1000, 1400, 1000, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l4an"]
+atlas = ExtResource("2_8l4an")
+region = Rect2(200, 2200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n15yj"]
+atlas = ExtResource("2_8l4an")
+region = Rect2(1000, 2200, 800, 200)
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8l4an")
+
+[node name="TitleBackgroundGenerator" type="Node" parent="."]
+script = ExtResource("1_vmg2h")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TitleBackgroundGenerator"]
+z_index = -1
+z_as_relative = false
+scale = Vector2(5, 5)
+tile_set = SubResource("TileSet_emot1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+
+[node name="Title" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_vmg2h")
+
+[node name="Snail" type="Sprite2D" parent="."]
+position = Vector2(605, 253)
+texture = SubResource("AtlasTexture_8l4an")
+
+[node name="StartGame" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 708)
+texture = SubResource("AtlasTexture_n15yj")

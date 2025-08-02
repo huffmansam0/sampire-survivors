@@ -25,7 +25,7 @@ func _get_transition(delta: float):
 	return null
 	
 func _enter_state(new_state, old_state):
-	match new_state:
+	match states[new_state]:
 		states.approach:
 			#parent.animation_player.play("Walk")
 			pass

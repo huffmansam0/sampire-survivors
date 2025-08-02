@@ -8,32 +8,37 @@
 [ext_resource type="AudioStream" uid="uid://cfsvpywav6n64" path="res://Audio/shitty_sad_trombone_1.mp3" id="6_ksbbd"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="6_nn08x"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_52ee3"]
+atlas = ExtResource("6_nn08x")
+region = Rect2(0, 2200, 200, 200)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhhdu"]
 atlas = ExtResource("6_nn08x")
-region = Rect2(200, 1600, 200, 200)
+region = Rect2(200, 2200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_megsn"]
 atlas = ExtResource("6_nn08x")
-region = Rect2(400, 1600, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_52ee3"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(0, 1600, 200, 200)
+region = Rect2(400, 2200, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yoq75"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_52ee3")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bhhdu")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_megsn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_52ee3")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -58,8 +63,7 @@ motion_mode = 1
 script = ExtResource("1_nn08x")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.23517e-06, 0.499995)
-scale = Vector2(0.75, 0.744)
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_yoq75")
 autoplay = "default"
 

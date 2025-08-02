@@ -40,7 +40,7 @@ func handle_movement(delta: float):
 	velocity = input_direction * speed
 	
 	if input_direction.x != 0:
-		player_sprite.flip_h = input_direction.x >= 0
+		player_sprite.flip_h = input_direction.x < 0
 	
 func take_damage(amount: int):
 	if damage_boosting or dead:

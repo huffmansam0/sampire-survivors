@@ -8,7 +8,7 @@ var size_mult: float = 0
 
 func _init() -> void:
 	type = "snail_juice"
-	interval = 0.2
+	interval = 0.01
 	tick_rate = 0.1
 	duration = 2.5
 	#Upgrades specify their effect types, look up/add that effect and edit/set its values
@@ -17,8 +17,11 @@ func _init() -> void:
 	effects = {
 		"damage": damage_effect,
 	}
+	position_offset = Vector2(0, 80)
 
 func apply_upgrade(instance: SnailJuiceAttackInstance):
 	instance.size = size
 	instance.size_mult = size_mult
-	instance.global_position = instance.global_position + position_offset
+	instance.duration = duration
+	instance.duration_mult = duration_mult
+	instance.position_offset = position_offset

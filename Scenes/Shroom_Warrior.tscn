@@ -51,6 +51,7 @@ z_as_relative = false
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_r7byj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

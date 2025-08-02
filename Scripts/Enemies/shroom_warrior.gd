@@ -16,7 +16,7 @@ func _ready():
 func approach(delta: float):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
-		velocity = velocity.bounce(collision.get_normal()) * 1
+		velocity = velocity.bounce(collision.get_normal()) * 0.8
 
 func take_damage(amount: int):
 	super.take_damage(amount)

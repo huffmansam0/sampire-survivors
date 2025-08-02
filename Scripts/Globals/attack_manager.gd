@@ -1,6 +1,6 @@
 extends Node
 
-@onready var player: Player = GameManager.get_player()
+var player: Player
 
 #register new attack scenes here for instantiation
 var snail_juice_scene: PackedScene = preload("res://Scenes/Snail_Juice.tscn")
@@ -31,9 +31,15 @@ var enemies_in_attacks: Dictionary[String, EnemiesInAttack] = {}
 var enemy_attack_timers: Dictionary[String, EnemyAttackTimers] = {}
 
 func _ready() -> void:
-	#add your starting attack!
+	set_process(false)
+	SignalBus.game_started.connect(_start_game)
+	
+func _start_game():
+	player = GameManager.get_player()
 	var snail_juice_attack = SnailJuiceAttack.new()
 	add_attack(snail_juice_attack)
+	
+	set_process(true)
 
 func add_attack(attack: Attack):
 	active_attacks[attack.type] = attack
@@ -97,7 +103,7 @@ func update_effects(current_effects: Dictionary[String, EffectResource], new_eff
 func spawn_attack(attack: Attack):
 	#spawn the attack
 	var attack_instance = attack_scene_mapping[attack.type].instantiate()
-	attack_instance.global_position = player.global_position
+	attack_instance.global_position = player.global_position + attack.position_offset
 	attack.apply_upgrade(attack_instance)
 	
 	#set the timer to delete it
@@ -120,11 +126,6 @@ func spawn_attack(attack: Attack):
 	
 	#add child
 	get_tree().current_scene.add_child(attack_instance)
-
-func spawn_puddle(position: Vector2):
-	var slime = snail_juice_scene.instantiate()
-	slime.global_position = position
-	get_tree().current_scene.add_child(slime)
 	
 func enemy_entered_attack(enemy: Enemy, attack_type: String):
 	var enemyId = enemy.get_instance_id()
