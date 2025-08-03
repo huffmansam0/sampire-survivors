@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dr1dvjdqqbc3c"]
+[gd_scene load_steps=13 format=3 uid="uid://dr1dvjdqqbc3c"]
 
 [ext_resource type="Script" uid="uid://ckfl4ogbwy0sa" path="res://Scripts/title_screen.gd" id="1_8l4an"]
 [ext_resource type="Script" uid="uid://dsy2fyu61cdw2" path="res://Scripts/title_background_generator.gd" id="1_vmg2h"]
@@ -23,13 +23,50 @@ sources/0 = SubResource("TileSetAtlasSource_n15yj")
 atlas = ExtResource("2_8l4an")
 region = Rect2(1000, 1400, 1000, 800)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8l4an"]
-atlas = ExtResource("2_8l4an")
-region = Rect2(200, 2200, 200, 200)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_n15yj"]
 atlas = ExtResource("2_8l4an")
 region = Rect2(1000, 2200, 800, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l4an"]
+atlas = ExtResource("2_8l4an")
+region = Rect2(0, 2200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emot1"]
+atlas = ExtResource("2_8l4an")
+region = Rect2(0, 2200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5sur"]
+atlas = ExtResource("2_8l4an")
+region = Rect2(200, 2200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7whhf"]
+atlas = ExtResource("2_8l4an")
+region = Rect2(400, 2200, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5c2t2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l4an")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emot1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5sur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7whhf")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -55,11 +92,12 @@ zoom = Vector2(0.4, 0.4)
 [node name="Title" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_vmg2h")
 
-[node name="Snail" type="Sprite2D" parent="."]
-position = Vector2(605, 253)
-texture = SubResource("AtlasTexture_8l4an")
-
 [node name="StartGame" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, 708)
 texture = SubResource("AtlasTexture_n15yj")
+
+[node name="Snail" type="AnimatedSprite2D" parent="."]
+position = Vector2(598, 244)
+sprite_frames = SubResource("SpriteFrames_5c2t2")
+animation = &"idle"

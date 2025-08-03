@@ -16,14 +16,13 @@ var experience_to_next_level: int = 10
 func _ready():
 	set_process(false)
 	SignalBus.game_started.connect(_start_game)
+	SignalBus.game_ended.connect(_end_game)
 	
 func _start_game():
 	player = GameManager.get_player()
 	
-	experience_changed.emit(current_experience, experience_to_next_level)
-	level_changed.emit(current_level)
-	
-	set_process(true)
+func _end_game():
+	get_tree().call_group("Experience", "free")
 	
 func register_enemy_spawner(spawner: EnemySpawner):
 	enemy_spawner = spawner
@@ -36,6 +35,8 @@ func gain_experience():
 		level_up()
 
 func level_up():
+	if GameManager.state == GameManager.states.defeated:
+		return
 	current_level += 1
 	
 	current_experience = current_experience - experience_to_next_level

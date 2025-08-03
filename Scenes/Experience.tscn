@@ -10,7 +10,7 @@ region = Rect2(0, 2000, 200, 200)
 [sub_resource type="CircleShape2D" id="CircleShape2D_hc6sy"]
 radius = 111.041
 
-[node name="Experience" type="Node2D"]
+[node name="Experience" type="Node2D" groups=["Experience"]]
 z_index = 1
 z_as_relative = false
 script = ExtResource("1_n8qja")
@@ -19,7 +19,7 @@ script = ExtResource("1_n8qja")
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_n8qja")
 
-[node name="CollectionHitbox" type="Area2D" parent="." groups=["Experience"]]
+[node name="CollectionHitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
 

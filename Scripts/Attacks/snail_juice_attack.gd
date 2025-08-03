@@ -3,12 +3,14 @@ class_name SnailJuiceAttack
 
 #Could also define things like colors or sprites here, considering that those might change
 
+#const base_position_offset: Vector2 = Vector2(0, 80)
+
 var size: float = 10
 var size_mult: float = 0
 
 func _init() -> void:
 	type = "snail_juice"
-	interval = 0.01
+	interval = 0.02
 	tick_rate = 0.1
 	duration = 2.5
 	#Upgrades specify their effect types, look up/add that effect and edit/set its values

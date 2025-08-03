@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=28 format=3 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/snail_graveyard.gd" id="1_0rcbu"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_u4jbh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_ue46d"]
 [ext_resource type="Script" uid="uid://b2ebmabjr40g2" path="res://Scripts/enemy_spawner.gd" id="5_303s7"]
 [ext_resource type="Script" uid="uid://brl0fqjxdwaa0" path="res://Scripts/UI/experience_ui.gd" id="6_epsi1"]
+[ext_resource type="Script" uid="uid://bvbsh6jpljsui" path="res://Scripts/UI/snail_graveyard_ui.gd" id="6_u4jbh"]
 [ext_resource type="Script" uid="uid://cryep8dp6jk8" path="res://Scripts/UI/health_ui.gd" id="7_pacyf"]
 [ext_resource type="Script" uid="uid://dtbm6eohcjvxq" path="res://Scripts/UI/game_timer_ui.gd" id="8_30ly4"]
 [ext_resource type="Script" uid="uid://c0b33ltpf1yb" path="res://Scripts/UI/fps_meter.gd" id="9_0rd3i"]
@@ -58,6 +59,18 @@ font_size = 32
 outline_size = 8
 outline_color = Color(0.352941, 0.411765, 0.533333, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4jbh"]
+atlas = ExtResource("4_ue46d")
+region = Rect2(1400, 2600, 1000, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4yco"]
+atlas = ExtResource("4_ue46d")
+region = Rect2(1400, 3000, 1000, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue46d"]
+atlas = ExtResource("4_ue46d")
+region = Rect2(1400, 3400, 400, 200)
+
 [node name="SnailGraveyard" type="Node"]
 script = ExtResource("1_0rcbu")
 
@@ -84,6 +97,7 @@ script = ExtResource("5_303s7")
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 1
+script = ExtResource("6_u4jbh")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 10
@@ -197,3 +211,36 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+
+[node name="SKILL" type="TextureRect" parent="UI"]
+visible = false
+modulate = Color(0.635294, 0.14902, 0.2, 1)
+custom_minimum_size = Vector2(3000, 1500)
+offset_left = 374.0
+offset_top = -21.0
+offset_right = 3374.0
+offset_bottom = 1479.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_u4jbh")
+
+[node name="ISSUE" type="TextureRect" parent="UI"]
+visible = false
+modulate = Color(0.635294, 0.14902, 0.2, 1)
+custom_minimum_size = Vector2(3000, 1500)
+offset_left = 352.0
+offset_top = 479.0
+offset_right = 3352.0
+offset_bottom = 1979.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_c4yco")
+
+[node name="GoAgain" type="TextureRect" parent="UI"]
+visible = false
+modulate = Color(0.635294, 0.14902, 0.2, 1)
+offset_left = 1524.0
+offset_top = 974.0
+offset_right = 1924.0
+offset_bottom = 1174.0
+texture = SubResource("AtlasTexture_ue46d")

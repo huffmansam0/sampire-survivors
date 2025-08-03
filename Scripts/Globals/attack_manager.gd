@@ -32,7 +32,30 @@ var enemy_attack_timers: Dictionary[String, EnemyAttackTimers] = {}
 
 func _ready() -> void:
 	set_process(false)
+	print(get_path())
 	SignalBus.game_started.connect(_start_game)
+	SignalBus.game_ended.connect(_end_game)
+	
+func _end_game():
+	get_tree().call_group("Attacks", "free")
+	
+	for attack in active_attacks.values():
+		attack.queue_free()
+	active_attacks.clear()
+	
+	for timer in active_attack_interval_timers.values():
+		timer.queue_free()
+	active_attack_interval_timers.clear()
+	
+	for timer in attack_despawn_timers.values():
+		timer.queue_free()
+	attack_despawn_timers.clear()
+	
+	enemies_in_attacks.clear()
+	
+	for timer in enemy_attack_timers.values():
+		timer.queue_free()
+	enemy_attack_timers.clear()
 	
 func _start_game():
 	player = GameManager.get_player()
@@ -44,7 +67,7 @@ func _start_game():
 func add_attack(attack: Attack):
 	active_attacks[attack.type] = attack
 	
-	var interval_timer = active_attack_interval_timers.get_or_add(attack.type, Timer.new())
+	var interval_timer: Timer = active_attack_interval_timers.get_or_add(attack.type, Timer.new())
 
 	interval_timer.wait_time = attack.interval
 	interval_timer.one_shot = false
@@ -101,12 +124,12 @@ func update_effects(current_effects: Dictionary[String, EffectResource], new_eff
 		current_effects[effect.type] = current_effect
 
 func spawn_attack(attack: Attack):
+		
 	#spawn the attack
 	var attack_instance = attack_scene_mapping[attack.type].instantiate()
-	attack_instance.global_position = player.global_position + attack.position_offset
 	attack.apply_upgrade(attack_instance)
 	
-	#set the timer to delete it
+	##set the timer to delete it
 	var despawn_timer = Timer.new()
 	var despawn_timer_id = despawn_timer.get_instance_id()
 	
@@ -125,6 +148,7 @@ func spawn_attack(attack: Attack):
 	despawn_timer.start()
 	
 	#add child
+	attack_instance.global_position = player.global_position + attack.position_offset
 	get_tree().current_scene.add_child(attack_instance)
 	
 func enemy_entered_attack(enemy: Enemy, attack_type: String):
@@ -157,7 +181,10 @@ func _attack_enemy(attack_type: String, enemy: Enemy):
 
 func enemy_exited_attack(enemy: Enemy, attack_type: String):
 	var enemyId = enemy.get_instance_id()
-	var enemies_in_attack = enemies_in_attacks.get_or_add(attack_type, EnemiesInAttack.new())
+	var enemies_in_attack: EnemiesInAttack = enemies_in_attacks.get_or_add(attack_type, EnemiesInAttack.new())
+	
+	if !enemies_in_attack.dict.has(enemyId):
+		return
 	
 	enemies_in_attack.dict[enemyId] -= 1
 	if enemies_in_attack.dict[enemyId] <= 0:

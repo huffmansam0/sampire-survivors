@@ -2,7 +2,7 @@ extends Control
 class_name TitleScreen
 
 @onready var title: Sprite2D = $Title
-@onready var snail: Sprite2D = $Snail
+@onready var snail: AnimatedSprite2D = $Snail
 @onready var start_game: Sprite2D = $StartGame
 
 var game_ready: bool = false
@@ -21,13 +21,15 @@ func _input(event: InputEvent):
 func _play_intro_animation() -> void:
 	var intro_tween: Tween = create_tween()
 	
-	intro_tween.tween_interval(2)
-	intro_tween.tween_property(title, "position", title.position + Vector2(0, -600), 2)
-	intro_tween.tween_interval(0.3)
+	intro_tween.tween_interval(1.5)
+	intro_tween.tween_property(title, "position", title.position + Vector2(0, -600), 1.5)
+	intro_tween.tween_interval(0.2)
 	intro_tween.tween_property(snail, "flip_h", true, 0.0)
-	intro_tween.tween_interval(0.9)
+	intro_tween.tween_interval(0.5)
+	intro_tween.tween_callback(func(): snail.play("walking"))
 	intro_tween.tween_property(snail, "position", Vector2(0, 0), 1.5)
-	intro_tween.tween_interval(0.3)
+	intro_tween.tween_callback(func(): snail.play("idle"))
+	intro_tween.tween_interval(0.2)
 	intro_tween.tween_property(snail, "flip_h", false, 0.0)
 	intro_tween.tween_interval(1)
 	
@@ -41,5 +43,5 @@ func _play_blinking_animation() -> void:
 	
 	blink_tween.set_loops() 
 	
-	blink_tween.tween_property(start_game, "visible", false, 0.0).set_delay(1)
-	blink_tween.tween_property(start_game, "visible", true, 0.0).set_delay(1)
+	blink_tween.tween_property(start_game, "visible", false, 0.0).set_delay(0.7)
+	blink_tween.tween_property(start_game, "visible", true, 0.0).set_delay(0.7)

@@ -57,8 +57,6 @@ func take_damage(amount: int):
 		
 func die():
 	dead = true
-	died.emit()
-	
-	label.text = "You Died.\nYou Suck.\nFuck You."
+	SignalBus.defeat.emit()
 	
 	speed = 0

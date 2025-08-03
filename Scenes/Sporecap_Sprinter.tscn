@@ -151,6 +151,7 @@ script = ExtResource("3_rhw1c")
 libraries = {
 &"": SubResource("AnimationLibrary_t2pfq")
 }
+autoplay = "Walk"
 
 [node name="SpriteSheet" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)

@@ -6,7 +6,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ufti0"]
 atlas = ExtResource("2_idsbw")
-region = Rect2(0, 1800, 200, 200)
+region = Rect2(0, 2200, 200, 200)
 
 [resource]
 script = ExtResource("2_scdiw")
@@ -15,14 +15,14 @@ size_mult = null
 interval = null
 interval_mult = null
 duration = null
-duration_mult = 1.0
+duration_mult = 0.5
 tick_rate = null
 tick_rate_mult = null
 position_offset_x = null
 position_offset_y = null
 effects = Dictionary[String, ExtResource("1_os6jo")]({})
 name = "Slime Preservatives"
-description = "Increases Snail Juice duration by 100%."
+description = "Increases Snail Juice duration by 50%."
 type = "snail_juice"
 icon = SubResource("AtlasTexture_ufti0")
 metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"

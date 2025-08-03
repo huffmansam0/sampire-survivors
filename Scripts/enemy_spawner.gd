@@ -25,6 +25,9 @@ var active_enemy_count: int = 0
 var despawn_distance: float = 6000
 
 func _ready():
+	SignalBus.game_started.connect(_start_game)
+	
+func _start_game():
 	GameManager.game_time_elapsed.connect(_on_game_time_elapsed)
 	GameManager.game_time_expired.connect(_on_game_time_expired)
 	

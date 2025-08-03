@@ -8,7 +8,7 @@
 script = ExtResource("1_qg1yl")
 type = "damage"
 amount = 0.0
-amount_mult = 1.0
+amount_mult = 0.5
 duration = 0.0
 duration_mult = 0.0
 metadata/_custom_type_script = "uid://dd6xgl42i3dsh"
@@ -33,7 +33,7 @@ effects = Dictionary[String, ExtResource("1_qg1yl")]({
 "damage": SubResource("Resource_qg1yl")
 })
 name = "Acidic Slime"
-description = "Increases Snail Juice damage by 100%."
+description = "Increases Snail Juice damage by 50%."
 type = "snail_juice"
 icon = SubResource("AtlasTexture_idrih")
 metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"
