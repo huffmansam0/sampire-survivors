@@ -15,7 +15,6 @@ var max_hp: int = 6
 var experience_box_mult: int = 0
 
 @onready var experience_box = $ExperienceBox
-@onready var label = $Label
 @onready var player_sprite = $PlayerSprite
 
 var current_hp: int

@@ -29,9 +29,13 @@ func _ready():
 	
 func _start_game():
 	GameManager.game_time_elapsed.connect(_on_game_time_elapsed)
-	GameManager.game_time_expired.connect(_on_game_time_expired)
+	SignalBus.victory.connect(_on_victory)
 	
 	ExperienceManager.register_enemy_spawner(self)
+
+func _on_victory():
+	get_tree().call_group("Enemies", "die")
+	spawn_rate = 0
 
 func _process(delta):
 	spawn_timer += delta

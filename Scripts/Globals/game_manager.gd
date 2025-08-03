@@ -14,7 +14,8 @@ var prev_elapsed_game_time: int
 func _ready():
 	add_state("title_screen")
 	add_state("in_game")
-	add_state("defeated")
+	add_state("defeat")
+	add_state("victory")
 	
 	call_deferred("set_state", states.title_screen)
 	
@@ -31,11 +32,14 @@ func _start_game():
 	player = get_tree().get_first_node_in_group("Player")
 	game_timer = get_tree().get_first_node_in_group("GameTimer")
 	
-	game_timer.timeout.connect(func(): SignalBus.victory.emit())
+	game_timer.wait_time = game_timer_duration
+	game_timer.timeout.connect(func(): 
+		call_deferred("set_state", states.victory)
+	)
 	game_timer.start()
 	
 func _on_defeat():
-	call_deferred("set_state", states.defeated)
+	call_deferred("set_state", states.defeat)
 	
 func _on_scene_transition_requested(path: String):
 	if (path == "res://Scenes/Snail_Graveyard.tscn"):
@@ -63,7 +67,8 @@ func _enter_state(new_state, old_state):
 			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 		states.in_game:
 			get_tree().change_scene_to_file("res://Scenes/Snail_Graveyard.tscn")
-			
+		states.victory:
+			SignalBus.victory.emit()
 		
 func _exit_state(new_state, old_state):
 	match old_state:

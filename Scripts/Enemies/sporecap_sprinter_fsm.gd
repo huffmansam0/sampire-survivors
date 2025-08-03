@@ -1,6 +1,9 @@
 #SporecapSprinter StateMachine
 extends StateMachine
 
+func _enter_tree() -> void:
+	pass
+
 func _ready():
 	parent = get_parent()
 	add_state("approach")

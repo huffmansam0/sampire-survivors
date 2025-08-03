@@ -35,7 +35,7 @@ func gain_experience():
 		level_up()
 
 func level_up():
-	if GameManager.state == GameManager.states.defeated:
+	if GameManager.state == GameManager.states.defeat or GameManager.state == GameManager.states.victory:
 		return
 	current_level += 1
 	

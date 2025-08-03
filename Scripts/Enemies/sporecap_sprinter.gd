@@ -14,6 +14,9 @@ var distance_to_charge_destination: float
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hitbox: Area2D = $Hitbox_Area2D
 
+func _enter_tree():
+	pass
+
 func _ready():
 	move_speed = 350.0
 	max_hp = 100

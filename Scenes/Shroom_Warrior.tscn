@@ -6,15 +6,15 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5y0t"]
 atlas = ExtResource("2_bgd1r")
-region = Rect2(0, 0, 200, 200)
+region = Rect2(2400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igg1x"]
 atlas = ExtResource("2_bgd1r")
-region = Rect2(200, 0, 200, 200)
+region = Rect2(2600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2jcfd"]
 atlas = ExtResource("2_bgd1r")
-region = Rect2(400, 0, 200, 200)
+region = Rect2(2800, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4pjup"]
 animations = [{
@@ -37,7 +37,7 @@ animations = [{
 size = Vector2(92, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(153, 114)
+size = Vector2(99, 145.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7byj"]
 bg_color = Color(0.243137, 0.152941, 0.192157, 1)
@@ -58,10 +58,10 @@ script = ExtResource("1_r7byj")
 position = Vector2(2.86102e-06, 1.43051e-06)
 sprite_frames = SubResource("SpriteFrames_4pjup")
 autoplay = "default"
-frame = 2
 
 [node name="Collision_Area2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 48)
+visible = false
+position = Vector2(-1, 30)
 shape = SubResource("RectangleShape2D_7k104")
 
 [node name="Hitbox_Area2D" type="Area2D" parent="."]
@@ -69,7 +69,7 @@ visible = false
 collision_mask = 0
 
 [node name="Hitbox_Collision2D" type="CollisionShape2D" parent="Hitbox_Area2D"]
-position = Vector2(0, 43)
+position = Vector2(0.5, 6.5)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
@@ -78,14 +78,14 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
-position = Vector2(-1, 42)
+position = Vector2(1.5, 7.75)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -72.0
-offset_top = 107.0
-offset_right = 73.0
-offset_bottom = 136.0
+offset_left = -71.0
+offset_top = 96.0
+offset_right = 74.0
+offset_bottom = 125.0
 theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
 show_percentage = false

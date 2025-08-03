@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=29 format=3 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/snail_graveyard.gd" id="1_0rcbu"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_u4jbh"]
@@ -55,9 +55,9 @@ atlas = ExtResource("4_ue46d")
 region = Rect2(0, 1400, 200, 200)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0mwrw"]
-font_size = 32
+font_size = 48
 outline_size = 8
-outline_color = Color(0.352941, 0.411765, 0.533333, 1)
+outline_color = Color(0.227451, 0.266667, 0.4, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4jbh"]
 atlas = ExtResource("4_ue46d")
@@ -70,6 +70,10 @@ region = Rect2(1400, 3000, 1000, 400)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ue46d"]
 atlas = ExtResource("4_ue46d")
 region = Rect2(1400, 3400, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_303s7"]
+atlas = ExtResource("4_ue46d")
+region = Rect2(2400, 2600, 1200, 800)
 
 [node name="SnailGraveyard" type="Node"]
 script = ExtResource("1_0rcbu")
@@ -88,7 +92,6 @@ tile_set = SubResource("TileSet_61w0f")
 
 [node name="GameTimer" type="Timer" parent="." groups=["GameTimer"]]
 process_mode = 1
-wait_time = 600.0
 one_shot = true
 
 [node name="EnemySpawner" type="Node" parent="."]
@@ -244,3 +247,12 @@ offset_top = 974.0
 offset_right = 1924.0
 offset_bottom = 1174.0
 texture = SubResource("AtlasTexture_ue46d")
+
+[node name="SNAIL_ISSUE" type="TextureRect" parent="UI"]
+visible = false
+custom_minimum_size = Vector2(4000, 2000)
+offset_left = 160.0
+offset_top = 160.0
+offset_right = 4160.0
+offset_bottom = 2160.0
+texture = SubResource("AtlasTexture_303s7")

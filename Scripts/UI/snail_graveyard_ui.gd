@@ -2,14 +2,28 @@ extends CanvasLayer
 
 @onready var SKILL: TextureRect = $SKILL
 @onready var ISSUE: TextureRect = $ISSUE
+@onready var SNAIL_ISSUE: TextureRect = $SNAIL_ISSUE
 @onready var go_again: TextureRect = $GoAgain
 
 func _ready() -> void:
+	SignalBus.victory.connect(_on_victory)
 	SignalBus.defeat.connect(_on_defeat)
+	
+func _on_victory():
+	await _snail_issue()
+	_blink_go_again()
 	
 func _on_defeat():
 	await _skill_issue()
 	_blink_go_again()
+	
+func _snail_issue():
+	var tween = create_tween()
+	
+	SNAIL_ISSUE.visible = true
+	tween.tween_property(SNAIL_ISSUE, "scale", Vector2(0.4, 0.4), 0.25)
+	
+	await tween.finished
 	
 func _skill_issue():
 	var tween = create_tween()
