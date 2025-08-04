@@ -7,7 +7,7 @@ const background_tile_weights: Array[int] = [1000, 30, 300, 1000, 600, 1]
 
 var player: CharacterBody2D
 var game_timer: Timer
-var game_timer_duration := 15
+var game_timer_duration := 600
 var prev_elapsed_game_time: int
 
 func _ready():
