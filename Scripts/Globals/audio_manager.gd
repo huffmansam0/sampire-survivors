@@ -6,7 +6,6 @@ var player: Player
 #@onready var hurt_audios = [$SnailDamagedTake1, $SnailDamagedTake2, $SnailDamagedTake3,]
 
 func _ready() -> void:
-	set_process(false)
 	SignalBus.game_started.connect(_start_game)
 	
 func _start_game():
@@ -14,8 +13,6 @@ func _start_game():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	player.health_changed.connect(_on_player_health_changed)
 	player.died.connect(_on_player_died)
-	
-	set_process(true)
 
 func _on_player_health_changed(old_health: int, new_health: int):
 	if old_health > new_health:

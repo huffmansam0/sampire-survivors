@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=30 format=3 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/snail_graveyard.gd" id="1_0rcbu"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_u4jbh"]
@@ -74,6 +74,10 @@ region = Rect2(1400, 3400, 400, 200)
 [sub_resource type="AtlasTexture" id="AtlasTexture_303s7"]
 atlas = ExtResource("4_ue46d")
 region = Rect2(2400, 2600, 1200, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epsi1"]
+atlas = ExtResource("4_ue46d")
+region = Rect2(1800, 3400, 400, 200)
 
 [node name="SnailGraveyard" type="Node"]
 script = ExtResource("1_0rcbu")
@@ -151,13 +155,15 @@ size_flags_horizontal = 10
 
 [node name="GameTimerUI" type="MarginContainer" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+size_flags_vertical = 4
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 15
 script = ExtResource("8_30ly4")
 
 [node name="GameTimerUILabel" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer/GameTimerUI"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "9:59"
 label_settings = SubResource("LabelSettings_0mwrw")
 horizontal_alignment = 2
@@ -256,3 +262,13 @@ offset_top = 160.0
 offset_right = 4160.0
 offset_bottom = 2160.0
 texture = SubResource("AtlasTexture_303s7")
+
+[node name="SURVIVE" type="TextureRect" parent="UI"]
+custom_minimum_size = Vector2(120, 70)
+offset_left = 1782.0
+offset_top = 119.0
+offset_right = 1902.0
+offset_bottom = 189.0
+size_flags_vertical = 3
+texture = SubResource("AtlasTexture_epsi1")
+expand_mode = 1

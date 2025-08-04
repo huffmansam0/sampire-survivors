@@ -9,6 +9,13 @@ func _ready() -> void:
 	SignalBus.victory.connect(_on_victory)
 	SignalBus.defeat.connect(_on_defeat)
 	
+func _exit_tree() -> void:
+	if SignalBus.victory.is_connected(_on_victory):
+		SignalBus.victory.disconnect(_on_victory)
+	
+	if SignalBus.defeat.is_connected(_on_defeat):
+		SignalBus.defeat.disconnect(_on_defeat)
+	
 func _on_victory():
 	await _snail_issue()
 	_blink_go_again()

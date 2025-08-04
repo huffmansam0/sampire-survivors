@@ -41,8 +41,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
-size = Vector2(137, 139)
+[sub_resource type="CircleShape2D" id="CircleShape2D_52ee3"]
+radius = 84.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nn08x"]
 radius = 81.7435
@@ -66,9 +66,9 @@ zoom = Vector2(0.4, 0.4)
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
 collision_layer = 4
 
-[node name="Hurtbox_CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
-position = Vector2(5.5, 1.5)
-shape = SubResource("RectangleShape2D_0hol4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_52ee3")
 
 [node name="SnailDamagedTake1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_bhhdu")
@@ -83,6 +83,7 @@ stream = ExtResource("5_yoq75")
 stream = ExtResource("6_ksbbd")
 
 [node name="ExperienceBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 8
 

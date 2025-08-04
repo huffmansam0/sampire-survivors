@@ -7,3 +7,5 @@ signal game_started
 signal game_ended
 signal victory
 signal defeat
+signal enemy_died(enemy: Enemy)
+signal game_time_elapsed(seconds: int)

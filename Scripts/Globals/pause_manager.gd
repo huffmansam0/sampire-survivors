@@ -5,11 +5,6 @@ var is_paused = false
 var pause_enabled = false
 
 func _ready():
-	set_process(false)
-	SignalBus.game_started.connect(_start_game)
-
-func _start_game():
-	set_process(true)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _input(event):

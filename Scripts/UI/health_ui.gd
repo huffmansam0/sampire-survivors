@@ -11,12 +11,27 @@ var current_health: int = 0
 var heart_containers: Array[TextureRect] = []
 
 func _ready():
+	SignalBus.game_started.connect(_start_game)
+	SignalBus.game_ended.connect(_end_game)
+
+func _exit_tree() -> void:	
+	if SignalBus.game_started.is_connected(_start_game):
+		SignalBus.game_started.disconnect(_start_game)
+		
+	if SignalBus.game_ended.is_connected(_end_game):
+		SignalBus.game_ended.disconnect(_end_game)
+
+func _start_game():
 	var player = GameManager.player
-	if player:
-		player.health_changed.connect(_on_health_changed)
-		max_health = player.max_hp
-		current_health = player.current_hp
-		update_hearts()
+	player.health_changed.connect(_on_health_changed)
+	max_health = player.max_hp
+	current_health = player.current_hp
+	update_hearts()
+
+func _end_game():
+	max_health = 0
+	current_health = 0
+
 
 func _on_health_changed(old_hp: int, new_hp: int):
 	if new_hp < current_health:

@@ -54,10 +54,4 @@ func _enter_state(new_state, old_state):
 			#start fixin' to bust animation
 			pass
 		states.explode:
-			get_node("../Hitbox_Area2D").scale.x = 3.5
-			get_node("../Hitbox_Area2D").scale.y = 3.5
-			parent.animation_player.animation_finished.connect(func(new_name): 
-				parent.die()
-			)
-			get_node("../HealthBar").visible = false
-			parent.animation_player.play("Explode")
+			parent.explode()

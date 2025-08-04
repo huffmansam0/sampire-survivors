@@ -1,13 +1,11 @@
-extends CharacterBody2D
+extends Enemy
 class_name MycelliumMageRangedAttack
 
-@export var move_speed := 700.0
 @export var base_damage := 1
 
 var life_time := 5.0
 
 var target: Player = GameManager.player
-var move_direction: Vector2
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_sheet: Sprite2D = $SpriteSheet
@@ -21,7 +19,7 @@ func _ready():
 	
 	move_direction = global_position.direction_to(target.global_position)
 	velocity = move_direction * move_speed
-	sprite_sheet.rotation = velocity.angle() + PI
+	rotation = velocity.angle() + PI
 	
 func _physics_process(delta: float) -> void:
 	move_and_collide(velocity * delta)

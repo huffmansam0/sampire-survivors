@@ -1,8 +1,6 @@
 extends Node
 class_name EnemySpawner
 
-signal enemy_died(enemy: Enemy)
-
 @export var shroom_warrior_scene = preload("res://Scenes/Shroom_Warrior.tscn")
 @export var mycellium_mage_scene = preload("res://Scenes/Mycellium_Mage.tscn")
 @export var sporecap_sprinter_scene = preload("res://Scenes/Sporecap_Sprinter.tscn")
@@ -24,15 +22,23 @@ var active_enemy_cap: int = 500
 var active_enemy_count: int = 0
 var despawn_distance: float = 6000
 
-func _ready():
+func _ready() -> void:
 	SignalBus.game_started.connect(_start_game)
+
+func _exit_tree() -> void:
+	if SignalBus.victory.is_connected(_on_victory):
+		SignalBus.victory.disconnect(_on_victory)
 	
+	if SignalBus.game_started.is_connected(_start_game):
+		SignalBus.game_started.disconnect(_start_game)
+		
+	if SignalBus.game_time_elapsed.is_connected(_on_game_time_elapsed):
+		SignalBus.game_time_elapsed.disconnect(_on_game_time_elapsed)
+
 func _start_game():
-	GameManager.game_time_elapsed.connect(_on_game_time_elapsed)
+	SignalBus.game_time_elapsed.connect(_on_game_time_elapsed)
 	SignalBus.victory.connect(_on_victory)
 	
-	ExperienceManager.register_enemy_spawner(self)
-
 func _on_victory():
 	get_tree().call_group("Enemies", "die")
 	spawn_rate = 0
@@ -85,7 +91,7 @@ func _check_enemy_distance(enemy: Enemy, distance: float):
 
 func _on_enemy_died(enemy: Enemy):
 	active_enemy_count -= 1
-	enemy_died.emit(enemy)
+	SignalBus.enemy_died.emit(enemy)
 
 func _on_game_time_elapsed(seconds: int):
 	match seconds:

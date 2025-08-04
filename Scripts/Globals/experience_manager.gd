@@ -14,19 +14,18 @@ var current_level: int = 1
 var experience_to_next_level: int = 10
 
 func _ready():
-	set_process(false)
 	SignalBus.game_started.connect(_start_game)
 	SignalBus.game_ended.connect(_end_game)
+	SignalBus.enemy_died.connect(_on_enemy_killed)
 	
 func _start_game():
 	player = GameManager.get_player()
 	
 func _end_game():
 	get_tree().call_group("Experience", "free")
-	
-func register_enemy_spawner(spawner: EnemySpawner):
-	enemy_spawner = spawner
-	enemy_spawner.enemy_died.connect(_on_enemy_killed)
+	current_level = 1
+	experience_to_next_level = 10
+	current_experience = 0
 	
 func gain_experience():
 	current_experience += 1

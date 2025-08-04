@@ -3,11 +3,12 @@ extends Enemy
 class_name SporecapSprinter
 
 @export var charge_speed := 900.0
-@export var charge_target_proximity := 500.0
+@export var charge_target_proximity := 700.0
 @export var charge_destination_proximity := 20.0
 
 var charge_destination: Vector2
 var distance_to_charge_destination: float
+var explosion: PackedScene = preload("res://Scenes/Sporecap_Sprinter_Explosion.tscn")
 
 @onready var hp_bar = $HealthBar
 @onready var state_machine = $StateMachine
@@ -42,6 +43,9 @@ func fix_to_bust():
 	pass
 	
 func explode():
+	var explosion_instance = explosion.instantiate()
+	explosion_instance.global_position = global_position
+	get_tree().current_scene.add_child(explosion_instance)
 	die()
 	
 func should_charge():

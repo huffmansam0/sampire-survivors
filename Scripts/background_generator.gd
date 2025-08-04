@@ -4,20 +4,27 @@ class_name BackgroundGenerator
 @export var starting_size := Vector2i(8, 6)
 
 @onready var tile_map: TileMapLayer = $TileMapLayer
-@onready var player: Player = GameManager.get_player()
+var player: Player
 
 @onready var tile_indexes: Array[int] = GameManager.get_background_tiles()
 @onready var tile_index_weights: Array[int] = GameManager.get_background_tile_weights()
 
 const tile_map_row = 4
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-@onready var tile_position_label = get_tree().get_first_node_in_group("TilePosition")
+@onready var tile_position_label: TilePositionLabel = get_tree().get_first_node_in_group("TilePosition")
 
 #state
 var current_tile: Vector2i = Vector2i(0, 0)
 
 func _ready():
-	await get_tree().process_frame
+	SignalBus.game_started.connect(_start_game)
+
+func _exit_tree() -> void:
+	if SignalBus.game_started.is_connected(_start_game):
+		SignalBus.game_started.disconnect(_start_game)
+	
+func _start_game():
+	player = GameManager.get_player()
 	tile_position_label.set_tile(current_tile)
 	generate_starting_background()
 	player.position_changed.connect(_on_player_position_changed)

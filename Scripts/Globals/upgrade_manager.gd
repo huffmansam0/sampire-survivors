@@ -8,13 +8,17 @@ var upgrade_paths: Dictionary[String, String] = {
 	"juice_lubricant": "res://Upgrades/juice_lubricant.tres",
 }
 
-@onready var player: Player
+var player: Player
 
 @export var upgrades_array = []
 
 func _ready():
 	set_process(false)
 	SignalBus.game_started.connect(_start_game)
+
+func _exit_tree() -> void:
+	if SignalBus.game_started.is_connected(_start_game):
+		SignalBus.game_started.disconnect(_start_game)
 
 func _start_game():
 	player = GameManager.get_player()

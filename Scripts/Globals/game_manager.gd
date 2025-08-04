@@ -1,6 +1,5 @@
 extends StateMachine
 
-signal game_time_elapsed(seconds: int)
 signal game_time_expired
 
 const background_tiles: Array[int] = [5, 6, 7, 8, 9, 10]
@@ -8,7 +7,7 @@ const background_tile_weights: Array[int] = [1000, 30, 300, 1000, 600, 1]
 
 var player: CharacterBody2D
 var game_timer: Timer
-var game_timer_duration := 600
+var game_timer_duration := 15
 var prev_elapsed_game_time: int
 
 func _ready():
@@ -21,12 +20,14 @@ func _ready():
 	
 	SignalBus.scene_transition_requested.connect(_on_scene_transition_requested)
 	SignalBus.game_started.connect(_start_game)
+	SignalBus.game_ended.connect(_end_game)
 	SignalBus.defeat.connect(_on_defeat)
 	
 func _input(event):
 	if state and event.is_action_pressed("ui_restart"):
 		SignalBus.game_ended.emit()
-		get_tree().call_deferred("reload_current_scene")
+		get_tree().reload_current_scene()
+		call_deferred("set_state", states.in_game)
 	
 func _start_game():
 	player = get_tree().get_first_node_in_group("Player")
@@ -37,6 +38,9 @@ func _start_game():
 		call_deferred("set_state", states.victory)
 	)
 	game_timer.start()
+	
+func _end_game():
+	player = null
 	
 func _on_defeat():
 	call_deferred("set_state", states.defeat)
@@ -55,7 +59,7 @@ func _state_logic(delta: float):
 				var elapsed_game_time = int(game_timer_duration - game_timer.time_left)
 				if elapsed_game_time > prev_elapsed_game_time:
 					prev_elapsed_game_time = elapsed_game_time
-					game_time_elapsed.emit(elapsed_game_time)
+					SignalBus.game_time_elapsed.emit(elapsed_game_time)
 
 func _get_transition(delta: float):
 	match state:

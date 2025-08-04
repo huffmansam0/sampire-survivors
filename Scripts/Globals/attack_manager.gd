@@ -1,6 +1,7 @@
 extends Node
 
 var player: Player
+var attack_container: Node2D
 
 #register new attack scenes here for instantiation
 var snail_juice_scene: PackedScene = preload("res://Scenes/Snail_Juice.tscn")
@@ -31,13 +32,18 @@ var enemies_in_attacks: Dictionary[String, EnemiesInAttack] = {}
 var enemy_attack_timers: Dictionary[String, EnemyAttackTimers] = {}
 
 func _ready() -> void:
-	set_process(false)
-	print(get_path())
+	attack_container = Node2D.new()
+	attack_container.name = "AttackContainer"
+	add_child(attack_container)
+	
 	SignalBus.game_started.connect(_start_game)
 	SignalBus.game_ended.connect(_end_game)
 	
 func _end_game():
 	get_tree().call_group("Attacks", "free")
+	
+	for child in attack_container.get_children():
+		child.queue_free()
 	
 	for attack in active_attacks.values():
 		attack.queue_free()
@@ -149,7 +155,7 @@ func spawn_attack(attack: Attack):
 	
 	#add child
 	attack_instance.global_position = player.global_position + attack.position_offset
-	get_tree().current_scene.add_child(attack_instance)
+	attack_container.add_child(attack_instance)
 	
 func enemy_entered_attack(enemy: Enemy, attack_type: String):
 	var enemyId = enemy.get_instance_id()

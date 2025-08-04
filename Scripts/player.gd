@@ -56,6 +56,7 @@ func take_damage(amount: int):
 		
 func die():
 	dead = true
+	player_sprite.pause()
 	SignalBus.defeat.emit()
 	
 	speed = 0
