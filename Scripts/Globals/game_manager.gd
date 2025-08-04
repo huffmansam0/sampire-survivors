@@ -10,11 +10,18 @@ var game_timer: Timer
 var game_timer_duration := 600
 var prev_elapsed_game_time: int
 
+#do these in a collection?
+var victory_requested: bool = false
+var restart_requested: bool = false
+var defeat_requested: bool = false
+var in_game_requested: bool = false
+
 func _ready():
 	add_state("title_screen")
 	add_state("in_game")
 	add_state("defeat")
 	add_state("victory")
+	add_state("restarting")
 	
 	call_deferred("set_state", states.title_screen)
 	
@@ -25,9 +32,8 @@ func _ready():
 	
 func _input(event):
 	if state and event.is_action_pressed("ui_restart"):
-		SignalBus.game_ended.emit()
-		get_tree().reload_current_scene()
-		call_deferred("set_state", states.in_game)
+		restart_requested = true
+
 	
 func _start_game():
 	player = get_tree().get_first_node_in_group("Player")
@@ -35,7 +41,7 @@ func _start_game():
 	
 	game_timer.wait_time = game_timer_duration
 	game_timer.timeout.connect(func(): 
-		call_deferred("set_state", states.victory)
+		victory_requested = true
 	)
 	game_timer.start()
 	
@@ -43,14 +49,17 @@ func _end_game():
 	player = null
 	
 func _on_defeat():
-	call_deferred("set_state", states.defeat)
+	defeat_requested = true
 	
 func _on_scene_transition_requested(path: String):
 	if (path == "res://Scenes/Snail_Graveyard.tscn"):
-		call_deferred("set_state", states.in_game)
-	
-func _process(delta: float) -> void:
-	pass
+		in_game_requested = true
+
+func _reset_requests():
+	victory_requested = false
+	restart_requested = false
+	defeat_requested = false
+	in_game_requested = false
 
 func _state_logic(delta: float):
 	match state:
@@ -62,8 +71,31 @@ func _state_logic(delta: float):
 					SignalBus.game_time_elapsed.emit(elapsed_game_time)
 
 func _get_transition(delta: float):
+	var new_state
+	
 	match state:
-		pass
+		states.title_screen:
+			if in_game_requested:
+				new_state = states.in_game
+		states.in_game:
+			if restart_requested:
+				new_state = states.restarting
+			if victory_requested:
+				new_state = states.victory
+			if defeat_requested:
+				new_state = states.defeat
+		states.defeat:
+			if restart_requested:
+				new_state = states.restarting
+		states.victory:
+			if restart_requested:
+				new_state = states.restarting
+		states.restarting:
+			if in_game_requested:
+				new_state = states.in_game
+	
+	_reset_requests()
+	return new_state
 		
 func _enter_state(new_state, old_state):
 	match new_state:
@@ -73,6 +105,10 @@ func _enter_state(new_state, old_state):
 			get_tree().change_scene_to_file("res://Scenes/Snail_Graveyard.tscn")
 		states.victory:
 			SignalBus.victory.emit()
+		states.restarting:
+			SignalBus.game_ended.emit()
+			get_tree().reload_current_scene()
+			in_game_requested = true
 		
 func _exit_state(new_state, old_state):
 	match old_state:

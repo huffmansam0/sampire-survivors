@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=31 format=3 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/snail_graveyard.gd" id="1_0rcbu"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_u4jbh"]
@@ -78,6 +78,10 @@ region = Rect2(2400, 2600, 1200, 800)
 [sub_resource type="AtlasTexture" id="AtlasTexture_epsi1"]
 atlas = ExtResource("4_ue46d")
 region = Rect2(1800, 3400, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pacyf"]
+atlas = ExtResource("4_ue46d")
+region = Rect2(2200, 3400, 400, 200)
 
 [node name="SnailGraveyard" type="Node"]
 script = ExtResource("1_0rcbu")
@@ -272,3 +276,10 @@ offset_bottom = 189.0
 size_flags_vertical = 3
 texture = SubResource("AtlasTexture_epsi1")
 expand_mode = 1
+
+[node name="WASD" type="TextureRect" parent="UI"]
+offset_left = 800.0
+offset_top = 850.0
+offset_right = 1200.0
+offset_bottom = 1050.0
+texture = SubResource("AtlasTexture_pacyf")

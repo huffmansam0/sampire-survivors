@@ -4,10 +4,18 @@ extends CanvasLayer
 @onready var ISSUE: TextureRect = $ISSUE
 @onready var SNAIL_ISSUE: TextureRect = $SNAIL_ISSUE
 @onready var go_again: TextureRect = $GoAgain
+@onready var WASD: TextureRect = $WASD
 
 func _ready() -> void:
 	SignalBus.victory.connect(_on_victory)
 	SignalBus.defeat.connect(_on_defeat)
+	
+	var WASD_timer: Timer = Timer.new()
+	WASD_timer.wait_time = 7.5
+	WASD_timer.one_shot = true
+	WASD_timer.timeout.connect(func(): WASD.visible = false)
+	add_child(WASD_timer)
+	WASD_timer.start()
 	
 func _exit_tree() -> void:
 	if SignalBus.victory.is_connected(_on_victory):
