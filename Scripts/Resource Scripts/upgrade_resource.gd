@@ -5,3 +5,4 @@ class_name UpgradeResource
 @export var description: String
 @export var type: String
 @export var icon: AtlasTexture
+@export var unlocks: Array[UpgradeResource]

@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=6 format=3 uid="uid://l6jporgmeft6"]
+[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=9 format=3 uid="uid://l6jporgmeft6"]
 
 [ext_resource type="Script" uid="uid://dd6xgl42i3dsh" path="res://Scripts/Resource Scripts/effect_resource.gd" id="1_qg1yl"]
 [ext_resource type="Script" uid="uid://bcoxc0pgv5tkb" path="res://Scripts/Resource Scripts/snail_juice_attack_upgrade_resource.gd" id="2_fit2p"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_vsdp3"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="4_6ntrh"]
+[ext_resource type="Resource" uid="uid://jcstkxtnkl1h" path="res://Upgrades/slime_preservatives.tres" id="5_j4r23"]
+[ext_resource type="Resource" uid="uid://cj7k1ay8isd22" path="res://Upgrades/abundant_secretions.tres" id="6_xpaym"]
 
 [sub_resource type="Resource" id="Resource_qg1yl"]
 script = ExtResource("1_qg1yl")
@@ -15,7 +18,7 @@ metadata/_custom_type_script = "uid://dd6xgl42i3dsh"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idrih"]
 atlas = ExtResource("2_vsdp3")
-region = Rect2(600, 400, 200, 200)
+region = Rect2(0, 3600, 200, 200)
 
 [resource]
 script = ExtResource("2_fit2p")
@@ -36,4 +39,5 @@ name = "Acidic Slime"
 description = "Increases Snail Juice damage by 50%."
 type = "snail_juice"
 icon = SubResource("AtlasTexture_idrih")
+unlocks = Array[ExtResource("4_6ntrh")]([ExtResource("5_j4r23"), ExtResource("6_xpaym")])
 metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"

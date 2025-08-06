@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://0qnw1ctsgve5"]
+[gd_scene load_steps=30 format=3 uid="uid://0qnw1ctsgve5"]
 
 [ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/snail_graveyard.gd" id="1_0rcbu"]
 [ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_u4jbh"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://c0b33ltpf1yb" path="res://Scripts/UI/fps_meter.gd" id="9_0rd3i"]
 [ext_resource type="Script" uid="uid://426roaty0inm" path="res://Scripts/UI/tile_position.gd" id="10_oooie"]
 [ext_resource type="Script" uid="uid://cjtl2srqi33m4" path="res://Scripts/UI/upgrade_ui.gd" id="11_32cc3"]
-[ext_resource type="PackedScene" uid="uid://dpf138ogcjcgu" path="res://Scenes/UI/Upgrade_Button.tscn" id="12_nwep5"]
 [ext_resource type="PackedScene" uid="uid://ci2ybwitvo86x" path="res://Scenes/UI/Upgrade_Panel.tscn" id="13_llcpl"]
 [ext_resource type="PackedScene" uid="uid://bulaad0w6s08k" path="res://Scenes/UI/Confirm_Button.tscn" id="14_fl4pf"]
 
@@ -56,7 +55,6 @@ region = Rect2(0, 1400, 200, 200)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0mwrw"]
 font_size = 48
-outline_size = 8
 outline_color = Color(0.227451, 0.266667, 0.4, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4jbh"]
@@ -197,15 +195,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
-
-[node name="UpgradeButton" parent="UI/UpgradeUI/UpgradeHBoxContainer" instance=ExtResource("12_nwep5")]
-layout_mode = 2
-
-[node name="UpgradeButton2" parent="UI/UpgradeUI/UpgradeHBoxContainer" instance=ExtResource("12_nwep5")]
-layout_mode = 2
-
-[node name="UpgradeButton3" parent="UI/UpgradeUI/UpgradeHBoxContainer" instance=ExtResource("12_nwep5")]
-layout_mode = 2
 
 [node name="Spacer3" type="Control" parent="UI/UpgradeUI"]
 custom_minimum_size = Vector2(0, 50)

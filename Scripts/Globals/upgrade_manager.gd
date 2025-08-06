@@ -1,21 +1,33 @@
 extends Node
 
-var upgrades: Dictionary[String, UpgradeResource] = {}
-var upgrade_paths: Dictionary[String, String] = {
-	"slime_preservatives": "res://Upgrades/slime_preservatives.tres",
-	"acidic_slime": "res://Upgrades/acidic_slime.tres",
-	"abundant_secretions": "res://Upgrades/abundant_secretions.tres",
-	"juice_lubricant": "res://Upgrades/juice_lubricant.tres",
+signal attack_upgrade_acquired(upgrade: SnailJuiceAttackUpgradeResource)
+
+#Key - upgrade name
+var available_upgrades: Dictionary[String, UpgradeResource] = {}
+
+#Key - upgrade name
+var acquired_upgrades: Dictionary[String, UpgradeResource] = {}
+
+var starting_upgrade_filepaths: Dictionary[String, String] = {
+	"Acidic Slime": "res://Upgrades/acidic_slime.tres",
+	"Snail Juice Lubricant": "res://Upgrades/juice_lubricant.tres",
+	"Snail's Reach": "res://Upgrades/snails_reach.tres"
 }
 
 var player: Player
 
+const base_num_upgrade_choices: int = 3
+var num_upgrade_choices: int = base_num_upgrade_choices
+
 @export var upgrades_array = []
 
 func _ready():
-	set_process(false)
 	SignalBus.game_started.connect(_start_game)
+	SignalBus.game_ended.connect(_end_game)
 
+#TODO: This can probably be cleaned up as, according to my current understanding,
+#	It isn't necessary. I believe this is only necessary to sever connection between
+#	globals and non-globals. In this case, it is a connection between 2 globals.
 func _exit_tree() -> void:
 	if SignalBus.game_started.is_connected(_start_game):
 		SignalBus.game_started.disconnect(_start_game)
@@ -23,23 +35,32 @@ func _exit_tree() -> void:
 func _start_game():
 	player = GameManager.get_player()
 	_load_upgrades()
-	set_process(true)
+	
+func _end_game():
+	num_upgrade_choices = base_num_upgrade_choices
 
 func _load_upgrades():
-	for upgrade_name in upgrade_paths:
-		var path = upgrade_paths[upgrade_name]
+	for upgrade_name in starting_upgrade_filepaths:
+		var path = starting_upgrade_filepaths[upgrade_name]
 		var resource = load(path)
-		upgrades[upgrade_name] = resource
+		available_upgrades[upgrade_name] = resource
 
 func upgrade_acquired(upgrade: UpgradeResource):
+	for _upgrade in upgrade.unlocks:
+		if _upgrade.name not in acquired_upgrades:
+			available_upgrades.get_or_add(_upgrade.name, _upgrade)
+
+	acquired_upgrades.get_or_add(upgrade.name, upgrade)
+	available_upgrades.erase(upgrade.name)
+
 	upgrade.apply()
 
 func get_upgrades() -> Array[UpgradeResource]:
-	var temp_collection = upgrades.keys()
+	var temp_collection = available_upgrades.keys()
 	var selected: Array[UpgradeResource] = []
-	for i in 3:
+	for i in num_upgrade_choices:
 		var item = temp_collection.pick_random()
-		selected.append(upgrades[item])
+		selected.append(available_upgrades[item])
 		temp_collection.erase(item)
 	return selected
 
@@ -54,3 +75,5 @@ func apply_player_upgrade(upgrade: PlayerUpgradeResource):
 	
 	player.max_hp += upgrade.max_hp
 	
+func apply_upgrade_upgrade(upgrade: UpgradeUpgradeResource):
+	num_upgrade_choices += upgrade.num_upgrade_choices

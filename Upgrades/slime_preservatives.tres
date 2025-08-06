@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=5 format=3 uid="uid://jcstkxtnkl1h"]
+[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=6 format=3 uid="uid://jcstkxtnkl1h"]
 
 [ext_resource type="Script" uid="uid://dd6xgl42i3dsh" path="res://Scripts/Resource Scripts/effect_resource.gd" id="1_os6jo"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_idsbw"]
 [ext_resource type="Script" uid="uid://bcoxc0pgv5tkb" path="res://Scripts/Resource Scripts/snail_juice_attack_upgrade_resource.gd" id="2_scdiw"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="4_idsbw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ufti0"]
 atlas = ExtResource("2_idsbw")
-region = Rect2(0, 2200, 200, 200)
+region = Rect2(200, 3600, 200, 200)
 
 [resource]
 script = ExtResource("2_scdiw")
@@ -25,4 +26,5 @@ name = "Slime Preservatives"
 description = "Increases Snail Juice duration by 50%."
 type = "snail_juice"
 icon = SubResource("AtlasTexture_ufti0")
+unlocks = Array[ExtResource("4_idsbw")]([])
 metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"

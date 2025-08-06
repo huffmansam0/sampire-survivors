@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeUpgradeResource" load_steps=5 format=3 uid="uid://8d1gw5bex232"]
+
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="1_2c2n7"]
+[ext_resource type="Script" uid="uid://c1odq3mo6pt81" path="res://Scripts/Resource Scripts/upgrade_upgrade_resource.gd" id="1_b6x0b"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_2c2n7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbr20"]
+atlas = ExtResource("1_2c2n7")
+region = Rect2(200, 3400, 200, 200)
+
+[resource]
+script = ExtResource("1_b6x0b")
+num_upgrade_choices = 0
+name = "There's Options"
+description = "Get one additional upgrade choice on each level up."
+type = "upgrade"
+icon = SubResource("AtlasTexture_pbr20")
+unlocks = Array[ExtResource("2_2c2n7")]([])
+metadata/_custom_type_script = "uid://c1odq3mo6pt81"

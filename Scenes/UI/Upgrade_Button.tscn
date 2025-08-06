@@ -1,6 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpf138ogcjcgu"]
+[gd_scene load_steps=10 format=3 uid="uid://dpf138ogcjcgu"]
 
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="1_rcjfj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xlts6"]
+bg_color = Color(0.352941, 0.411765, 0.533333, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.6, 0.858824, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rcjfj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jb03y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcjfj"]
 bg_color = Color(0.227451, 0.266667, 0.4, 1)
@@ -14,17 +30,9 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xlts6"]
-bg_color = Color(0.352941, 0.411765, 0.533333, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0.6, 0.858824, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xlts6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyiu7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb03y"]
 bg_color = Color(0.14902, 0.168627, 0.266667, 1)
@@ -49,9 +57,12 @@ offset_bottom = 20.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 1
-theme_override_styles/focus = SubResource("StyleBoxFlat_rcjfj")
+theme_override_styles/focus = SubResource("StyleBoxFlat_xlts6")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_rcjfj")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jb03y")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcjfj")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xlts6")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xlts6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uyiu7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jb03y")
 icon = SubResource("AtlasTexture_xlts6")
 expand_icon = true

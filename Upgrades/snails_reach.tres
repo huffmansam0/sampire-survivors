@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PlayerUpgradeResource" load_steps=6 format=3 uid="uid://ky2vyhbjjl5m"]
+
+[ext_resource type="Script" uid="uid://byv6fv5rpq2di" path="res://Scripts/Resource Scripts/player_upgrade_resource.gd" id="1_fxmap"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="1_ndr17"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_1m8uh"]
+[ext_resource type="Resource" uid="uid://8d1gw5bex232" path="res://Upgrades/theres_options.tres" id="3_1m8uh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2gxp"]
+atlas = ExtResource("1_ndr17")
+region = Rect2(0, 3400, 200, 200)
+
+[resource]
+script = ExtResource("1_fxmap")
+speed = 0.0
+speed_mult = 0.0
+max_hp = 0
+experience_box_mult = 1.5
+name = "Snail's Reach"
+description = "Increases experience pickup range."
+type = "player"
+icon = SubResource("AtlasTexture_v2gxp")
+unlocks = Array[ExtResource("2_1m8uh")]([ExtResource("3_1m8uh")])
+metadata/_custom_type_script = "uid://byv6fv5rpq2di"
