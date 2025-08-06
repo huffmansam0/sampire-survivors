@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=7 format=3 uid="uid://2kmt8vlnr860"]
+
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_33q6w"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_1gt5p"]
+[ext_resource type="Script" uid="uid://byv6fv5rpq2di" path="res://Scripts/Resource Scripts/player_upgrade_component.gd" id="2_mr8nj"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_nptpt"]
+
+[sub_resource type="Resource" id="Resource_5wv6e"]
+script = ExtResource("2_mr8nj")
+speed = 0.0
+speed_mult = 0.0
+max_hp = 0
+experience_box_mult = 0.0
+shield_recharge_duration = 0.0
+scale = 0.0
+scale_mult = 0.0
+collision_damage = 0.0
+collision_damage_mult = 0.0
+type = 1
+metadata/_custom_type_script = "uid://byv6fv5rpq2di"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjyo8"]
+atlas = ExtResource("3_nptpt")
+region = Rect2(2200, 3800, 200, 200)
+
+[resource]
+script = ExtResource("2_1gt5p")
+name = "Shell Roll"
+description = "Periodically become invincible and deal additional damage on collision for X seconds."
+types = Array[int]([1, 8, 0])
+icon = SubResource("AtlasTexture_mjyo8")
+unlocks = Array[ExtResource("2_1gt5p")]([])
+components = Array[ExtResource("1_33q6w")]([SubResource("Resource_5wv6e")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

@@ -1,0 +1,20 @@
+extends Node
+
+enum UpgradeType {
+	ATTACK,
+	PLAYER,
+	SNAILJUICE,
+	LOVEDART,
+	FIRE,
+	EXPERIENCE,
+	UPGRADE,
+	PSIONICSNAIL,
+	DEFENSE,
+	ONKILL,
+}
+
+enum EffectType {
+	DAMAGE,
+	SLOW,
+	BURN,
+}

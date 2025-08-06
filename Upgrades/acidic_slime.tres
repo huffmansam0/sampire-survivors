@@ -1,29 +1,24 @@
-[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=9 format=3 uid="uid://l6jporgmeft6"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=11 format=3 uid="uid://d2n8etkloyxj7"]
 
-[ext_resource type="Script" uid="uid://dd6xgl42i3dsh" path="res://Scripts/Resource Scripts/effect_resource.gd" id="1_qg1yl"]
-[ext_resource type="Script" uid="uid://bcoxc0pgv5tkb" path="res://Scripts/Resource Scripts/snail_juice_attack_upgrade_resource.gd" id="2_fit2p"]
-[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_vsdp3"]
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_vsdp3"]
+[ext_resource type="Script" uid="uid://qf82ubnelwhp" path="res://Scripts/Resource Scripts/effect_component.gd" id="2_idrih"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_6ntrh"]
+[ext_resource type="Script" uid="uid://c67ubvm2tw33d" path="res://Scripts/Resource Scripts/attack_upgrade_component.gd" id="3_j4r23"]
 [ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="4_6ntrh"]
-[ext_resource type="Resource" uid="uid://jcstkxtnkl1h" path="res://Upgrades/slime_preservatives.tres" id="5_j4r23"]
-[ext_resource type="Resource" uid="uid://cj7k1ay8isd22" path="res://Upgrades/abundant_secretions.tres" id="6_xpaym"]
+[ext_resource type="Resource" uid="uid://dkggyhhye8lo8" path="res://Upgrades/slime_preservatives.tres" id="6_j4r23"]
+[ext_resource type="Resource" uid="uid://3qfnxvfpp7o6" path="res://Upgrades/snail_glue.tres" id="7_xpaym"]
 
-[sub_resource type="Resource" id="Resource_qg1yl"]
-script = ExtResource("1_qg1yl")
-type = "damage"
+[sub_resource type="Resource" id="Resource_xpaym"]
+script = ExtResource("2_idrih")
+type = 0
 amount = 0.0
 amount_mult = 0.5
 duration = 0.0
 duration_mult = 0.0
-metadata/_custom_type_script = "uid://dd6xgl42i3dsh"
+metadata/_custom_type_script = "uid://qf82ubnelwhp"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_idrih"]
-atlas = ExtResource("2_vsdp3")
-region = Rect2(0, 3600, 200, 200)
-
-[resource]
-script = ExtResource("2_fit2p")
-size = 0.0
-size_mult = 0.0
+[sub_resource type="Resource" id="Resource_nf3dc"]
+script = ExtResource("3_j4r23")
 interval = 0.0
 interval_mult = 0.0
 duration = 0.0
@@ -32,12 +27,22 @@ tick_rate = 0.0
 tick_rate_mult = 0.0
 position_offset_x = 0.0
 position_offset_y = 0.0
-effects = Dictionary[String, ExtResource("1_qg1yl")]({
-"damage": SubResource("Resource_qg1yl")
-})
+size = 0.0
+size_mult = 0.0
+effects = Array[ExtResource("2_idrih")]([SubResource("Resource_xpaym")])
+type = 4
+metadata/_custom_type_script = "uid://c67ubvm2tw33d"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpaym"]
+atlas = ExtResource("3_6ntrh")
+region = Rect2(0, 3600, 200, 200)
+
+[resource]
+script = ExtResource("4_6ntrh")
 name = "Acidic Slime"
 description = "Increases Snail Juice damage by 50%."
-type = "snail_juice"
-icon = SubResource("AtlasTexture_idrih")
-unlocks = Array[ExtResource("4_6ntrh")]([ExtResource("5_j4r23"), ExtResource("6_xpaym")])
-metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"
+types = Array[int]([0, 2])
+icon = SubResource("AtlasTexture_xpaym")
+unlocks = Array[ExtResource("4_6ntrh")]([ExtResource("6_j4r23"), ExtResource("7_xpaym")])
+components = Array[ExtResource("1_vsdp3")]([SubResource("Resource_nf3dc")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

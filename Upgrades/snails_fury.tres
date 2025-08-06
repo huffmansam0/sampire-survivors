@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=5 format=3 uid="uid://bsppy4psihsqu"]
+
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_fbpyh"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_r0s44"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_sb7kg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7bwv"]
+atlas = ExtResource("2_sb7kg")
+region = Rect2(2200, 3600, 200, 200)
+
+[resource]
+script = ExtResource("2_r0s44")
+name = "Snail's Fury"
+description = "Greatly augments all fire effects."
+types = Array[int]([0, 1, 4])
+icon = SubResource("AtlasTexture_l7bwv")
+unlocks = Array[ExtResource("2_r0s44")]([])
+components = Array[ExtResource("1_fbpyh")]([])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

@@ -1,30 +1,38 @@
-[gd_resource type="Resource" script_class="SnailJuiceAttackUpgradeResource" load_steps=6 format=3 uid="uid://jcstkxtnkl1h"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=9 format=3 uid="uid://dkggyhhye8lo8"]
 
-[ext_resource type="Script" uid="uid://dd6xgl42i3dsh" path="res://Scripts/Resource Scripts/effect_resource.gd" id="1_os6jo"]
-[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_idsbw"]
-[ext_resource type="Script" uid="uid://bcoxc0pgv5tkb" path="res://Scripts/Resource Scripts/snail_juice_attack_upgrade_resource.gd" id="2_scdiw"]
-[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="4_idsbw"]
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_os6jo"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_scdiw"]
+[ext_resource type="Script" uid="uid://qf82ubnelwhp" path="res://Scripts/Resource Scripts/effect_component.gd" id="2_ufti0"]
+[ext_resource type="Script" uid="uid://c67ubvm2tw33d" path="res://Scripts/Resource Scripts/attack_upgrade_component.gd" id="3_1q5gj"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_cpjr1"]
+[ext_resource type="Resource" uid="uid://cgfnp7t56w5me" path="res://Upgrades/abundant_secretions.tres" id="6_1q5gj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ufti0"]
-atlas = ExtResource("2_idsbw")
+[sub_resource type="Resource" id="Resource_gi0ks"]
+script = ExtResource("3_1q5gj")
+interval = 0.0
+interval_mult = 0.0
+duration = 0.0
+duration_mult = 0.5
+tick_rate = 0.0
+tick_rate_mult = 0.0
+position_offset_x = 0.0
+position_offset_y = 0.0
+size = 0.0
+size_mult = 0.0
+effects = Array[ExtResource("2_ufti0")]([])
+type = 4
+metadata/_custom_type_script = "uid://c67ubvm2tw33d"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtq6r"]
+atlas = ExtResource("4_cpjr1")
 region = Rect2(200, 3600, 200, 200)
 
 [resource]
 script = ExtResource("2_scdiw")
-size = null
-size_mult = null
-interval = null
-interval_mult = null
-duration = null
-duration_mult = 0.5
-tick_rate = null
-tick_rate_mult = null
-position_offset_x = null
-position_offset_y = null
-effects = Dictionary[String, ExtResource("1_os6jo")]({})
 name = "Slime Preservatives"
 description = "Increases Snail Juice duration by 50%."
-type = "snail_juice"
-icon = SubResource("AtlasTexture_ufti0")
-unlocks = Array[ExtResource("4_idsbw")]([])
-metadata/_custom_type_script = "uid://bcoxc0pgv5tkb"
+types = Array[int]([0, 2])
+icon = SubResource("AtlasTexture_mtq6r")
+unlocks = Array[ExtResource("2_scdiw")]([ExtResource("6_1q5gj")])
+components = Array[ExtResource("1_os6jo")]([SubResource("Resource_gi0ks")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

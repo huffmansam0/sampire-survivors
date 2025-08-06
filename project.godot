@@ -23,6 +23,7 @@ ExperienceManager="*res://Scripts/Globals/experience_manager.gd"
 UpgradeManager="*res://Scripts/Globals/upgrade_manager.gd"
 AttackManager="*res://Scripts/Globals/attack_manager.gd"
 SignalBus="*res://Scripts/Globals/signal_bus.gd"
+Globals="*res://Scripts/Globals/globals.gd"
 
 [display]
 

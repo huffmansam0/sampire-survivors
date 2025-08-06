@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=8 format=3 uid="uid://cnncoiqy70chn"]
+
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_46m5u"]
+[ext_resource type="Script" uid="uid://dp4r5vjpi7ksc" path="res://Scripts/Resource Scripts/experience_upgrade_component.gd" id="2_1d56v"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_rnnsk"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_v8puq"]
+[ext_resource type="Resource" uid="uid://4btva3kbrepj" path="res://Upgrades/mindbloom.tres" id="5_1d56v"]
+
+[sub_resource type="Resource" id="Resource_g7xri"]
+script = ExtResource("2_1d56v")
+experience = 0.0
+experience_mult = 0.33
+type = 2
+metadata/_custom_type_script = "uid://dp4r5vjpi7ksc"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d56v"]
+atlas = ExtResource("2_v8puq")
+region = Rect2(400, 3400, 200, 200)
+
+[resource]
+script = ExtResource("2_rnnsk")
+name = "Snail's Wisdom"
+description = "Increases experience gained by 33%."
+types = Array[int]([5])
+icon = SubResource("AtlasTexture_1d56v")
+unlocks = Array[ExtResource("2_rnnsk")]([ExtResource("5_1d56v")])
+components = Array[ExtResource("1_46m5u")]([SubResource("Resource_g7xri")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

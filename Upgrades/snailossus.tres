@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=7 format=3 uid="uid://dm6uldq5nl8fd"]
+
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_vc00g"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_lngwy"]
+[ext_resource type="Script" uid="uid://byv6fv5rpq2di" path="res://Scripts/Resource Scripts/player_upgrade_component.gd" id="2_qb2tp"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_1pq76"]
+
+[sub_resource type="Resource" id="Resource_gm16k"]
+script = ExtResource("2_qb2tp")
+speed = 0.0
+speed_mult = 0.0
+max_hp = 2
+experience_box_mult = 0.0
+shield_recharge_duration = 0.0
+scale = 0.0
+scale_mult = 2.0
+type = 1
+metadata/_custom_type_script = "uid://byv6fv5rpq2di"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43ru5"]
+atlas = ExtResource("3_1pq76")
+region = Rect2(2000, 3800, 200, 200)
+
+[resource]
+script = ExtResource("2_lngwy")
+name = "Snailossus"
+description = "Snail grows much larger, deals additional damage on collision , and gains 2 hearts."
+types = Array[int]([1, 8, 0])
+icon = SubResource("AtlasTexture_43ru5")
+unlocks = Array[ExtResource("2_lngwy")]([])
+components = Array[ExtResource("1_vc00g")]([SubResource("Resource_gm16k")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"
