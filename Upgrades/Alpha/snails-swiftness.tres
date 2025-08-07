@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=7 format=3 uid="uid://cdi8lnds7cpuy"]
+
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_o1tnk"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_6jfpg"]
+[ext_resource type="Script" uid="uid://byv6fv5rpq2di" path="res://Scripts/Resource Scripts/player_upgrade_component.gd" id="2_dbd1n"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_la1n0"]
+
+[sub_resource type="Resource" id="Resource_vnkaq"]
+script = ExtResource("2_dbd1n")
+speed = 0.0
+speed_mult = 0.03
+max_hp = 0
+experience_box_mult = 0.0
+shield_recharge_duration = 0.0
+scale = 0.0
+scale_mult = 0.0
+collision_damage = 0.0
+collision_damage_mult = 0.0
+type = 0
+metadata/_custom_type_script = "uid://byv6fv5rpq2di"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0soyq"]
+atlas = ExtResource("3_la1n0")
+region = Rect2(2000, 3600, 200, 200)
+
+[resource]
+script = ExtResource("2_6jfpg")
+name = "Snail's Swiftness"
+description = "Increase move speed by 3%."
+types = Array[int]([1])
+icon = SubResource("AtlasTexture_0soyq")
+unlocks = Array[ExtResource("2_6jfpg")]([])
+components = Array[ExtResource("1_o1tnk")]([SubResource("Resource_vnkaq")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

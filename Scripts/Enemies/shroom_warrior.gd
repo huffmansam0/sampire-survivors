@@ -18,6 +18,6 @@ func approach(delta: float):
 	if collision:
 		velocity = velocity.bounce(collision.get_normal()) * 0.8
 
-func take_damage(amount: int):
+func take_damage(amount: float):
 	super.take_damage(amount)
 	hp_bar.value = current_hp

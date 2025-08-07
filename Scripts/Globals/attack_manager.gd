@@ -7,12 +7,18 @@ var attack_container: Node2D
 var snail_juice_scene: PackedScene = preload("res://Scenes/Snail_Juice.tscn")
 
 #update mapping for attack scenes here
-var attack_scene_mapping: Dictionary[String, PackedScene] = {
-	"snail_juice": snail_juice_scene,
+var attack_scene_mapping: Dictionary[Globals.AttackTypes, PackedScene] = {
+	Globals.AttackTypes.SNAILJUICE: snail_juice_scene,
 }
 
-var active_attacks: Dictionary[String, Attack] = {}
-var active_attack_interval_timers: Dictionary[String, Timer] = {}
+#Key - attack type
+#Value - reference to the blueprint for the attack
+var active_attacks: Dictionary[Globals.AttackTypes, Attack] = {}
+
+#Key - attack type
+#Value - reference to the interval timer for the attack
+var active_attack_interval_timers: Dictionary[Globals.AttackTypes, Timer] = {}
+
 var attack_despawn_timers: Dictionary[int, Timer] = {}
 
 #Outer:
@@ -21,7 +27,7 @@ var attack_despawn_timers: Dictionary[int, Timer] = {}
 #Inner:
 #	Key: int - id of enemy
 #	Value: # of instances of the attack that enemy is currently in
-var enemies_in_attacks: Dictionary[String, EnemiesInAttack] = {}
+var enemies_in_attacks: Dictionary[Globals.AttackTypes, EnemiesInAttack] = {}
 
 #Outer:
 #	Key: string - attack type being tracked
@@ -29,7 +35,7 @@ var enemies_in_attacks: Dictionary[String, EnemiesInAttack] = {}
 #Inner:
 #	Key: int - id of enemy
 #	Value: timer triggering attack's effects on affected enemy
-var enemy_attack_timers: Dictionary[String, EnemyAttackTimers] = {}
+var enemy_attack_timers: Dictionary[Globals.AttackTypes, EnemyAttackTimers] = {}
 
 func _ready() -> void:
 	attack_container = Node2D.new()
@@ -38,6 +44,8 @@ func _ready() -> void:
 	
 	SignalBus.game_started.connect(_start_game)
 	SignalBus.game_ended.connect(_end_game)
+	
+	SignalBus.attack_upgrade_acquired.connect(_on_attack_upgrade_acquired)
 	
 func _end_game():
 	get_tree().call_group("Attacks", "free")
@@ -65,11 +73,41 @@ func _end_game():
 	
 func _start_game():
 	player = GameManager.get_player()
-	var snail_juice_attack = SnailJuiceAttack.new()
+	var snail_juice_attack = SnailJuiceAttack.get_base()
 	add_attack(snail_juice_attack)
-	
-	set_process(true)
 
+func _on_attack_upgrade_acquired(upgrade: UpgradeResource):
+	for component in upgrade.components:
+		if component.type == Globals.UpgradeTypes.ATTACK:
+			var attack_component: AttackUpgradeComponent = component
+			if active_attacks.has(attack_component.attack_type):
+				var attack_blueprint = active_attacks[attack_component.attack_type]
+				
+				#update all properties
+				attack_blueprint.interval += attack_component.interval
+				attack_blueprint.interval_mult += attack_component.interval_mult
+				attack_blueprint.duration += attack_component.duration
+				attack_blueprint.duration_mult += attack_component.duration_mult
+				attack_blueprint.tick_rate += attack_component.tick_rate
+				attack_blueprint.tick_rate_mult += attack_component.tick_rate_mult
+				attack_blueprint.position_offset += attack_component.position_offset
+				attack_blueprint.size += attack_component.size
+				attack_blueprint.size_mult += attack_component.size_mult
+				
+				#update all effects
+				for effect in attack_component.effects:
+					var attack_blueprint_effect: EffectComponent = attack_blueprint.effects[effect.type]
+					attack_blueprint_effect.amount += effect.amount
+					attack_blueprint_effect.amount_mult += effect.amount_mult
+					attack_blueprint_effect.duration += effect.duration
+					attack_blueprint_effect.duration_mult += effect.duration_mult
+				
+				#update interval timer
+				active_attack_interval_timers[attack_component.attack_type].wait_time = attack_blueprint.interval * (1 + attack_blueprint.interval_mult)
+			else:
+				#BETA: here's where we'd add new attacks. get their base and add it I imagine
+				pass
+	
 func add_attack(attack: Attack):
 	active_attacks[attack.type] = attack
 	
@@ -79,61 +117,15 @@ func add_attack(attack: Attack):
 	interval_timer.one_shot = false
 	interval_timer.autostart = false
 	add_child(interval_timer)
-	interval_timer.timeout.connect(spawn_attack.bind(attack))
+	interval_timer.timeout.connect(spawn_attack.bind(attack.type))
 	interval_timer.start()
 
-func update_attack(new_attack: Attack):
-	var attack: Attack = active_attacks[new_attack.type]
+func spawn_attack(attack_type: Globals.AttackTypes):
+	var attack = active_attacks[attack_type]
 	
-	update_effects(attack.effects, new_attack.effects)
-	var properties = new_attack.get_script().get_script_property_list()
-
-	for property in properties:
-		var prop_name = property.name
-
-		#register non-additive properties here
-		if prop_name.ends_with(".gd") or prop_name in [
-			"type",
-			"effects",
-		]:
-			continue
-
-		var new_value = new_attack.get(prop_name)
-		var current_value = attack.get(prop_name)
-		attack.set(prop_name, (current_value if current_value != null else 0.0) + (new_value if new_value != null else 0))
-
-	active_attacks[new_attack.type] = attack
-	
-	#update interval timer
-	active_attack_interval_timers[attack.type].wait_time = attack.interval * (1 + attack.interval_mult)
-
-func update_effects(current_effects: Dictionary[String, EffectResource], new_effects: Dictionary[String, EffectResource]):
-	for effect: EffectResource in new_effects.values():
-		var current_effect: EffectResource = current_effects.get(effect.type, EffectResource.create_empty())
-		current_effect.type = effect.type
-		
-		var properties = effect.get_script().get_script_property_list()
-		
-		for property in properties:
-			var prop_name = property.name
-			
-			#register non-additive properties here
-			if prop_name.ends_with(".gd") or prop_name in [
-				"type",
-			]:
-				continue
-				
-			var new_value = effect.get(prop_name)
-			var current_value = current_effect.get(prop_name)
-			current_effect.set(prop_name, (current_value if current_value != null else 0.0) + (new_value if new_value != null else 0))
-			
-		current_effects[effect.type] = current_effect
-
-func spawn_attack(attack: Attack):
-		
 	#spawn the attack
-	var attack_instance = attack_scene_mapping[attack.type].instantiate()
-	attack.apply_upgrade(attack_instance)
+	var attack_instance: SnailJuiceAttackInstance = attack_scene_mapping[attack.type].instantiate()
+	attack_instance.setup(attack)
 	
 	##set the timer to delete it
 	var despawn_timer = Timer.new()
@@ -157,7 +149,7 @@ func spawn_attack(attack: Attack):
 	attack_instance.global_position = player.global_position + attack.position_offset
 	attack_container.add_child(attack_instance)
 	
-func enemy_entered_attack(enemy: Enemy, attack_type: String):
+func enemy_entered_attack(enemy: Enemy, attack_type: Globals.AttackTypes):
 	var enemyId = enemy.get_instance_id()
 	var enemies_in_attack = enemies_in_attacks.get_or_add(attack_type, EnemiesInAttack.new())
 	var attack_timers = enemy_attack_timers.get_or_add(attack_type, EnemyAttackTimers.new())
@@ -175,17 +167,17 @@ func enemy_entered_attack(enemy: Enemy, attack_type: String):
 		add_child(attack_timer)
 		attack_timers.dict[enemyId] = attack_timer
 
-func _attack_enemy(attack_type: String, enemy: Enemy):
+func _attack_enemy(attack_type: Globals.AttackTypes, enemy: Enemy):
 	var attack = active_attacks[attack_type]
 	
 	if is_instance_valid(enemy):
 		#Register new effects here
 		for effect in attack.effects.values():
 			match effect.type:
-				"damage":
+				Globals.EffectTypes.DAMAGE:
 					enemy.take_damage(effect.amount * (1 + effect.amount_mult))
 
-func enemy_exited_attack(enemy: Enemy, attack_type: String):
+func enemy_exited_attack(enemy: Enemy, attack_type: Globals.AttackTypes):
 	var enemyId = enemy.get_instance_id()
 	var enemies_in_attack: EnemiesInAttack = enemies_in_attacks.get_or_add(attack_type, EnemiesInAttack.new())
 	
@@ -196,7 +188,7 @@ func enemy_exited_attack(enemy: Enemy, attack_type: String):
 	if enemies_in_attack.dict[enemyId] <= 0:
 		_remove_enemy(enemyId, attack_type)
 	
-func _remove_enemy(enemyId: int, attack_type: String):
+func _remove_enemy(enemyId: int, attack_type: Globals.AttackTypes):
 	var enemies_in_attack = enemies_in_attacks.get_or_add(attack_type, EnemiesInAttack.new())
 	var attack_timers = enemy_attack_timers.get_or_add(attack_type, EnemyAttackTimers.new())
 	

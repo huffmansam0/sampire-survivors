@@ -1,16 +1,9 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=8 format=3 uid="uid://t4sytianvi52"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=6 format=3 uid="uid://t4sytianvi52"]
 
 [ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_b6x0b"]
 [ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_2c2n7"]
-[ext_resource type="Script" uid="uid://c1odq3mo6pt81" path="res://Scripts/Resource Scripts/upgrade_upgrade_component.gd" id="2_pbr20"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_nheiv"]
-[ext_resource type="Resource" uid="uid://4btva3kbrepj" path="res://Upgrades/mindbloom.tres" id="5_nheiv"]
-
-[sub_resource type="Resource" id="Resource_akp33"]
-script = ExtResource("2_pbr20")
-num_upgrade_choices = 1
-type = 5
-metadata/_custom_type_script = "uid://c1odq3mo6pt81"
+[ext_resource type="Resource" uid="uid://4btva3kbrepj" path="res://Upgrades/Beta/mindbloom.tres" id="5_nheiv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ovp06"]
 atlas = ExtResource("3_nheiv")
@@ -23,5 +16,5 @@ description = "+1 upgrade choice per level up."
 types = Array[int]([6, 5])
 icon = SubResource("AtlasTexture_ovp06")
 unlocks = Array[ExtResource("2_2c2n7")]([ExtResource("5_nheiv")])
-components = Array[ExtResource("1_b6x0b")]([SubResource("Resource_akp33")])
+components = Array[ExtResource("1_b6x0b")]([])
 metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

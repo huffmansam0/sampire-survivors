@@ -58,6 +58,6 @@ func should_explode():
 	return true
 
 
-func take_damage(amount: int):
+func take_damage(amount: float):
 	super.take_damage(amount)
 	hp_bar.value = current_hp

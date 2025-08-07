@@ -48,6 +48,6 @@ func should_approach():
 func should_shoot():
 	return distance_to_target <= shoot_target_proximity
 
-func take_damage(amount: int):
+func take_damage(amount: float):
 	super.take_damage(amount)
 	hp_bar.value = current_hp

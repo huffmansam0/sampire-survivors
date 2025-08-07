@@ -1,7 +1,7 @@
 extends Area2D
 class_name SnailJuiceAttackInstance
 
-const attack_type = "snail_juice"
+const attack_type: Globals.AttackTypes = Globals.AttackTypes.SNAILJUICE
 
 var slime_puddle: Sprite2D
 var hitbox: CollisionShape2D
@@ -10,7 +10,6 @@ var size: float
 var size_mult: float
 var duration: float
 var duration_mult: float
-var position_offset: Vector2
 
 var base_scale: Vector2 = Vector2(0.33, 0.33)
 
@@ -62,3 +61,10 @@ func _on_area_exited(area):
 
 func die():
 	queue_free()
+	
+func setup(attack_blueprint: SnailJuiceAttack):
+	duration = attack_blueprint.duration
+	duration_mult = attack_blueprint.duration_mult
+	size = attack_blueprint.size
+	size_mult = attack_blueprint.size_mult
+	

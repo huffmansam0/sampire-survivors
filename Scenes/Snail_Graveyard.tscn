@@ -170,6 +170,10 @@ text = "9:59"
 label_settings = SubResource("LabelSettings_0mwrw")
 horizontal_alignment = 2
 
+[node name="Spacer" type="Control" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
 [node name="FPSMeter" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("9_0rd3i")

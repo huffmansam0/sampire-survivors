@@ -3,27 +3,30 @@ class_name SnailJuiceAttack
 
 #Could also define things like colors or sprites here, considering that those might change
 
-#const base_position_offset: Vector2 = Vector2(0, 80)
+#TODO: organize these by whether they're AttackManager concerns or instance concerns
+const base_interval: float = 0.02
+const base_interval_mult: float = 0.0
+const base_duration: float = 2.5
+const base_duration_mult: float = 0.0
+const base_tick_rate: float = 0.1
+const base_tick_rate_mult: float = 0.0
+const base_position_offset: Vector2 = Vector2(0, 80)
+const base_size: float = 0.0
+const base_size_mult: float = 0.0
+const base_damage_amount: float = 5.0
 
-var size: float = 10
-var size_mult: float = 0
-
-func _init() -> void:
-	type = "snail_juice"
-	interval = 0.02
-	tick_rate = 0.1
-	duration = 2.5
-	#Upgrades specify their effect types, look up/add that effect and edit/set its values
-	var damage_effect = EffectResource.new()
-	damage_effect.initialize("damage", 10, 0, 0, 0)
-	effects = {
-		"damage": damage_effect,
-	}
-	position_offset = Vector2(0, 80)
-
-func apply_upgrade(instance: SnailJuiceAttackInstance):
-	instance.size = size
-	instance.size_mult = size_mult
-	instance.duration = duration
-	instance.duration_mult = duration_mult
-	instance.position_offset = position_offset
+static func get_base() -> SnailJuiceAttack:
+	var snail_juice_attack_base = SnailJuiceAttack.new()
+	snail_juice_attack_base.interval = base_interval
+	snail_juice_attack_base.interval_mult = base_interval_mult
+	snail_juice_attack_base.duration = base_duration
+	snail_juice_attack_base.duration_mult = base_duration_mult
+	snail_juice_attack_base.tick_rate = base_tick_rate
+	snail_juice_attack_base.tick_rate_mult = base_tick_rate_mult
+	snail_juice_attack_base.position_offset = base_position_offset
+	snail_juice_attack_base.size = base_size
+	snail_juice_attack_base.size_mult = base_size_mult
+	var damage_effect: EffectComponent = EffectComponent.new()
+	damage_effect.initialize(Globals.EffectTypes.DAMAGE, base_damage_amount, 0, 0, 0)
+	snail_juice_attack_base.effects = {Globals.EffectTypes.DAMAGE: damage_effect}
+	return snail_juice_attack_base

@@ -7,16 +7,25 @@ const despawn_distance: float = 12000
 
 @export var experience_scene = preload("res://Scenes/Experience.tscn")
 
-@onready var enemy_spawner: EnemySpawner
+#Base stats
+var base_experience_per_pickup: float = 1.0
+
+#Upgradeable stats
+var additional_experience_per_pickup: float = 0.0
+var experience_per_pickup_mult: float = 0.0
+
+#Actual stats
+var experience_per_pickup = base_experience_per_pickup
 var player: Player
-var current_experience: int = 0
+var current_experience: float = 0.0
 var current_level: int = 1
-var experience_to_next_level: int = 10
+var experience_to_next_level: float = 10.0
 
 func _ready():
 	SignalBus.game_started.connect(_start_game)
 	SignalBus.game_ended.connect(_end_game)
 	SignalBus.enemy_died.connect(_on_enemy_killed)
+	SignalBus.experience_upgrade_acquired.connect(_on_experience_upgrade_acquired)
 	
 func _start_game():
 	player = GameManager.get_player()
@@ -28,7 +37,7 @@ func _end_game():
 	current_experience = 0
 	
 func gain_experience():
-	current_experience += 1
+	current_experience += experience_per_pickup
 	experience_changed.emit(current_experience, experience_to_next_level)
 	if (current_experience >= experience_to_next_level):
 		level_up()
@@ -56,3 +65,13 @@ func _on_enemy_killed(enemy: Enemy):
 func _on_distance_to_player_changed(experience: Experience, distance: float):
 	if distance > despawn_distance:
 		experience.queue_free()
+
+func _on_experience_upgrade_acquired(upgrade: UpgradeResource):
+	for component in upgrade.components:
+		if component.type == Globals.UpgradeTypes.PLAYER:
+			var player_component: ExperienceUpgradeComponent = component
+			
+			additional_experience_per_pickup = player_component.experience
+			experience_per_pickup_mult += player_component.experience_mult
+			
+			experience_per_pickup = base_experience_per_pickup + additional_experience_per_pickup + (1 * experience_per_pickup_mult)

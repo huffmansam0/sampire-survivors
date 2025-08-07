@@ -1,16 +1,14 @@
 extends Node
 class_name Attack
 
-var type: String
-
+var type: Globals.AttackTypes
 var interval: float
-var interval_mult: float = 0
+var interval_mult: float
 var duration: float
-var duration_mult: float = 0
+var duration_mult: float
 var tick_rate: float
-var tick_rate_mult: float = 0
-var position_offset: Vector2 = Vector2.ZERO
-var effects: Dictionary[String, EffectResource]
-
-func apply_upgrade(instance):
-	pass
+var tick_rate_mult: float
+var position_offset: Vector2
+var size: float
+var size_mult: float
+var effects: Dictionary

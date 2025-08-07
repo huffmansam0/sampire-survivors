@@ -1,6 +1,6 @@
 extends Node
 
-enum UpgradeType {
+enum UpgradeTypes {
 	ATTACK,
 	PLAYER,
 	SNAILJUICE,
@@ -13,8 +13,12 @@ enum UpgradeType {
 	ONKILL,
 }
 
-enum EffectType {
+enum EffectTypes {
 	DAMAGE,
 	SLOW,
 	BURN,
+}
+
+enum AttackTypes {
+	SNAILJUICE,
 }

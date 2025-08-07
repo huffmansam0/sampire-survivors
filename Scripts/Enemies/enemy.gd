@@ -4,13 +4,13 @@ class_name Enemy
 signal died(enemy: Enemy)
 signal distance_to_target_changed(enemy: Enemy, new_distance: float)
 
-@export var max_hp: int
+@export var max_hp: float
 @export var move_speed: float
 
 @onready var health_bar = $HealthBar
 @onready var player = GameManager.get_player()
 
-var current_hp: int
+var current_hp: float
 
 var damage_timer: float = 0.0
 var damage_interval: float = 0.25
@@ -53,7 +53,7 @@ func _update_distance_to_target():
 	distance_to_target = global_position.distance_to(player.global_position)
 	distance_to_target_changed.emit(self, distance_to_target)
 
-func take_damage(amount: int):
+func take_damage(amount: float):
 	current_hp -= amount
 	
 	if (current_hp <= 0):

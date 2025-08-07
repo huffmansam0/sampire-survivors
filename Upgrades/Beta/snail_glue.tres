@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://qf82ubnelwhp" path="res://Scripts/Resource Scripts/effect_component.gd" id="2_28aab"]
 [ext_resource type="Script" uid="uid://c67ubvm2tw33d" path="res://Scripts/Resource Scripts/attack_upgrade_component.gd" id="3_50ink"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_3sth1"]
-[ext_resource type="Resource" uid="uid://cgfnp7t56w5me" path="res://Upgrades/abundant_secretions.tres" id="6_50ink"]
+[ext_resource type="Resource" uid="uid://cgfnp7t56w5me" path="res://Upgrades/Beta/abundant_secretions.tres" id="6_50ink"]
 
 [sub_resource type="Resource" id="Resource_kue84"]
 script = ExtResource("2_28aab")

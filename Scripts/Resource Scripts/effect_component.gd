@@ -1,7 +1,7 @@
 extends Resource
 class_name EffectComponent
 
-@export var type: Globals.EffectType
+@export var type: Globals.EffectTypes
 
 @export var amount: float
 @export var amount_mult: float
@@ -12,7 +12,7 @@ class_name EffectComponent
 static func create_empty():
 	return EffectComponent.new()
 
-func initialize(type: Globals.EffectType, amount: float, amount_mult: float, duration: float, duration_mult: float):
+func initialize(type: Globals.EffectTypes, amount: float, amount_mult: float, duration: float, duration_mult: float):
 	self.type = type
 	self.amount = amount
 	self.amount_mult = amount_mult

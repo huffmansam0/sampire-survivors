@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_datvx"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="2_110va"]
 [ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_1822w"]
-[ext_resource type="Resource" uid="uid://bsppy4psihsqu" path="res://Upgrades/snails_fury.tres" id="4_110va"]
+[ext_resource type="Resource" uid="uid://bsppy4psihsqu" path="res://Upgrades/Beta/snails_fury.tres" id="4_110va"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_evn36"]
 atlas = ExtResource("2_110va")

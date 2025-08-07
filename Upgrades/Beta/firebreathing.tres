@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_oihbf"]
 [ext_resource type="Script" uid="uid://c67ubvm2tw33d" path="res://Scripts/Resource Scripts/attack_upgrade_component.gd" id="3_10sq8"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_i6vum"]
-[ext_resource type="Resource" uid="uid://yp5fgxuvt6kl" path="res://Upgrades/stir_fry.tres" id="6_i6vum"]
-[ext_resource type="Resource" uid="uid://bdfbsmagin4ce" path="res://Upgrades/burning_speed.tres" id="7_2o712"]
+[ext_resource type="Resource" uid="uid://yp5fgxuvt6kl" path="res://Upgrades/Beta/stir_fry.tres" id="6_i6vum"]
+[ext_resource type="Resource" uid="uid://bdfbsmagin4ce" path="res://Upgrades/Beta/burning_speed.tres" id="7_2o712"]
 
 [sub_resource type="Resource" id="Resource_2o712"]
 script = ExtResource("2_jltt6")

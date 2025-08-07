@@ -6,13 +6,17 @@ var available_upgrades: Dictionary[String, UpgradeResource]
 #Key - upgrade name
 var acquired_upgrades: Dictionary[String, UpgradeResource]
 
-var starting_upgrade_filepaths: Dictionary[String, String] = {
-	"Acidic Slime": "res://Upgrades/acidic_slime.tres",
-	"Firebreathing": "res://Upgrades/firebreathing.tres",
-	"Stalwart Shell": "res://Upgrades/stalwart_shell.tres",
-	"Psionic Snail": "res://Upgrades/psionic_snail.tres",
-	"Love Dart": "res://Upgrades/love_dart.tres",
-}
+#Alpha upgrades
+const alpha_upgrades_filepath: String = "res://Upgrades/Alpha/"
+
+#Maybe beta starting upgrades?
+#var starting_upgrade_filepaths: Dictionary[String, String] = {
+	#"Acidic Slime": "res://Upgrades/acidic_slime.tres",
+	#"Firebreathing": "res://Upgrades/firebreathing.tres",
+	#"Stalwart Shell": "res://Upgrades/stalwart_shell.tres",
+	#"Psionic Snail": "res://Upgrades/psionic_snail.tres",
+	#"Love Dart": "res://Upgrades/love_dart.tres",
+#}
 
 var player: Player
 
@@ -22,6 +26,7 @@ var num_upgrade_choices: int = base_num_upgrade_choices
 @export var upgrades_array = []
 
 func _ready():
+	#Connect signals
 	SignalBus.game_started.connect(_start_game)
 	SignalBus.game_ended.connect(_end_game)
 	
@@ -41,10 +46,16 @@ func _end_game():
 	pass
 
 func _load_upgrades():
-	for upgrade_name in starting_upgrade_filepaths:
-		var path = starting_upgrade_filepaths[upgrade_name]
-		var resource = load(path)
-		available_upgrades[upgrade_name] = resource
+	var dir = DirAccess.open(alpha_upgrades_filepath)
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	
+	while file_name != "":
+		var upgrade_resource: UpgradeResource = load(alpha_upgrades_filepath + file_name)
+		available_upgrades[upgrade_resource.name] = upgrade_resource
+		file_name = dir.get_next()
+		
+	dir.list_dir_end()
 
 func upgrade_acquired(upgrade: UpgradeResource):
 	for _upgrade in upgrade.unlocks:
@@ -52,22 +63,21 @@ func upgrade_acquired(upgrade: UpgradeResource):
 			available_upgrades.get_or_add(_upgrade.name, _upgrade)
 
 	acquired_upgrades.get_or_add(upgrade.name, upgrade)
-	available_upgrades.erase(upgrade.name)
 
 	#emit a signal for each type
 	for type in upgrade.types:
 		match type:
-			Globals.UpgradeType.EXPERIENCE:
+			Globals.UpgradeTypes.EXPERIENCE:
 				SignalBus.experience_upgrade_acquired.emit(upgrade)
-			Globals.UpgradeType.PLAYER:
+			Globals.UpgradeTypes.PLAYER:
 				SignalBus.player_upgrade_acquired.emit(upgrade)
-			Globals.UpgradeType.FIRE:
+			Globals.UpgradeTypes.FIRE:
 				SignalBus.fire_upgrade_acquired.emit(upgrade)
-			Globals.UpgradeType.ATTACK:
+			Globals.UpgradeTypes.ATTACK:
 				SignalBus.attack_upgrade_acquired.emit(upgrade)
-			Globals.UpgradeType.SNAILJUICE:
+			Globals.UpgradeTypes.SNAILJUICE:
 				SignalBus.snail_juice_upgrade_acquired.emit(upgrade)
-			Globals.UpgradeType.UPGRADE:
+			Globals.UpgradeTypes.UPGRADE:
 				SignalBus.upgrade_upgrade_acquired.emit(upgrade)
 
 func get_upgrades() -> Array[UpgradeResource]:
@@ -91,4 +101,11 @@ func get_upgrades() -> Array[UpgradeResource]:
 	#player.max_hp += upgrade.max_hp
 	#
 func _on_upgrade_upgrade_acquired(upgrade: UpgradeResource):
-	num_upgrade_choices += upgrade.num_upgrade_choices
+	#record that we have this upgrade now
+	
+	if upgrade.components.has(Globals.UpgradeTypes.UPGRADE):
+		#apply all numerics
+		num_upgrade_choices += upgrade.num_upgrade_choices
+	
+	#
+	

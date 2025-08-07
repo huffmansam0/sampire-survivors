@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_1m8uh"]
 [ext_resource type="Script" uid="uid://byv6fv5rpq2di" path="res://Scripts/Resource Scripts/player_upgrade_component.gd" id="2_ndr17"]
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_v2gxp"]
-[ext_resource type="Resource" uid="uid://t4sytianvi52" path="res://Upgrades/theres_options.tres" id="5_5tu4g"]
-[ext_resource type="Resource" uid="uid://cnncoiqy70chn" path="res://Upgrades/snails_wisdom.tres" id="6_5k8ce"]
+[ext_resource type="Resource" uid="uid://t4sytianvi52" path="res://Upgrades/Beta/theres_options.tres" id="5_5tu4g"]
+[ext_resource type="Resource" uid="uid://cnncoiqy70chn" path="res://Upgrades/Beta/snails_wisdom.tres" id="6_5k8ce"]
 
 [sub_resource type="Resource" id="Resource_5tu4g"]
 script = ExtResource("2_ndr17")
