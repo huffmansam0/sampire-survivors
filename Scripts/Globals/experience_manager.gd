@@ -68,10 +68,10 @@ func _on_distance_to_player_changed(experience: Experience, distance: float):
 
 func _on_experience_upgrade_acquired(upgrade: UpgradeResource):
 	for component in upgrade.components:
-		if component.type == Globals.UpgradeTypes.PLAYER:
-			var player_component: ExperienceUpgradeComponent = component
+		if component.type == Globals.UpgradeTypes.EXPERIENCE:
+			var experience_component: ExperienceUpgradeComponent = component
 			
-			additional_experience_per_pickup = player_component.experience
-			experience_per_pickup_mult += player_component.experience_mult
+			additional_experience_per_pickup = experience_component.experience
+			experience_per_pickup_mult += experience_component.experience_mult
 			
-			experience_per_pickup = base_experience_per_pickup + additional_experience_per_pickup + (1 * experience_per_pickup_mult)
+			experience_per_pickup = (base_experience_per_pickup + additional_experience_per_pickup) + (1 * experience_per_pickup_mult)

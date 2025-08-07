@@ -64,6 +64,7 @@ autoplay = "default"
 zoom = Vector2(0.4, 0.4)
 
 [node name="Hurtbox_Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
@@ -83,7 +84,6 @@ stream = ExtResource("5_yoq75")
 stream = ExtResource("6_ksbbd")
 
 [node name="ExperienceBox" type="Area2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 8
 

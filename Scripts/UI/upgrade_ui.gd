@@ -58,7 +58,6 @@ func _update_upgrades():
 	for i in range(upgrades.size()):
 		var upgrade_button_instance = UpgradeButton.instantiate()
 		upgrade_container.add_child(upgrade_button_instance)
-		var button_node: Button = upgrade_button_instance.get_node("UpgradeButton")
 		upgrade_button_instance.button_down.connect(_on_upgrade_button_pressed.bind(i))
 		upgrade_button_instance.icon = upgrades[i].icon
 		upgrade_buttons.append(upgrade_button_instance)

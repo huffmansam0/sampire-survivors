@@ -78,6 +78,6 @@ func _on_player_upgrade_acquired(upgrade: UpgradeResource):
 			max_hp += player_component.max_hp
 			experience_box_mult += player_component.experience_box_mult
 			
-			speed = base_speed + additional_speed * (1 + speed_mult)
-			experience_box.scale = base_experience_box_scale * (1 + experience_box_mult)
+			speed = (base_speed + additional_speed) * (1 + speed_mult)
+			experience_box.scale = (base_experience_box_scale) * (1 + experience_box_mult)
 			
