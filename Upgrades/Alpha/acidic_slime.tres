@@ -17,14 +17,14 @@ metadata/_custom_type_script = "uid://qf82ubnelwhp"
 
 [sub_resource type="Resource" id="Resource_e0fjw"]
 script = ExtResource("3_8cnbn")
+attack_type = 0
 interval = 0.0
 interval_mult = 0.0
 duration = 0.0
 duration_mult = 0.0
 tick_rate = 0.0
 tick_rate_mult = 0.0
-position_offset_x = 0.0
-position_offset_y = 0.0
+position_offset = Vector2(0, 0)
 size = 0.0
 size_mult = 0.0
 effects = Array[ExtResource("2_7jf6l")]([SubResource("Resource_mumx7")])

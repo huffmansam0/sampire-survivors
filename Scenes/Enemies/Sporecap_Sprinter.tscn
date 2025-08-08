@@ -1,0 +1,137 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2jjfco32l7a2"]
+
+[ext_resource type="Script" uid="uid://c6yf5eafjmehy" path="res://Scripts/Enemies/sporecap_sprinter.gd" id="1_3vxty"]
+[ext_resource type="Script" uid="uid://bekv7eiyxxnfc" path="res://Scripts/Enemies/sporecap_sprinter_fsm.gd" id="2_fhm4h"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="3_3exw6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
+size = Vector2(33, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2pfq"]
+size = Vector2(48, 169)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6r63f"]
+size = Vector2(51, 170)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7byj"]
+bg_color = Color(0.243137, 0.152941, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgd1r"]
+bg_color = Color(1, 0, 0.266667, 1)
+
+[sub_resource type="Animation" id="Animation_huefm"]
+resource_name = "Explode"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(2400, 600, 200, 200), Rect2(2600, 600, 200, 200), Rect2(2800, 600, 200, 200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.25, 2.25)]
+}
+
+[sub_resource type="Animation" id="Animation_ib7ku"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rhw1c"]
+resource_name = "Walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(2400, 200, 200, 200), Rect2(2600, 200, 200, 200), Rect2(2400, 200, 200, 200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2pfq"]
+_data = {
+&"Explode": SubResource("Animation_huefm"),
+&"RESET": SubResource("Animation_ib7ku"),
+&"Walk": SubResource("Animation_rhw1c")
+}
+
+[node name="SporecapSprinter" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 2
+z_as_relative = false
+collision_layer = 16
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_3vxty")
+
+[node name="Collision_Area2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 47)
+shape = SubResource("RectangleShape2D_7k104")
+
+[node name="Hitbox_Area2D" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="Hitbox_Collision2D" type="CollisionShape2D" parent="Hitbox_Area2D"]
+position = Vector2(-3, 2.5)
+shape = SubResource("RectangleShape2D_t2pfq")
+
+[node name="Hurtbox_Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="Hurtbox_Collision2D" type="CollisionShape2D" parent="Hurtbox_Area2D"]
+position = Vector2(-2.5, 3)
+shape = SubResource("RectangleShape2D_6r63f")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -73.0
+offset_top = 95.0
+offset_right = 72.0
+offset_bottom = 124.0
+theme_override_styles/background = SubResource("StyleBoxFlat_r7byj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bgd1r")
+show_percentage = false
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_fhm4h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t2pfq")
+}
+autoplay = "Walk"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(14, 0)
+texture = ExtResource("3_3exw6")
+region_enabled = true

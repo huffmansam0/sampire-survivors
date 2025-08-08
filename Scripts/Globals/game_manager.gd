@@ -102,12 +102,11 @@ func _enter_state(new_state, old_state):
 		states.title_screen:
 			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 		states.in_game:
-			get_tree().change_scene_to_file("res://Scenes/Snail_Graveyard.tscn")
+			get_tree().change_scene_to_file("res://Scenes/Levels/Snail_Graveyard.tscn")
 		states.victory:
 			SignalBus.victory.emit()
 		states.restarting:
 			SignalBus.game_ended.emit()
-			get_tree().reload_current_scene()
 			in_game_requested = true
 		
 func _exit_state(new_state, old_state):

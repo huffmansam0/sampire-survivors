@@ -1,4 +1,4 @@
-extends Enemy
+extends CharacterBody2D
 class_name MycelliumMageRangedAttack
 
 @export var base_damage := 1
@@ -11,6 +11,9 @@ var target: Player = GameManager.player
 @onready var sprite_sheet: Sprite2D = $SpriteSheet
 @onready var timeout: Timer = $Timeout
 @onready var hitbox: Area2D = $Hitbox
+
+var move_direction: Vector2
+var move_speed: float
 
 func _ready():
 	timeout.timeout.connect(queue_free)

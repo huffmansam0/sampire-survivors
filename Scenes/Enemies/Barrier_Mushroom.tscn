@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://hlug04gys03c"]
+
+[ext_resource type="Script" uid="uid://cvitvh1ss8qxo" path="res://Scripts/Enemies/barrier_mushroom.gd" id="1_7ssac"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="1_tv2as"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv2as"]
+radius = 39.0
+height = 154.0
+
+[sub_resource type="Animation" id="Animation_7ssac"]
+resource_name = "glitchy"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(3000, 0, 200, 200), Rect2(3200, 0, 200, 200), Rect2(3400, 0, 200, 200), Rect2(3000, 0, 200, 200), Rect2(3200, 0, 200, 200), Rect2(3400, 0, 200, 200)]
+}
+
+[sub_resource type="Animation" id="Animation_pa0rm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(3000, 0, 200, 200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vil4h"]
+_data = {
+&"RESET": SubResource("Animation_pa0rm"),
+&"glitchy": SubResource("Animation_7ssac")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlds0"]
+atlas = ExtResource("1_tv2as")
+region = Rect2(3000, 0, 200, 200)
+
+[node name="BarrierMushroom" type="CharacterBody2D"]
+script = ExtResource("1_7ssac")
+
+[node name="HitboxArea" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="HitboxShape" type="CollisionShape2D" parent="HitboxArea"]
+visible = false
+shape = SubResource("CapsuleShape2D_tv2as")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="CollisionArea"]
+visible = false
+shape = SubResource("CapsuleShape2D_tv2as")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../HitboxArea")
+libraries = {
+&"": SubResource("AnimationLibrary_vil4h")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, -5)
+texture = SubResource("AtlasTexture_nlds0")

@@ -46,16 +46,11 @@ func _end_game():
 	pass
 
 func _load_upgrades():
-	var dir = DirAccess.open(alpha_upgrades_filepath)
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
+	var resources = ResourceLoader.list_directory(alpha_upgrades_filepath)
 	
-	while file_name != "":
-		var upgrade_resource: UpgradeResource = load(alpha_upgrades_filepath + file_name)
+	for resource in resources:
+		var upgrade_resource: UpgradeResource = load(alpha_upgrades_filepath + resource)
 		available_upgrades[upgrade_resource.name] = upgrade_resource
-		file_name = dir.get_next()
-		
-	dir.list_dir_end()
 
 func upgrade_acquired(upgrade: UpgradeResource):
 	for _upgrade in upgrade.unlocks:

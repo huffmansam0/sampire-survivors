@@ -7,12 +7,12 @@ var player: Player
 
 func _ready() -> void:
 	SignalBus.game_started.connect(_start_game)
+	SignalBus.defeat.connect(_on_player_died)
 	
 func _start_game():
 	player = GameManager.get_player()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	player.health_changed.connect(_on_player_health_changed)
-	SignalBus.defeat.connect(_on_player_died)
 
 func _on_player_health_changed(old_health: int, new_health: int):
 	if old_health > new_health:

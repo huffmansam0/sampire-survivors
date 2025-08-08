@@ -1,9 +1,9 @@
 extends Node
 class_name EnemySpawner
 
-@export var shroom_warrior_scene = preload("res://Scenes/Shroom_Warrior.tscn")
-@export var mycellium_mage_scene = preload("res://Scenes/Mycellium_Mage.tscn")
-@export var sporecap_sprinter_scene = preload("res://Scenes/Sporecap_Sprinter.tscn")
+@export var shroom_warrior_scene = preload("res://Scenes/Enemies/Shroom_Warrior.tscn")
+@export var mycellium_mage_scene = preload("res://Scenes/Enemies/Mycellium_Mage.tscn")
+@export var sporecap_sprinter_scene = preload("res://Scenes/Enemies/Sporecap_Sprinter.tscn")
 
 @onready var player = GameManager.get_player()
 @onready var game_timer = GameManager.get_game_timer()

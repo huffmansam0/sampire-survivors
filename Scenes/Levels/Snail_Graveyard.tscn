@@ -1,0 +1,278 @@
+[gd_scene load_steps=30 format=3 uid="uid://0qnw1ctsgve5"]
+
+[ext_resource type="Script" uid="uid://cj7osirfkt5vn" path="res://Scripts/snail_graveyard.gd" id="1_uiioy"]
+[ext_resource type="PackedScene" uid="uid://d2xod8pb6h4qd" path="res://Scenes/Player.tscn" id="2_kyy4y"]
+[ext_resource type="Script" uid="uid://d0p2wp24ryhda" path="res://Scripts/background_generator.gd" id="3_76l5u"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_xbw2t"]
+[ext_resource type="Script" uid="uid://b2ebmabjr40g2" path="res://Scripts/enemy_spawner.gd" id="5_wiw6w"]
+[ext_resource type="Script" uid="uid://bvbsh6jpljsui" path="res://Scripts/UI/snail_graveyard_ui.gd" id="6_17u47"]
+[ext_resource type="Script" uid="uid://brl0fqjxdwaa0" path="res://Scripts/UI/experience_ui.gd" id="7_urqqy"]
+[ext_resource type="Script" uid="uid://cryep8dp6jk8" path="res://Scripts/UI/health_ui.gd" id="8_dswij"]
+[ext_resource type="Script" uid="uid://dtbm6eohcjvxq" path="res://Scripts/UI/game_timer_ui.gd" id="9_k3nnb"]
+[ext_resource type="Script" uid="uid://c0b33ltpf1yb" path="res://Scripts/UI/fps_meter.gd" id="10_5uk4g"]
+[ext_resource type="Script" uid="uid://426roaty0inm" path="res://Scripts/UI/tile_position.gd" id="11_ojfu3"]
+[ext_resource type="Script" uid="uid://cjtl2srqi33m4" path="res://Scripts/UI/upgrade_ui.gd" id="12_rqgvl"]
+[ext_resource type="PackedScene" uid="uid://ci2ybwitvo86x" path="res://Scenes/UI/Upgrade_Panel.tscn" id="13_ulj5d"]
+[ext_resource type="PackedScene" uid="uid://bulaad0w6s08k" path="res://Scenes/UI/Confirm_Button.tscn" id="14_uxf1g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0rcbu"]
+resource_name = "tilez"
+texture = ExtResource("4_xbw2t")
+texture_region_size = Vector2i(200, 200)
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_61w0f"]
+tile_size = Vector2i(200, 200)
+sources/0 = SubResource("TileSetAtlasSource_0rcbu")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1qtq"]
+bg_color = Color(0.14902, 0.168627, 0.266667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpk4g"]
+bg_color = Color(0, 0.6, 0.858824, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cw43m"]
+font_size = 30
+outline_size = 2
+outline_color = Color(0.0941176, 0.0784314, 0.145098, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnn4a"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(200, 1400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k2rf"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(400, 1400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_caca8"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(0, 1400, 200, 200)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0mwrw"]
+font_size = 48
+outline_color = Color(0.227451, 0.266667, 0.4, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4jbh"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(1400, 2600, 1000, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4yco"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(1400, 3000, 1000, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue46d"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(1400, 3400, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_303s7"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(2400, 2600, 1200, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epsi1"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(1800, 3400, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pacyf"]
+atlas = ExtResource("4_xbw2t")
+region = Rect2(2200, 3400, 400, 200)
+
+[node name="SnailGraveyard" type="Node"]
+script = ExtResource("1_uiioy")
+
+[node name="Player" parent="." instance=ExtResource("2_kyy4y")]
+process_mode = 1
+
+[node name="BackgroundGenerator" type="Node" parent="."]
+script = ExtResource("3_76l5u")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="BackgroundGenerator"]
+z_index = -1
+z_as_relative = false
+scale = Vector2(5, 5)
+tile_set = SubResource("TileSet_61w0f")
+
+[node name="GameTimer" type="Timer" parent="." groups=["GameTimer"]]
+process_mode = 1
+one_shot = true
+
+[node name="EnemySpawner" type="Node" parent="."]
+process_mode = 1
+script = ExtResource("5_wiw6w")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 1
+script = ExtResource("6_17u47")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="TopUI" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ExperienceUI" type="MarginContainer" parent="UI/MarginContainer/TopUI"]
+layout_mode = 2
+script = ExtResource("7_urqqy")
+
+[node name="ExperienceProgressBar" type="ProgressBar" parent="UI/MarginContainer/TopUI/ExperienceUI"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_o1qtq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lpk4g")
+show_percentage = false
+
+[node name="ExperienceLabel" type="Label" parent="UI/MarginContainer/TopUI/ExperienceUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Level 1"
+label_settings = SubResource("LabelSettings_cw43m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/TopUI"]
+layout_mode = 2
+
+[node name="HealthUI" type="Control" parent="UI/MarginContainer/TopUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("8_dswij")
+full_heart_texture = SubResource("AtlasTexture_gnn4a")
+half_heart_texture = SubResource("AtlasTexture_7k2rf")
+empty_heart_texture = SubResource("AtlasTexture_caca8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/TopUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="GameTimerUI" type="MarginContainer" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 15
+script = ExtResource("9_k3nnb")
+
+[node name="GameTimerUILabel" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer/GameTimerUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "9:59"
+label_settings = SubResource("LabelSettings_0mwrw")
+horizontal_alignment = 2
+
+[node name="Spacer" type="Control" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="FPSMeter" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("10_5uk4g")
+
+[node name="TilePosition" type="Label" parent="UI/MarginContainer/TopUI/HBoxContainer/VBoxContainer" groups=["TilePosition"]]
+visible = false
+layout_mode = 2
+script = ExtResource("11_ojfu3")
+
+[node name="UpgradeUI" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_rqgvl")
+
+[node name="Spacer" type="Control" parent="UI/UpgradeUI"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+
+[node name="UpgradeHBoxContainer" type="HBoxContainer" parent="UI/UpgradeUI"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Spacer3" type="Control" parent="UI/UpgradeUI"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="UpgradePanel" parent="UI/UpgradeUI" instance=ExtResource("13_ulj5d")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Spacer2" type="Control" parent="UI/UpgradeUI"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ConfirmButton" parent="UI/UpgradeUI" instance=ExtResource("14_uxf1g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="SKILL" type="TextureRect" parent="UI"]
+visible = false
+modulate = Color(0.635294, 0.14902, 0.2, 1)
+custom_minimum_size = Vector2(3000, 1500)
+offset_left = 374.0
+offset_top = -21.0
+offset_right = 3374.0
+offset_bottom = 1479.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_u4jbh")
+
+[node name="ISSUE" type="TextureRect" parent="UI"]
+visible = false
+modulate = Color(0.635294, 0.14902, 0.2, 1)
+custom_minimum_size = Vector2(3000, 1500)
+offset_left = 352.0
+offset_top = 479.0
+offset_right = 3352.0
+offset_bottom = 1979.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_c4yco")
+
+[node name="GoAgain" type="TextureRect" parent="UI"]
+visible = false
+modulate = Color(0.635294, 0.14902, 0.2, 1)
+offset_left = 1524.0
+offset_top = 974.0
+offset_right = 1924.0
+offset_bottom = 1174.0
+texture = SubResource("AtlasTexture_ue46d")
+
+[node name="SNAIL_ISSUE" type="TextureRect" parent="UI"]
+visible = false
+custom_minimum_size = Vector2(4000, 2000)
+offset_left = 160.0
+offset_top = 160.0
+offset_right = 4160.0
+offset_bottom = 2160.0
+texture = SubResource("AtlasTexture_303s7")
+
+[node name="SURVIVE" type="TextureRect" parent="UI"]
+custom_minimum_size = Vector2(120, 70)
+offset_left = 1782.0
+offset_top = 119.0
+offset_right = 1902.0
+offset_bottom = 189.0
+size_flags_vertical = 3
+texture = SubResource("AtlasTexture_epsi1")
+expand_mode = 1
+
+[node name="WASD" type="TextureRect" parent="UI"]
+offset_left = 800.0
+offset_top = 850.0
+offset_right = 1200.0
+offset_bottom = 1050.0
+texture = SubResource("AtlasTexture_pacyf")

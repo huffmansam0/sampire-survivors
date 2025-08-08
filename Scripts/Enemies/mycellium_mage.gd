@@ -5,7 +5,7 @@ class_name MycelliumMage
 @export var shoot_interval := 3.0
 
 var shot_ready := true
-var ranged_attack: PackedScene = preload("res://Scenes/Mycellium_Mage_Ranged_Attack.tscn")
+var ranged_attack: PackedScene = preload("res://Scenes/Enemies/Mycellium_Mage_Ranged_Attack.tscn")
 
 @onready var hp_bar = $HealthBar
 @onready var state_machine = $StateMachine

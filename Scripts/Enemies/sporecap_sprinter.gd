@@ -8,7 +8,7 @@ class_name SporecapSprinter
 
 var charge_destination: Vector2
 var distance_to_charge_destination: float
-var explosion: PackedScene = preload("res://Scenes/Sporecap_Sprinter_Explosion.tscn")
+var explosion: PackedScene = preload("res://Scenes/Enemies/Sporecap_Sprinter_Explosion.tscn")
 
 @onready var hp_bar = $HealthBar
 @onready var state_machine = $StateMachine
