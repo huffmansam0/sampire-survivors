@@ -1,7 +1,5 @@
 extends StateMachine
 
-signal game_time_expired
-
 const background_tiles: Array[int] = [5, 6, 7, 8, 9, 10]
 const background_tile_weights: Array[int] = [1000, 30, 300, 1000, 600, 1]
 

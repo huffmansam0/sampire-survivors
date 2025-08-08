@@ -114,6 +114,3 @@ func _on_game_time_elapsed(seconds: int):
 		90:
 			spawn_rate *= 2
 			
-	
-func _on_game_time_expired():
-	pass
