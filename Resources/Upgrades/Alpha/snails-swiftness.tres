@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_vnkaq"]
 script = ExtResource("2_dbd1n")
 speed = 0.0
-speed_mult = 0.04
+speed_mult = 0.05
 max_hp = 0
 experience_box_mult = 0.0
 shield_recharge_duration = 0.0
@@ -16,7 +16,7 @@ scale = 0.0
 scale_mult = 0.0
 collision_damage = 0.0
 collision_damage_mult = 0.0
-type = 0
+type = 1
 metadata/_custom_type_script = "uid://byv6fv5rpq2di"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0soyq"]
@@ -26,7 +26,7 @@ region = Rect2(2000, 3600, 200, 200)
 [resource]
 script = ExtResource("2_6jfpg")
 name = "Snail's Swiftness"
-description = "Increase move speed by 4%."
+description = "Increase move speed by 5%."
 types = Array[int]([1])
 icon = SubResource("AtlasTexture_0soyq")
 unlocks = Array[ExtResource("2_6jfpg")]([])
