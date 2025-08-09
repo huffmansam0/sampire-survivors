@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=9 format=3 uid="uid://bn2upuril11ni"]
+
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_3r8y1"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_dxigx"]
+[ext_resource type="Script" uid="uid://qf82ubnelwhp" path="res://Scripts/Resource Scripts/effect_component.gd" id="2_hor0r"]
+[ext_resource type="Script" uid="uid://c67ubvm2tw33d" path="res://Scripts/Resource Scripts/attack_upgrade_component.gd" id="3_cf7ua"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_p28vi"]
+
+[sub_resource type="Resource" id="Resource_wi51o"]
+script = ExtResource("2_hor0r")
+type = 0
+amount = 15.0
+amount_mult = 0.0
+duration = 0.0
+duration_mult = 0.0
+metadata/_custom_type_script = "uid://qf82ubnelwhp"
+
+[sub_resource type="Resource" id="Resource_r3a3t"]
+script = ExtResource("3_cf7ua")
+interval = 1.0
+interval_mult = 0.0
+duration = 0.0
+duration_mult = 0.0
+tick_rate = 0.0
+tick_rate_mult = 0.0
+position_offset_x = 0.0
+position_offset_y = 0.0
+size = 0.0
+size_mult = 0.0
+effects = Array[ExtResource("2_hor0r")]([SubResource("Resource_wi51o")])
+type = 0
+metadata/_custom_type_script = "uid://c67ubvm2tw33d"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lc1j"]
+atlas = ExtResource("4_p28vi")
+region = Rect2(800, 3800, 200, 200)
+
+[resource]
+script = ExtResource("2_dxigx")
+name = "Psionic Snail"
+description = "Damage the nearest enemy periodically."
+types = Array[int]([0, 7])
+icon = SubResource("AtlasTexture_1lc1j")
+unlocks = Array[ExtResource("2_dxigx")]([])
+components = Array[ExtResource("1_3r8y1")]([SubResource("Resource_r3a3t")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

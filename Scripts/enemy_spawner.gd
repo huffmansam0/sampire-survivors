@@ -10,15 +10,24 @@ class_name EnemySpawner
 
 var rng = RandomNumberGenerator.new()
 
+#BASE STATS
+var base_spawn_rate: float = 0.5
+var base_active_enemy_cap: int = 500
+var base_shroom_warrior_weight := 5
+var base_mycellium_mage_weight := 0
+var base_sporecap_sprinter_weight := 0
+
 #== STARTING SPAWN WEIGHTS ===#
-var shroom_warrior_weight := 5
-var mycellium_mage_weight := 0
-var sporecap_sprinter_weight := 0
+var shroom_warrior_weight := base_shroom_warrior_weight
+var mycellium_mage_weight := base_mycellium_mage_weight
+var sporecap_sprinter_weight := base_sporecap_sprinter_weight
 
 var spawn_timer: float = 0.0
 
-var spawn_rate: float = 3
-var active_enemy_cap: int = 500
+
+var prev_spawn_rate: float = base_spawn_rate
+var spawn_rate: float = base_spawn_rate
+var active_enemy_cap: int = base_active_enemy_cap
 var active_enemy_count: int = 0
 var despawn_distance: float = 6000
 
@@ -100,17 +109,66 @@ func _on_game_time_elapsed(seconds: int):
 			#spawn_rate = 0.01
 			#sporecap_sprinter_weight = 1
 			#mycellium_mage_weight = 1
+			spawn_rate = 10
 			pass
+		2:
+			spawn_rate = base_spawn_rate
 		5:
-			spawn_rate *= 1.1
+			spawn_rate *= 1
 		10:
-			spawn_rate *= 1.1
+			spawn_rate *= 1
 		15:
-			spawn_rate *= 1.1
-		60:
-			sporecap_sprinter_weight = 1
-		120:
-			mycellium_mage_weight = 1
+			spawn_rate *= 1
+		45:
+			prev_spawn_rate = spawn_rate
+			spawn_rate = 10
+		50:
+			spawn_rate = prev_spawn_rate + 0.5
 		90:
-			spawn_rate *= 2
+			prev_spawn_rate = spawn_rate
+			spawn_rate = 30
+			sporecap_sprinter_weight = 1
+			shroom_warrior_weight = 0
+		91:
+			spawn_rate = prev_spawn_rate + 0.5
+			shroom_warrior_weight = 5
+		120:
+			mycellium_mage_weight = 3
+		150:
+			spawn_rate += 0.5
+		180:
+			shroom_warrior_weight = 100000
+			prev_spawn_rate = spawn_rate
+			spawn_rate = 30
+		181:
+			shroom_warrior_weight = 5
+			spawn_rate = prev_spawn_rate
+		220:
+			shroom_warrior_weight = 100000
+			prev_spawn_rate = spawn_rate
+			spawn_rate = 60
+		221:
+			shroom_warrior_weight = 5
+			sporecap_sprinter_weight = 100000
+		222:
+			sporecap_sprinter_weight = 1
+			spawn_rate = prev_spawn_rate + 3
+		250:
+			spawn_rate = prev_spawn_rate - 1
+		370:
+			sporecap_sprinter_weight = 100000
+			prev_spawn_rate = spawn_rate
+			spawn_rate = 45
+		371:
+			sporecap_sprinter_weight = 3
+			mycellium_mage_weight = 100000
+		372:
+			mycellium_mage_weight = 2
+			spawn_rate = prev_spawn_rate
+		440:
+			spawn_rate += 2
+		510:
+			spawn_rate += 3
+			sporecap_sprinter_weight += 2
+			
 			

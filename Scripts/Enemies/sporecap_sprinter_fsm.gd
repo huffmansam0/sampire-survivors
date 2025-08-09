@@ -5,7 +5,6 @@ func _enter_tree() -> void:
 	pass
 
 func _ready():
-	parent = get_parent()
 	add_state("approach")
 	add_state("charge")
 	add_state("fixin_to_bust")

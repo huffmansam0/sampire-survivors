@@ -4,6 +4,7 @@ signal experience_changed(current_experience, experience_to_next_level)
 signal level_changed(current_level)
 
 const despawn_distance: float = 12000
+const experience_to_next_level_mult: float = 1.5
 
 @export var experience_scene = preload("res://Scenes/Experience.tscn")
 
@@ -19,7 +20,7 @@ var experience_per_pickup = base_experience_per_pickup
 var player: Player
 var current_experience: float = 0.0
 var current_level: int = 1
-var experience_to_next_level: float = 10.0
+var experience_to_next_level: float = 6.0
 
 func _ready():
 	SignalBus.game_started.connect(_start_game)
@@ -48,7 +49,7 @@ func level_up():
 	current_level += 1
 	
 	current_experience = current_experience - experience_to_next_level
-	experience_to_next_level = experience_to_next_level + current_level * 2
+	experience_to_next_level += current_level * experience_to_next_level_mult
 	
 	experience_changed.emit(current_experience, experience_to_next_level)
 	level_changed.emit(current_level)
@@ -60,7 +61,7 @@ func _on_enemy_killed(enemy: Enemy):
 	experience.global_position = enemy.global_position
 	experience.experience_collected.connect(gain_experience)
 	experience.distance_to_player_changed.connect(_on_distance_to_player_changed)
-	add_child(experience)
+	call_deferred("add_child", experience)
 	
 func _on_distance_to_player_changed(experience: Experience, distance: float):
 	if distance > despawn_distance:

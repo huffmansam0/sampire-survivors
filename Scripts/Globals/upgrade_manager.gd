@@ -7,7 +7,7 @@ var available_upgrades: Dictionary[String, UpgradeResource]
 var acquired_upgrades: Dictionary[String, UpgradeResource]
 
 #Alpha upgrades
-const alpha_upgrades_filepath: String = "res://Upgrades/Alpha/"
+const alpha_upgrades_filepath: String = "res://Resources/Upgrades/Alpha/"
 
 #Maybe beta starting upgrades?
 #var starting_upgrade_filepaths: Dictionary[String, String] = {

@@ -7,6 +7,21 @@
 radius = 39.0
 height = 154.0
 
+[sub_resource type="Animation" id="Animation_pa0rm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(3000, 0, 200, 200)]
+}
+
 [sub_resource type="Animation" id="Animation_7ssac"]
 resource_name = "glitchy"
 length = 0.4
@@ -21,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(3000, 0, 200, 200), Rect2(3200, 0, 200, 200), Rect2(3400, 0, 200, 200), Rect2(3000, 0, 200, 200), Rect2(3200, 0, 200, 200), Rect2(3400, 0, 200, 200)]
-}
-
-[sub_resource type="Animation" id="Animation_pa0rm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(3000, 0, 200, 200)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vil4h"]

@@ -22,3 +22,13 @@ enum EffectTypes {
 enum AttackTypes {
 	SNAILJUICE,
 }
+
+#README: Layers Reference
+var layers: Dictionary[String, int] = {
+	"Enemy Hurtbox": 2
+}
+
+#README: Masks Reference
+var masks: Dictionary[String, int] = {
+	"": 1
+}

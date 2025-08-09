@@ -13,7 +13,7 @@ var target: Player = GameManager.player
 @onready var hitbox: Area2D = $Hitbox
 
 var move_direction: Vector2
-var move_speed: float
+var move_speed: float = 350.0
 
 func _ready():
 	timeout.timeout.connect(queue_free)

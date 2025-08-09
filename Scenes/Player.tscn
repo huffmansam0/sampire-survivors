@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2xod8pb6h4qd"]
+[gd_scene load_steps=14 format=3 uid="uid://d2xod8pb6h4qd"]
 
 [ext_resource type="Script" uid="uid://cncjalb71asae" path="res://Scripts/player.gd" id="1_nn08x"]
 [ext_resource type="AudioStream" uid="uid://bb15qdc0armo2" path="res://Audio/snail_damaged_take_1.wav" id="3_bhhdu"]
@@ -47,6 +47,9 @@ radius = 84.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_nn08x"]
 radius = 81.7435
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhhdu"]
+radius = 40.1995
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
 z_as_relative = false
@@ -84,9 +87,17 @@ stream = ExtResource("5_yoq75")
 stream = ExtResource("6_ksbbd")
 
 [node name="ExperienceBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExperienceBox"]
 position = Vector2(1, 3)
 shape = SubResource("CircleShape2D_nn08x")
+
+[node name="ExperienceBoxFinal" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExperienceBoxFinal"]
+shape = SubResource("CircleShape2D_bhhdu")

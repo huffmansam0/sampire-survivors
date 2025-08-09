@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bafmx44tyqiw7"]
+[gd_scene load_steps=8 format=3 uid="uid://bafmx44tyqiw7"]
 
 [ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="1_hc6sy"]
 [ext_resource type="Script" uid="uid://cnfa6rm2kmror" path="res://Scripts/experience.gd" id="1_n8qja"]
+[ext_resource type="Script" uid="uid://bdwpee5enc4j3" path="res://Scripts/experience_fsm.gd" id="3_t8fdw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8qja"]
 atlas = ExtResource("1_hc6sy")
@@ -10,19 +11,43 @@ region = Rect2(0, 2000, 200, 200)
 [sub_resource type="CircleShape2D" id="CircleShape2D_hc6sy"]
 radius = 111.041
 
-[node name="Experience" type="Node2D" groups=["Experience"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8fdw"]
+atlas = ExtResource("1_hc6sy")
+region = Rect2(200, 2000, 200, 200)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t8fdw"]
+radius = 17.0
+
+[node name="Experience" type="CharacterBody2D" groups=["Experience"]]
 z_index = 1
 z_as_relative = false
 script = ExtResource("1_n8qja")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="GroundedSprite" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_n8qja")
 
 [node name="CollectionHitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionHitbox"]
 z_index = 1
 shape = SubResource("CircleShape2D_hc6sy")
+
+[node name="CollectedSprite" type="Sprite2D" parent="."]
+position = Vector2(-5.96046e-08, 1)
+scale = Vector2(0.33, 0.33)
+texture = SubResource("AtlasTexture_t8fdw")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_t8fdw")
+
+[node name="FinalCollectionHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinalCollectionHitbox"]
+shape = SubResource("CircleShape2D_t8fdw")

@@ -13,8 +13,8 @@ var ranged_attack: PackedScene = preload("res://Scenes/Enemies/Mycellium_Mage_Ra
 @onready var shot_timer: Timer = $ShotTimer
 
 func _ready():
-	max_hp = 150
-	move_speed = 200.0
+	max_hp = 100
+	move_speed = 350.0
 	hp_bar.max_value = max_hp
 	hp_bar.min_value = 0
 	hp_bar.value = current_hp

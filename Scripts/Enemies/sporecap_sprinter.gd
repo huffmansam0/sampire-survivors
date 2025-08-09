@@ -19,7 +19,7 @@ func _enter_tree():
 	pass
 
 func _ready():
-	move_speed = 350.0
+	move_speed = 450.0
 	max_hp = 100
 	hp_bar.max_value = max_hp
 	hp_bar.min_value = 0
@@ -43,10 +43,13 @@ func fix_to_bust():
 	pass
 	
 func explode():
+	call_deferred("_explode")
+
+func _explode():
 	var explosion_instance = explosion.instantiate()
 	explosion_instance.global_position = global_position
 	get_tree().current_scene.add_child(explosion_instance)
-	die()
+	super.die()
 	
 func should_charge():
 	return distance_to_target <= charge_target_proximity
@@ -57,7 +60,9 @@ func should_fix_to_bust():
 func should_explode():
 	return true
 
-
 func take_damage(amount: float):
 	super.take_damage(amount)
 	hp_bar.value = current_hp
+
+func die():
+	call_deferred("explode")

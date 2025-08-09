@@ -1,8 +1,6 @@
-#MycelliumMage StateMachine
 extends StateMachine
 
 func _ready():
-	parent = get_parent()
 	add_state("approach")
 	add_state("shoot")
 	call_deferred("set_state", states.approach)

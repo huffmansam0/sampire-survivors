@@ -2,7 +2,6 @@
 extends StateMachine
 
 func _ready():
-	parent = get_parent()
 	add_state("approach")
 	call_deferred("set_state", states.approach)
 	

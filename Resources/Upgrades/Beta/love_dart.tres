@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=9 format=3 uid="uid://8etky6v8s51f"]
+
+[ext_resource type="Script" uid="uid://byrgjqqg8rpy5" path="res://Scripts/Resource Scripts/upgrade_component.gd" id="1_80chs"]
+[ext_resource type="Script" uid="uid://qf82ubnelwhp" path="res://Scripts/Resource Scripts/effect_component.gd" id="2_jalu6"]
+[ext_resource type="Script" uid="uid://d37qpu2rl5dx1" path="res://Scripts/Resource Scripts/upgrade_resource.gd" id="2_yjpva"]
+[ext_resource type="Script" uid="uid://c67ubvm2tw33d" path="res://Scripts/Resource Scripts/attack_upgrade_component.gd" id="3_mi8uw"]
+[ext_resource type="Texture2D" uid="uid://cu7dujjrykx1f" path="res://Images/Sprite_Sheet.png" id="4_6faqb"]
+
+[sub_resource type="Resource" id="Resource_6h0wq"]
+script = ExtResource("2_jalu6")
+type = 0
+amount = 20.0
+amount_mult = 0.0
+duration = 0.0
+duration_mult = 0.0
+metadata/_custom_type_script = "uid://qf82ubnelwhp"
+
+[sub_resource type="Resource" id="Resource_0kpt7"]
+script = ExtResource("3_mi8uw")
+interval = 2.0
+interval_mult = 0.0
+duration = 0.0
+duration_mult = 0.0
+tick_rate = 0.0
+tick_rate_mult = 0.0
+position_offset_x = 0.0
+position_offset_y = 0.0
+size = 0.0
+size_mult = 0.0
+effects = Array[ExtResource("2_jalu6")]([SubResource("Resource_6h0wq")])
+type = 2
+metadata/_custom_type_script = "uid://c67ubvm2tw33d"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcc0k"]
+atlas = ExtResource("4_6faqb")
+region = Rect2(800, 3600, 200, 200)
+
+[resource]
+script = ExtResource("2_yjpva")
+name = "Love Dart"
+description = "Fire a Love Dart in front of you periodically."
+types = Array[int]([0, 3])
+icon = SubResource("AtlasTexture_lcc0k")
+unlocks = Array[ExtResource("2_yjpva")]([])
+components = Array[ExtResource("1_80chs")]([SubResource("Resource_0kpt7")])
+metadata/_custom_type_script = "uid://d37qpu2rl5dx1"

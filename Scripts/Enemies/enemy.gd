@@ -21,6 +21,8 @@ var move_direction: Vector2
 var update_distance_to_target_interval: float = 0.2
 var distance_to_target: float
 
+var death_animation: PackedScene = preload("res://Scenes/Enemies/Death_Animation.tscn")
+
 func _ready():
 	current_hp = max_hp
 	health_bar.value = current_hp
@@ -60,5 +62,8 @@ func take_damage(amount: float):
 		die()
 
 func die():
+	var death_animation_instance = death_animation.instantiate()
+	death_animation_instance.global_position = global_position
+	get_tree().current_scene.add_child(death_animation_instance)
 	died.emit(self)
 	queue_free()

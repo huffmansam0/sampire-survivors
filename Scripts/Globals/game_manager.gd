@@ -34,6 +34,7 @@ func _input(event):
 
 	
 func _start_game():
+	prev_elapsed_game_time = 0
 	player = get_tree().get_first_node_in_group("Player")
 	game_timer = get_tree().get_first_node_in_group("GameTimer")
 	
